@@ -69,6 +69,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <nav>
+          <a className="underline text-blue-900 font-semibold" href="/">
+            Home
+          </a>
+          <br />
+          <a className="underline text-blue-900 font-semibold" href="/entries">
+            Entries
+          </a>
+        </nav>
         {children}
       </body>
     </html>
