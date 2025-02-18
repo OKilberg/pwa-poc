@@ -12,6 +12,8 @@ const submitCheckIn = async () => {
 
   const postUrl = "http://localhost:3001/entries";
 
+  await db.table("posts").add(checkInData);
+
   try {
     const response = await fetch(postUrl, {
       method: "POST",
@@ -20,8 +22,10 @@ const submitCheckIn = async () => {
     });
 
     if (!response.ok) {
-      console.log("Error, not possible to post to server, caching locally...");
-      await db.table("posts").add(checkInData);
+      console.log(
+        "Error, not possible to post to server, only saved locally..."
+      );
+      // await db.table("posts").add(checkInData);
     }
 
     const checkInPost = await response.json();
@@ -37,9 +41,10 @@ const submitCheckIn = async () => {
 const CheckIn = () => {
   return (
     <div>
-      CheckIn Here
       <div>
-        <button onClick={submitCheckIn}>CheckIn</button>
+        <button className="btn btn-primary" onClick={submitCheckIn}>
+          CheckIn
+        </button>
       </div>
     </div>
   );

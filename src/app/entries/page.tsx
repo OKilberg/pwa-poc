@@ -1,57 +1,32 @@
-"use client";
+import EntryTableBody from "@/components/EntryTableBody";
+import React from "react";
 
-import React, { useEffect, useState } from "react";
-import { db } from "../db";
-
-type Entry = {
+export type EntryItem = {
   id: string;
   code: number;
   in: string; // ISO-like datetime string
   out: string; // ISO-like datetime string
 };
 
-const fetchEntries = async () => {
-  const fetchUrl = "http://localhost:3001/entries";
-  const response = await fetch(fetchUrl);
-
-  if (!response.ok) {
-    throw new Error(`Error fetching ${fetchUrl}`);
-  }
-
-  const entries: Array<Entry> = await response.json();
-
-  return entries;
-};
-
 const Entries = () => {
-  const [stateEntries, setStateEntries] = useState<Array<Entry>>([]);
-
-  useEffect(() => {
-    const loadData = async () => {
-      const localData = await db.table("posts").toArray();
-
-      setStateEntries(localData);
-
-      try {
-        const entries = await fetchEntries();
-
-        console.log("Successful fetch, using server data...");
-
-        setStateEntries(entries);
-      } catch (error) {
-        console.log("Error fetching, using local cache... Error:", error);
-      }
-    };
-
-    loadData();
-  }, []);
-
   return (
-    <div>
-      Entries
-      {stateEntries.map((entry) => (
-        <div key={entry.id}>{JSON.stringify(entry)}</div>
-      ))}
+    <div className="overflow-x-auto flex justify-center">
+      <div className="card">
+        <div className="card-body">
+          <h1 className="card-title">Entries</h1>
+          <table className="table table-md prose">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>In</th>
+                <th>Out</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <EntryTableBody />
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

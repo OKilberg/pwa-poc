@@ -62,21 +62,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="ltr" data-theme="mytheme">
       <head>
         <meta name="apple-mobile-web-app-title" content="PWA-POC" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-100 text-white`}
       >
-        <nav>
-          <a className="underline text-blue-900 font-semibold" href="/">
-            Home
-          </a>
-          <br />
-          <a className="underline text-blue-900 font-semibold" href="/entries">
-            Entries
-          </a>
+        <nav className="navbar bg-base-100">
+          <div className="flex-1">
+            <a href="/" className="btn btn-ghost text-xl">
+              CheckInApp
+            </a>
+          </div>
+          <div className="flex-none">
+            <ul className="menu menu-horizontal px-1">
+              <li>
+                <a className="btn-link" href="/entries">
+                  Entries
+                </a>
+              </li>
+            </ul>
+          </div>
         </nav>
         {children}
       </body>
