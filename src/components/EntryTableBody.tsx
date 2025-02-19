@@ -7,15 +7,19 @@ import Entry from "./Entry";
 
 const fetchEntries = async () => {
   const fetchUrl = "http://localhost:3001/entries";
-  const response = await fetch(fetchUrl);
+  try {
+    const response = await fetch(fetchUrl);
 
-  if (!response.ok) {
-    throw new Error(`Error fetching ${fetchUrl}`);
+    if (!response.ok) {
+      throw new Error(`Error fetching ${fetchUrl}`);
+    }
+
+    const entries: Array<EntryItem> = await response.json();
+
+    return entries;
+  } catch (error) {
+    throw new Error("Error, could not fetch");
   }
-
-  const entries: Array<EntryItem> = await response.json();
-
-  return entries;
 };
 
 const EntryTableBody = () => {
@@ -36,15 +40,17 @@ const EntryTableBody = () => {
         setStateEntries(entries);
       } catch (error) {
         console.log("Error fetching, using local cache... Error:", error);
-      } finally {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
       }
     };
 
     loadData();
   }, []);
+
+  useEffect(() => {
+    if (stateEntries.length > 0) {
+      setIsLoading(false);
+    }
+  }, [stateEntries]);
 
   if (isLoading)
     return (

@@ -1,11 +1,18 @@
 "use client";
 
 import { db } from "@/app/db";
-import React from "react";
+import React, { useState } from "react";
+import CodeInput from "./CodeInput";
+import CheckInModal from "./CheckInModal";
 
-const submitCheckIn = async () => {
+const submitCheckIn = async (formData: FormData) => {
+  const number1 = formData.get("code-1");
+  const number2 = formData.get("code-2");
+  const number3 = formData.get("code-3");
+  const code = Number(`${number1}${number2}${number3}`);
+
   const checkInData = {
-    code: 123,
+    code,
     in: new Date().toISOString(),
     out: "",
   };
@@ -13,6 +20,13 @@ const submitCheckIn = async () => {
   const postUrl = "http://localhost:3001/entries";
 
   await db.table("posts").add(checkInData);
+
+  const modal = document.getElementById(
+    "my_modal_1"
+  ) as HTMLDialogElement | null;
+  if (document && modal) {
+    modal.showModal();
+  }
 
   try {
     const response = await fetch(postUrl, {
@@ -34,7 +48,6 @@ const submitCheckIn = async () => {
     return checkInPost;
   } catch (error) {
     console.log("Error, not possible to post to server, caching locally...");
-    await db.table("posts").add(checkInData);
   }
 };
 
@@ -42,9 +55,8 @@ const CheckIn = () => {
   return (
     <div>
       <div>
-        <button className="btn btn-primary" onClick={submitCheckIn}>
-          CheckIn
-        </button>
+        <CodeInput action={submitCheckIn} />
+        <CheckInModal />
       </div>
     </div>
   );

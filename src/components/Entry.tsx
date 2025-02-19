@@ -30,11 +30,14 @@ const getTime = (isoDate: string) => {
 const getFormattedTimeString = (timeObj: TimeObj) => {
   const { day, hour, minute, month, year } = timeObj;
 
+  const completeHour = hour < 10 ? `0${hour}` : hour;
+  const completeMinute = minute < 10 ? `0${minute}` : minute;
+
   if (isNaN(day)) {
     return "?";
   }
 
-  const formattedTimeString = `${hour}:${minute} ${day}/${month}`;
+  const formattedTimeString = `${completeHour}:${completeMinute} ${day}/${month}`;
 
   return formattedTimeString;
 };
@@ -59,22 +62,6 @@ const Entry = ({ entryItem }: Props) => {
       </td>
       <td>?</td>
     </tr>
-  );
-
-  return (
-    <div className="card card-compact bg-neutral text-neutral-content w-64">
-      <div className="card-body items-center text-center">
-        <span className="card-title">Employee {code}</span>
-        <div className="card-actions justify-end">
-          <span className="badge badge-primary">
-            In: {getFormattedTimeString(inTimeObj)}
-          </span>
-          <span className="badge badge-secondary">
-            Out: {getFormattedTimeString(outTimeObj)}
-          </span>
-        </div>
-      </div>
-    </div>
   );
 };
 

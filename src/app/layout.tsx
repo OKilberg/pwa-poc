@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,26 +62,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("Reloaded");
   return (
-    <html lang="en" dir="ltr" data-theme="mytheme">
-      <head>
-        <meta name="apple-mobile-web-app-title" content="PWA-POC" />
-      </head>
+    <html lang="en" dir="ltr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-100 text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-100 `}
       >
-        <nav className="navbar bg-base-100">
+        <nav className="navbar bg-base-200">
           <div className="flex-1">
-            <a href="/" className="btn btn-ghost text-xl">
+            <Link href="/" className="btn btn-ghost text-xl">
               CheckInApp
-            </a>
+            </Link>
           </div>
           <div className="flex-none">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <a className="btn-link" href="/entries">
+                <Link className="btn btn-ghost" href="/entries">
                   Entries
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
