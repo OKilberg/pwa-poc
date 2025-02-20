@@ -1,9 +1,10 @@
 "use client";
 
-import { db } from "@/app/db";
-import React, { useState } from "react";
+import React from "react";
 import CodeInput from "./CodeInput";
 import CheckInModal from "./CheckInModal";
+import { insertLocalEntry } from "@/lib/dbLib";
+import { postEntry } from "@/lib/serverLib";
 
 const submitCheckIn = async (formData: FormData) => {
   const number1 = formData.get("code-1");
@@ -17,38 +18,16 @@ const submitCheckIn = async (formData: FormData) => {
     out: "",
   };
 
-  const postUrl = "http://localhost:3001/entries";
-
-  await db.table("posts").add(checkInData);
+  const result = await insertLocalEntry(checkInData);
 
   const modal = document.getElementById(
     "my_modal_1"
   ) as HTMLDialogElement | null;
-  if (document && modal) {
+  if (document && modal && result) {
     modal.showModal();
   }
 
-  try {
-    const response = await fetch(postUrl, {
-      method: "POST",
-      body: JSON.stringify(checkInData),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (!response.ok) {
-      console.log(
-        "Error, not possible to post to server, only saved locally..."
-      );
-      // await db.table("posts").add(checkInData);
-    }
-
-    const checkInPost = await response.json();
-    console.log("Server available, posted to server...");
-
-    return checkInPost;
-  } catch (error) {
-    console.log("Error, not possible to post to server, caching locally...");
-  }
+  await postEntry(checkInData);
 };
 
 const CheckIn = () => {

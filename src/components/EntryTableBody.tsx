@@ -1,26 +1,10 @@
 "use client";
 
-import { db } from "@/app/db";
 import { EntryItem } from "@/app/entries/page";
 import React, { useEffect, useState } from "react";
 import Entry from "./Entry";
-
-const fetchEntries = async () => {
-  const fetchUrl = "http://localhost:3001/entries";
-  try {
-    const response = await fetch(fetchUrl);
-
-    if (!response.ok) {
-      throw new Error(`Error fetching ${fetchUrl}`);
-    }
-
-    const entries: Array<EntryItem> = await response.json();
-
-    return entries;
-  } catch (error) {
-    throw new Error("Error, could not fetch");
-  }
-};
+import { getEntries } from "@/lib/serverLib";
+import { getLocalEntries } from "@/lib/dbLib";
 
 const EntryTableBody = () => {
   const [stateEntries, setStateEntries] = useState<Array<EntryItem>>([]);
@@ -28,19 +12,15 @@ const EntryTableBody = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      const localData = await db.table("posts").toArray();
+      const localData = await getLocalEntries();
 
       setStateEntries(localData);
 
-      try {
-        const entries = await fetchEntries();
+      const entries = await getEntries();
 
-        console.log("Successful fetch, using server data...");
+      console.log("Successful fetch, using server data...");
 
-        setStateEntries(entries);
-      } catch (error) {
-        console.log("Error fetching, using local cache... Error:", error);
-      }
+      setStateEntries(entries);
     };
 
     loadData();
