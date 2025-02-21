@@ -1,41 +1,96 @@
 "use client";
 
-import React from "react";
+import React, { useActionState } from "react";
 import CodeInput from "./CodeInput";
 import CheckInModal from "./CheckInModal";
-import { insertLocalEntry } from "@/lib/dbLib";
+import {
+  getLocalUser,
+  getLocalUserLatestCheckin,
+  insertLocalEntry,
+  updateLocalEntry,
+} from "@/lib/dbLib";
 import { postEntry } from "@/lib/serverLib";
+import { wait } from "@/util/util";
+import { EntryItemNoId } from "@/lib/types";
 
-const submitCheckIn = async (formData: FormData) => {
+const submitCheckIn = async (_prevData: unknown, formData: FormData) => {
   const number1 = formData.get("code-1");
   const number2 = formData.get("code-2");
   const number3 = formData.get("code-3");
   const code = Number(`${number1}${number2}${number3}`);
 
-  const checkInData = {
+  let checkInData: EntryItemNoId = {
     code,
     in: new Date().toISOString(),
-    out: "",
+    out: null,
   };
 
-  const result = await insertLocalEntry(checkInData);
+  const user = await getLocalUser(code);
+  let result = {
+    message: `No user with code ${code} exists.`,
+    success: false,
+    description: `Are you sure you entered the correct code?`,
+  };
+
+  if (user) {
+    const latestCheckin = await getLocalUserLatestCheckin(code);
+
+    if (latestCheckin) {
+      const { id } = latestCheckin;
+
+      const changes = {
+        out: new Date().toISOString(),
+      };
+
+      const update = await updateLocalEntry(id, changes);
+
+      const message = `Thanks for today ${user.firstname}`;
+      const success = true;
+      const description = `See you next time!`;
+
+      result = { message, success, description };
+    } else {
+      const inserted = await insertLocalEntry(checkInData);
+
+      if (inserted) {
+        postEntry(checkInData); // No need to await
+
+        const message = `Welcome ${user.firstname}`;
+        const success = true;
+        const description = `Now get to work...`;
+
+        result = { message, success, description };
+      } else {
+        result = {
+          message: `Failed to check in user with code ${code}.`,
+          description: `Please try again. Contact an admin if the issue persists`,
+          success: false,
+        };
+      }
+    }
+  }
+
+  await wait(500);
 
   const modal = document.getElementById(
     "my_modal_1"
   ) as HTMLDialogElement | null;
-  if (document && modal && result) {
+
+  if (document && modal) {
     modal.showModal();
   }
 
-  await postEntry(checkInData);
+  return result;
 };
 
 const CheckIn = () => {
+  const [data, action, isLoading] = useActionState(submitCheckIn, undefined);
+
   return (
     <div>
       <div>
-        <CodeInput action={submitCheckIn} />
-        <CheckInModal />
+        <CodeInput action={action} isLoading={isLoading} />
+        <CheckInModal result={data} />
       </div>
     </div>
   );

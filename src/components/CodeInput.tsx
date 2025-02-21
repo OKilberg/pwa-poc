@@ -4,13 +4,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 type Props = {
   action: (formData: FormData) => void;
+  isLoading: boolean;
 };
 
-const CodeInput = ({ action }: Props) => {
+const CodeInput = ({ action, isLoading }: Props) => {
   const code1Ref = useRef<HTMLInputElement>(null);
   const code2Ref = useRef<HTMLInputElement>(null);
   const code3Ref = useRef<HTMLInputElement>(null);
-  const submitRef = useRef<HTMLInputElement>(null);
+  const submitRef = useRef<HTMLButtonElement>(null);
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
   useEffect(() => {
@@ -142,13 +143,19 @@ const CodeInput = ({ action }: Props) => {
         </div>
       </div>
 
-      <input
+      <button
         ref={submitRef}
         type="submit"
         value={"Check In"}
-        className="btn btn-primary mt-4"
+        className={isLoading ? "btn btn-disabled mt-4" : "btn btn-primary mt-4"}
         disabled={submitDisabled}
-      />
+      >
+        {isLoading ? (
+          <span className="loading loading-spinner loading-sm"></span>
+        ) : (
+          "Check In"
+        )}
+      </button>
     </form>
   );
 };

@@ -1,13 +1,6 @@
 import EntryTableBody from "@/components/EntryTableBody";
 import React from "react";
 
-export type EntryItem = {
-  id: string;
-  code: number;
-  in: string; // ISO-like datetime string
-  out: string; // ISO-like datetime string
-};
-
 const Entries = () => {
   return (
     <div className="overflow-x-auto flex justify-center">

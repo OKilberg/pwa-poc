@@ -1,4 +1,4 @@
-import { EntryItem } from "@/app/entries/page";
+import { EntryItem } from "@/lib/types";
 import React from "react";
 
 type Props = {
@@ -13,7 +13,9 @@ type TimeObj = {
   year: number;
 };
 
-const getTime = (isoDate: string) => {
+const getTime = (isoDate: string | null) => {
+  if (!isoDate) return null;
+
   const date = new Date(isoDate);
 
   const timeObj: TimeObj = {
@@ -27,15 +29,15 @@ const getTime = (isoDate: string) => {
   return timeObj;
 };
 
-const getFormattedTimeString = (timeObj: TimeObj) => {
+const getFormattedTimeString = (timeObj: TimeObj | null) => {
+  if (!timeObj) {
+    return "?";
+  }
+
   const { day, hour, minute, month, year } = timeObj;
 
   const completeHour = hour < 10 ? `0${hour}` : hour;
   const completeMinute = minute < 10 ? `0${minute}` : minute;
-
-  if (isNaN(day)) {
-    return "?";
-  }
 
   const formattedTimeString = `${completeHour}:${completeMinute} ${day}/${month}`;
 

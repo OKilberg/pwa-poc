@@ -1,10 +1,10 @@
 "use client";
 
-import { EntryItem } from "@/app/entries/page";
 import React, { useEffect, useState } from "react";
 import Entry from "./Entry";
 import { getEntries } from "@/lib/serverLib";
 import { getLocalEntries } from "@/lib/dbLib";
+import { EntryItem } from "@/lib/types";
 
 const EntryTableBody = () => {
   const [stateEntries, setStateEntries] = useState<Array<EntryItem>>([]);
@@ -18,9 +18,10 @@ const EntryTableBody = () => {
 
       const entries = await getEntries();
 
-      console.log("Successful fetch, using server data...");
-
-      setStateEntries(entries);
+      if (entries.length > 0) {
+        setStateEntries(entries);
+        console.log("Successful fetch, using server data...");
+      }
     };
 
     loadData();

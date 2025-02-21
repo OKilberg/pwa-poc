@@ -1,10 +1,10 @@
-import { EntryItem } from "@/app/entries/page";
+import { EntryItemNoId, EntryItems } from "./types";
 
 const ENTRY_URL = "http://localhost:3001/entries";
 
-export const postEntry = async (data: Omit<EntryItem, "id">) => {
+const post = async (data: unknown, url: string) => {
   try {
-    const response = await fetch(ENTRY_URL, {
+    const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -24,15 +24,15 @@ export const postEntry = async (data: Omit<EntryItem, "id">) => {
   }
 };
 
-export const getEntries = async () => {
+const get = async <T>(url: string) => {
   try {
-    const response = await fetch(ENTRY_URL);
+    const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error(`Server response was not ok. ${ENTRY_URL}`);
+      throw new Error(`Server response was not ok. ${url}`);
     }
 
-    const entries: Array<EntryItem> = await response.json();
+    const entries: T = await response.json();
 
     return entries;
   } catch (error) {
@@ -40,4 +40,16 @@ export const getEntries = async () => {
 
     return [];
   }
+};
+
+export const postEntry = async (data: EntryItemNoId) => {
+  const result = post(data, ENTRY_URL);
+
+  return result;
+};
+
+export const getEntries = async () => {
+  const result = await get<EntryItems>(ENTRY_URL);
+
+  return result;
 };
