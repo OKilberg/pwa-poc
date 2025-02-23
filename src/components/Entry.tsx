@@ -53,14 +53,10 @@ const Entry = ({ entryItem }: Props) => {
     <tr>
       <th>{code}</th>
       <td>
-        <div className="badge badge-outline">
-          {getFormattedTimeString(inTimeObj)}
-        </div>
+        <div className="font-mono">{getFormattedTimeString(inTimeObj)}</div>
       </td>
       <td>
-        <div className="badge badge-outline">
-          {getFormattedTimeString(outTimeObj)}
-        </div>
+        <div className="font-mono">{getFormattedTimeString(outTimeObj)}</div>
       </td>
       <td>?</td>
     </tr>

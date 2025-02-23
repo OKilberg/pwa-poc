@@ -1,4 +1,6 @@
+import { getCurrentTime } from "@/util/util";
 import React from "react";
+import EntryTimeline from "./EntryTimeline";
 
 type Props = {
   result:
@@ -24,7 +26,8 @@ const CheckInModal = ({ result }: Props) => {
         >
           {message}
         </h3>
-        <p className="py-4">{description}</p>
+        <EntryTimeline />
+        <p className="">{description}</p>
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
@@ -33,6 +36,27 @@ const CheckInModal = ({ result }: Props) => {
         </div>
       </div>
     </dialog>
+  );
+};
+
+const CheckInOutInfo = () => {
+  return (
+    <div className="flex flex-col">
+      <div className="stats">
+        <div className="stat">
+          <div className="stat-title">Checked In</div>
+          <div className="stat-value text-success">{getCurrentTime()}</div>
+          <div className="stat-desc">21% more than last month</div>
+        </div>
+      </div>
+      <div className="stats">
+        <div className="stat">
+          <div className="stat-title">Checked Out</div>
+          <div className="stat-value">--</div>
+          <div className="stat-desc">21% more than last month</div>
+        </div>
+      </div>
+    </div>
   );
 };
 

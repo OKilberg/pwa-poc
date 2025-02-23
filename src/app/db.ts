@@ -13,6 +13,6 @@ declare global {
   }
 }
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
   window.db = db;
 }
