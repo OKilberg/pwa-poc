@@ -4,16 +4,24 @@ import EntryTimeline from "./EntryTimeline";
 
 type Props = {
   result:
-    | { message: string; success: boolean; description: string }
+    | {
+        message: string;
+        success: boolean;
+        description: string;
+        action?: string;
+        checkIn?: string;
+        checkOut?: string;
+      }
     | undefined;
 };
 
 const CheckInModal = ({ result }: Props) => {
-  const { message, success, description } = result || {
-    message: "",
-    success: false,
-    description: "",
-  };
+  const { message, success, description, action, checkIn, checkOut } =
+    result || {
+      message: "",
+      success: false,
+      description: "",
+    };
   return (
     <dialog id="my_modal_1" className="modal">
       <div className="modal-box">
@@ -26,7 +34,7 @@ const CheckInModal = ({ result }: Props) => {
         >
           {message}
         </h3>
-        <EntryTimeline />
+        {checkIn && <EntryTimeline checkIn={checkIn} checkOut={checkOut} />}
         <p className="">{description}</p>
         <div className="modal-action">
           <form method="dialog">

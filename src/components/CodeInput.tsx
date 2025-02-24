@@ -20,8 +20,6 @@ const CodeInput = ({ action, isLoading }: Props) => {
     const code2 = code2Ref.current;
     const code3 = code3Ref.current;
 
-    console.log("REFS", code1, code2, code3);
-
     if (code1 && code2 && code3) {
       const getShouldEnableSubmit = () => {
         const shouldSetSubmitDisabled =
@@ -89,7 +87,7 @@ const CodeInput = ({ action, isLoading }: Props) => {
   }, [submitDisabled]);
 
   return (
-    <form className="max-w-sm mx-auto" action={action}>
+    <form className="max-w-sm mx-auto mt-4" action={action}>
       <div className="flex mb-2 space-x-2 justify-center">
         <div>
           <label htmlFor="code-1" className="sr-only">
@@ -97,13 +95,13 @@ const CodeInput = ({ action, isLoading }: Props) => {
           </label>
           <input
             name="code-1"
-            type="text"
+            type="number"
             ref={code1Ref}
             maxLength={1}
             data-focus-input-init
             data-focus-input-next="code-2"
             id="code-1"
-            className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            className="block w-10 h-12 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             required
           />
         </div>
@@ -113,14 +111,14 @@ const CodeInput = ({ action, isLoading }: Props) => {
           </label>
           <input
             name="code-2"
-            type="text"
+            type="number"
             ref={code2Ref}
             maxLength={1}
             data-focus-input-init
             data-focus-input-prev="code-1"
             data-focus-input-next="code-3"
             id="code-2"
-            className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            className="block w-10 h-12 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             required
           />
         </div>
@@ -130,14 +128,14 @@ const CodeInput = ({ action, isLoading }: Props) => {
           </label>
           <input
             name="code-3"
-            type="text"
+            type="number"
             ref={code3Ref}
             maxLength={1}
             data-focus-input-init
             data-focus-input-prev="code-2"
             data-focus-input-next="code-4"
             id="code-3"
-            className="block w-9 h-9 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            className="block w-10 h-12 py-3 text-sm font-extrabold text-center text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             required
           />
         </div>
@@ -147,13 +145,17 @@ const CodeInput = ({ action, isLoading }: Props) => {
         ref={submitRef}
         type="submit"
         value={"Check In"}
-        className={isLoading ? "btn btn-disabled mt-4" : "btn btn-primary mt-4"}
+        className={
+          isLoading
+            ? "btn btn-disabled mt-8 w-full"
+            : "btn btn-primary mt-8 w-full"
+        }
         disabled={submitDisabled}
       >
         {isLoading ? (
           <span className="loading loading-spinner loading-sm"></span>
         ) : (
-          "Check In"
+          "Check in"
         )}
       </button>
     </form>

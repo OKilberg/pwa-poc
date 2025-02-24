@@ -1,6 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@theme {
+  --font-carter-one: "Carter One", sans-serif; 
+  --font-public-sans: "Public Sans", sans-serif; 
+}
 
 :root {
   --background: #ffffff;

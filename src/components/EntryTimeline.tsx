@@ -1,17 +1,23 @@
 import React from "react";
 import { AlarmClockMinus, Check, Minus } from "lucide-react";
 import { AlarmClockCheck, AlarmClock, BriefcaseBusiness } from "lucide-react";
-import { getCurrentTime } from "@/util/util";
+import { getCurrentTime, getISOTime } from "@/util/util";
 
-type Props = {};
+type Props = {
+  checkIn: string;
+  checkOut?: string;
+};
 
-const EntryTimeline = (props: Props) => {
+const EntryTimeline = ({ checkIn, checkOut }: Props) => {
+  const checkInTime = getISOTime(checkIn);
+  const checkOutTime = checkOut ? getISOTime(checkOut) : null;
+  const getTimelineHrClassName = checkOutTime ? "bg-success" : "";
   return (
     <ul className="timeline not-prose flex w-full mt-8">
       <li className="grow">
         <div className="timeline-start flex flex-col items-center">
           <p className="font-mono text-sm">Check In</p>
-          <time className="stat-value text-base">{getCurrentTime()}</time>
+          <time className="stat-value text-base">{checkInTime}</time>
         </div>
         <div className="timeline-middle">
           <AlarmClockCheck />
@@ -24,18 +30,18 @@ const EntryTimeline = (props: Props) => {
         <div className="timeline-middle">
           <BriefcaseBusiness />
         </div>
-        <hr />
+        <hr className={getTimelineHrClassName} />
       </li>
       <li className="grow">
-        <hr />
+        <hr className={getTimelineHrClassName} />
         <div className="timeline-start flex flex-col items-center">
           <p className="font-mono text-sm">Check Out</p>
           <time className="stat-value text-base">
-            <Minus />
+            {checkOutTime ? checkOutTime : <Minus />}
           </time>
         </div>
         <div className="timeline-middle">
-          <AlarmClock />
+          {checkOutTime ? <AlarmClockCheck /> : <AlarmClock />}
         </div>
       </li>
     </ul>

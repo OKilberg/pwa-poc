@@ -5,7 +5,6 @@ import {
   updateLocalEntry,
 } from "@/lib/dbLib";
 import { postEntry } from "@/lib/serverLib";
-import { EntryItemNoId } from "@/lib/types";
 import {
   getModalPropsNoCodeMatch,
   showModal,
@@ -54,7 +53,8 @@ export const submitCodeAction = async (
     postEntry(checkInEntry); // No need to await
 
     const modalPropsCheckInSuccess = getModalPropsCheckInSuccess(
-      user.firstname
+      user.firstname,
+      checkInEntry.in
     );
 
     showModal();
@@ -63,7 +63,7 @@ export const submitCodeAction = async (
   }
 
   if (hasCheckedIn) {
-    const { id } = latestCheckin;
+    const { id, in: inTime } = latestCheckin;
 
     const entryChanges = {
       out: new Date().toISOString(),
@@ -73,7 +73,9 @@ export const submitCodeAction = async (
     // TODO: server update
 
     const modalPropsCheckOutSuccess = getModalPropsCheckOutSuccess(
-      user.firstname
+      user.firstname,
+      inTime,
+      entryChanges.out
     );
 
     showModal();

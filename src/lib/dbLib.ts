@@ -1,6 +1,7 @@
 import { db } from "@/app/db";
 import { EntryItem, EntryItemNoId } from "./types";
 const TABLE_POSTS = "posts";
+const TABLE_USERS = "users";
 
 const addLocalData = async <T>(table: string, data: T) => {
   try {
@@ -80,4 +81,12 @@ export const updateLocalEntry = async (id: number, changes: any) => {
 
     return false;
   }
+};
+
+export const addLocalUser = async (
+  code: number,
+  firstname: string,
+  lastname: string
+) => {
+  await addLocalData(TABLE_USERS, { code, firstname, lastname });
 };

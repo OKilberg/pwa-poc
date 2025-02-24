@@ -3,11 +3,17 @@ import { EntryItemNoId } from "@/lib/types";
 export const getModalProps = (
   message: string,
   success: boolean,
-  description: string
+  description: string,
+  action?: string,
+  checkIn?: string,
+  checkOut?: string
 ) => ({
   message,
   success,
   description,
+  action,
+  checkIn,
+  checkOut,
 });
 
 export const showModal = () => {
@@ -40,21 +46,33 @@ export const getModalPropsCheckInError = (code: number) => {
   return modalProps;
 };
 
-export const getModalPropsCheckInSuccess = (firstName: string) => {
+export const getModalPropsCheckInSuccess = (
+  firstName: string,
+  checkIn: string
+) => {
   const modalProps = getModalProps(
     `Welcome ${firstName}`,
     true,
-    `Now get to work...`
+    `Now get to work...`,
+    "checkIn",
+    checkIn
   );
 
   return modalProps;
 };
 
-export const getModalPropsCheckOutSuccess = (firstName: string) => {
+export const getModalPropsCheckOutSuccess = (
+  firstName: string,
+  checkIn: string,
+  checkOut: string
+) => {
   const modalProps = getModalProps(
     `Goodbye ${firstName}`,
     true,
-    `See you next time!`
+    `See you next time!`,
+    "checkOut",
+    checkIn,
+    checkOut
   );
 
   return modalProps;

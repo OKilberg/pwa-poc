@@ -1,4 +1,5 @@
 import { EntryItem } from "@/lib/types";
+import { getHoursMinutesDifference } from "@/util/util";
 import React from "react";
 
 type Props = {
@@ -46,8 +47,11 @@ const getFormattedTimeString = (timeObj: TimeObj | null) => {
 
 const Entry = ({ entryItem }: Props) => {
   const { id, code, in: inTime, out } = entryItem;
+  const currentTime = new Date().toISOString();
+  const outTime = out ? out : currentTime;
   const inTimeObj = getTime(inTime);
   const outTimeObj = getTime(out);
+  const diff = getHoursMinutesDifference(inTime, outTime);
 
   return (
     <tr>
@@ -58,7 +62,7 @@ const Entry = ({ entryItem }: Props) => {
       <td>
         <div className="font-mono">{getFormattedTimeString(outTimeObj)}</div>
       </td>
-      <td>?</td>
+      <td>{diff}</td>
     </tr>
   );
 };

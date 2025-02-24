@@ -7,3 +7,33 @@ export const getCurrentTime = () => {
     minute: "2-digit",
   });
 };
+
+export function getHoursMinutesDifference(startISO: string, endISO: string) {
+  const start = new Date(startISO);
+  const end = new Date(endISO);
+
+  if (end < start) return "0h 0m"; // Prevent negative results
+
+  let diffMs = end.getTime() - start.getTime(); // Difference in milliseconds
+  let totalMinutes = Math.floor(diffMs / (1000 * 60)); // Convert to full minutes
+  const hasRemainingSeconds = diffMs % (1000 * 60) !== 0; // Check if there are leftover seconds
+
+  if (hasRemainingSeconds) {
+    totalMinutes += 1; // Only round up if there are leftover seconds
+  }
+
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  return `${hours}h ${minutes}m`;
+}
+
+export function getISOTime(isoString: string) {
+  const date = new Date(isoString);
+
+  return date.toLocaleTimeString("sv-SE", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}

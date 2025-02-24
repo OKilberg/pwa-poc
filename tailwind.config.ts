@@ -11,6 +11,12 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        tresYellow: "#D7BF0A",
+        tresLight: "#D9D9D9",
+      },
+      fontFamily: {
+        carterOne: ["var(--font-carter-one)", "sans-serif"],
+        publicSans: ["var(--font-public-sans)", "sans-serif"],
       },
     },
   },
