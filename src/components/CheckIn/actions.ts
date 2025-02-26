@@ -1,11 +1,4 @@
 import {
-  getLocalUser,
-  getLocalUserLatestCheckin,
-  insertLocalEntry,
-  updateLocalEntry,
-} from "@/lib/dbLib";
-import { postEntry } from "@/lib/serverLib";
-import {
   getModalPropsNoCodeMatch,
   showModal,
   getModalPropsCheckInError,
@@ -13,17 +6,26 @@ import {
   getModalPropsCheckOutSuccess,
   createCheckInEntry,
 } from "./helpers";
+import { getUser } from "@/lib/db/users";
+import { addLogEntry, editLogEntry, getLatestLogEntry } from "@/lib/db/logs";
+
+const getCode = (formData: FormData) => {
+  const number1 = formData.get("code-1");
+  const number2 = formData.get("code-2");
+  const number3 = formData.get("code-3");
+
+  const code = Number(`${number1}${number2}${number3}`);
+
+  return code;
+};
 
 export const submitCodeAction = async (
   _prevData: unknown,
   formData: FormData
 ) => {
-  const number1 = formData.get("code-1");
-  const number2 = formData.get("code-2");
-  const number3 = formData.get("code-3");
-  const code = Number(`${number1}${number2}${number3}`);
+  const code = getCode(formData);
 
-  const user = await getLocalUser(code);
+  const user = await getUser(code);
   const codeMatchExists = !!user;
 
   if (!codeMatchExists) {
@@ -34,15 +36,15 @@ export const submitCodeAction = async (
     return modalPropsNoCodeMatch;
   }
 
-  const latestCheckin = await getLocalUserLatestCheckin(code);
-  const hasCheckedIn = latestCheckin;
+  const latestCheckin = await getLatestLogEntry(code);
+  const hasCheckedIn = !!latestCheckin;
 
   const checkInEntry = createCheckInEntry(code);
 
   if (!hasCheckedIn) {
-    const inserted = await insertLocalEntry(checkInEntry);
+    const added = await addLogEntry(checkInEntry);
 
-    if (!inserted) {
+    if (!added) {
       const modalPropsCheckInError = getModalPropsCheckInError(code);
 
       showModal();
@@ -50,11 +52,11 @@ export const submitCodeAction = async (
       return modalPropsCheckInError;
     }
 
-    postEntry(checkInEntry); // No need to await
+    // postEntry(checkInEntry); // No need to await
 
     const modalPropsCheckInSuccess = getModalPropsCheckInSuccess(
-      user.firstname,
-      checkInEntry.in
+      user.firstName,
+      checkInEntry.inTime
     );
 
     showModal();
@@ -62,24 +64,22 @@ export const submitCodeAction = async (
     return modalPropsCheckInSuccess;
   }
 
-  if (hasCheckedIn) {
-    const { id, in: inTime } = latestCheckin;
+  const { id, inTime } = latestCheckin;
 
-    const entryChanges = {
-      out: new Date().toISOString(),
-    };
+  const entryChanges = {
+    outTime: new Date().toISOString(),
+  };
 
-    const update = await updateLocalEntry(id, entryChanges);
-    // TODO: server update
+  const edit = await editLogEntry(id, entryChanges);
+  // TODO: server update
 
-    const modalPropsCheckOutSuccess = getModalPropsCheckOutSuccess(
-      user.firstname,
-      inTime,
-      entryChanges.out
-    );
+  const modalPropsCheckOutSuccess = getModalPropsCheckOutSuccess(
+    user.firstName,
+    inTime,
+    entryChanges.outTime
+  );
 
-    showModal();
+  showModal();
 
-    return modalPropsCheckOutSuccess;
-  }
+  return modalPropsCheckOutSuccess;
 };

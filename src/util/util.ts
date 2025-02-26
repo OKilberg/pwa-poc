@@ -37,3 +37,17 @@ export function getISOTime(isoString: string) {
     hour12: false,
   });
 }
+
+export const tryFetch = async <T>(
+  asyncFunction: () => Promise<T>
+): Promise<T | undefined> => {
+  try {
+    const response = await asyncFunction();
+
+    return response;
+  } catch (error) {
+    console.error("Error:", error);
+
+    return undefined;
+  }
+};

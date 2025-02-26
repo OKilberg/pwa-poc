@@ -1,7 +1,11 @@
 import React from "react";
-import { AlarmClockMinus, Check, Minus } from "lucide-react";
-import { AlarmClockCheck, AlarmClock, BriefcaseBusiness } from "lucide-react";
-import { getCurrentTime, getISOTime } from "@/util/util";
+import {
+  AlarmClock,
+  AlarmClockCheck,
+  BriefcaseBusiness,
+  Minus,
+} from "lucide-react";
+import { getISOTime } from "@/util/util";
 
 type Props = {
   checkIn: string;

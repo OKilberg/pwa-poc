@@ -2,26 +2,27 @@
 
 import React, { useEffect, useState } from "react";
 import Entry from "./Entry";
-import { getEntries } from "@/lib/serverLib";
-import { getLocalEntries } from "@/lib/dbLib";
-import { EntryItem } from "@/lib/types";
+import { getLogEntries } from "@/lib/db/logs";
+import { LogEntry } from "@/lib/dbTypes";
 
 const EntryTableBody = () => {
-  const [stateEntries, setStateEntries] = useState<Array<EntryItem>>([]);
+  const [stateEntries, setStateEntries] = useState<Array<LogEntry>>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
-      const localData = await getLocalEntries();
+      const logEntries = await getLogEntries();
 
-      setStateEntries(localData);
+      setStateEntries(logEntries);
 
+      /*
       const entries = await getEntries();
 
       if (entries.length > 0) {
         setStateEntries(entries);
         console.log("Successful fetch, using server data...");
       }
+      */
     };
 
     loadData();
@@ -46,8 +47,8 @@ const EntryTableBody = () => {
 
   return (
     <tbody>
-      {stateEntries.map((entry) => (
-        <Entry key={entry.id} entryItem={entry} />
+      {stateEntries.map((logEntry) => (
+        <Entry key={logEntry.id} logEntry={logEntry} />
       ))}
     </tbody>
   );

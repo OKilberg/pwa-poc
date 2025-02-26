@@ -1,5 +1,5 @@
 "use client";
-import { addLocalUser } from "@/lib/dbLib";
+import { addUser } from "@/lib/db/users";
 import React, { ReactNode } from "react";
 
 type Props = {
@@ -8,8 +8,24 @@ type Props = {
 
 const HiddenButton = ({ children }: Props) => {
   const onClick = async () => {
-    await addLocalUser(111, "Oscar", "K");
-    await addLocalUser(222, "Sofia", "H");
+    const user1 = {
+      id: 111,
+      role: "employee" as const,
+      firstName: "John",
+      lastName: "K",
+    };
+
+    const user2 = {
+      id: 111,
+      role: "employee" as const,
+      firstName: "Alice",
+      lastName: "H",
+    };
+
+    await addUser(user1);
+
+    await addUser(user2);
+
     alert("Added users");
   };
 

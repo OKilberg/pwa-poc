@@ -1,9 +1,9 @@
-import { EntryItem } from "@/lib/types";
+import { LogEntry } from "@/lib/dbTypes";
 import { getHoursMinutesDifference } from "@/util/util";
 import React from "react";
 
 type Props = {
-  entryItem: EntryItem;
+  logEntry: LogEntry;
 };
 
 type TimeObj = {
@@ -45,17 +45,17 @@ const getFormattedTimeString = (timeObj: TimeObj | null) => {
   return formattedTimeString;
 };
 
-const Entry = ({ entryItem }: Props) => {
-  const { id, code, in: inTime, out } = entryItem;
+const Entry = ({ logEntry }: Props) => {
+  const { id, inTime, outTime } = logEntry;
   const currentTime = new Date().toISOString();
-  const outTime = out ? out : currentTime;
+  const finalOutTime = outTime ? outTime : currentTime;
   const inTimeObj = getTime(inTime);
-  const outTimeObj = getTime(out);
-  const diff = getHoursMinutesDifference(inTime, outTime);
+  const outTimeObj = getTime(finalOutTime);
+  const diff = getHoursMinutesDifference(inTime, finalOutTime);
 
   return (
     <tr>
-      <th>{code}</th>
+      <th>{id}</th>
       <td>
         <div className="font-mono">{getFormattedTimeString(inTimeObj)}</div>
       </td>

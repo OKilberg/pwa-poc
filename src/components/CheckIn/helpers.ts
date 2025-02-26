@@ -1,3 +1,4 @@
+import { NewLogEntry } from "@/lib/dbTypes";
 import { EntryItemNoId } from "@/lib/types";
 
 export const getModalProps = (
@@ -79,10 +80,10 @@ export const getModalPropsCheckOutSuccess = (
 };
 
 export const createCheckInEntry = (code: number) => {
-  const checkInEntry: EntryItemNoId = {
-    code,
-    in: new Date().toISOString(),
-    out: null,
+  const checkInEntry: NewLogEntry = {
+    userId: code,
+    inTime: new Date().toISOString(),
+    outTime: null,
   };
 
   return checkInEntry;
