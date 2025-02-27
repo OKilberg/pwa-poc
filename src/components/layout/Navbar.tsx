@@ -1,12 +1,13 @@
-import { Link, Menu, NotebookText, TableProperties } from "lucide-react";
+import { Menu, NotebookText, TableProperties } from "lucide-react";
 import React from "react";
 import HiddenButton from "../HiddenButton";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
     <nav className="navbar text-tresLight font-publicSans px-0">
       <div className="flex-1">
-        <Link href="/" className="btn btn-ghost text-xl">
+        <Link href="/" className="">
           <Menu />
         </Link>
       </div>
@@ -22,16 +23,12 @@ const Navbar = () => {
         </div>
       </HiddenButton>
       <div className="flex-1 flex-row-reverse">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link className="btn btn-ghost" href="/entries">
-              <TableProperties />
-            </Link>
-          </li>
-        </ul>
+        <Link className="" href="/entries">
+          <TableProperties />
+        </Link>
       </div>
     </nav>
   );
 };
 
-export default Navbar
+export default Navbar;

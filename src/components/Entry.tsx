@@ -46,7 +46,7 @@ const getFormattedTimeString = (timeObj: TimeObj | null) => {
 };
 
 const Entry = ({ logEntry }: Props) => {
-  const { id, inTime, outTime } = logEntry;
+  const { id, userId, inTime, outTime } = logEntry;
   const currentTime = new Date().toISOString();
   const finalOutTime = outTime ? outTime : currentTime;
   const inTimeObj = getTime(inTime);
@@ -55,7 +55,7 @@ const Entry = ({ logEntry }: Props) => {
 
   return (
     <tr>
-      <th>{id}</th>
+      <th>{userId}</th>
       <td>
         <div className="font-mono">{getFormattedTimeString(inTimeObj)}</div>
       </td>

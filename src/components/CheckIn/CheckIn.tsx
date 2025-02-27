@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useActionState } from "react";
-import CodeInput from "../CodeInput";
+import CodeInput from "../CodeInput/CodeInput";
 import CheckInModal from "../CheckInModal";
 import { submitCodeAction } from "./actions";
 
