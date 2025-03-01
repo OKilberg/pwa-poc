@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Public_Sans, Carter_One } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
-import { Menu, NotebookText, TableProperties } from "lucide-react";
-import HiddenButton from "@/components/HiddenButton";
 import Navbar from "@/components/layout/Navbar";
 
 const carterOne = Carter_One({

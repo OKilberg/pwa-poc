@@ -1,4 +1,3 @@
-import { getCurrentTime } from "@/util/util";
 import React from "react";
 import EntryTimeline from "./EntryTimeline";
 
@@ -44,27 +43,6 @@ const CheckInModal = ({ result }: Props) => {
         </div>
       </div>
     </dialog>
-  );
-};
-
-const CheckInOutInfo = () => {
-  return (
-    <div className="flex flex-col">
-      <div className="stats">
-        <div className="stat">
-          <div className="stat-title">Checked In</div>
-          <div className="stat-value text-success">{getCurrentTime()}</div>
-          <div className="stat-desc">21% more than last month</div>
-        </div>
-      </div>
-      <div className="stats">
-        <div className="stat">
-          <div className="stat-title">Checked Out</div>
-          <div className="stat-value">--</div>
-          <div className="stat-desc">21% more than last month</div>
-        </div>
-      </div>
-    </div>
   );
 };
 

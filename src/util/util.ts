@@ -8,6 +8,10 @@ export const getCurrentTime = () => {
   });
 };
 
+export const getCurrentDate = () => {
+  
+};
+
 export function getHoursMinutesDifference(startISO: string, endISO: string) {
   const start = new Date(startISO);
   const end = new Date(endISO);

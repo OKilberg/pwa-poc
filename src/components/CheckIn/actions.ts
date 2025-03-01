@@ -70,7 +70,7 @@ export const submitCodeAction = async (
     outTime: new Date().toISOString(),
   };
 
-  const edit = await editLogEntry(id, entryChanges);
+  await editLogEntry(id, entryChanges);
   // TODO: server update
 
   const modalPropsCheckOutSuccess = getModalPropsCheckOutSuccess(
