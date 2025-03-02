@@ -12,6 +12,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         tresYellow: "#D7BF0A",
+        tresContrastYellow: "#d1bd25",
         tresLight: "#D9D9D9",
       },
       fontFamily: {

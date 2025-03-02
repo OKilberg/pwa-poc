@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Public_Sans, Carter_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import DrawerMenu from "@/components/layout/DrawerMenu";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -66,10 +67,9 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr">
       <body
-        className={`${carterOne.variable} ${publicSans.variable} antialiased bg-[#2C2A2A] text-black h-screen px-3`}
+        className={`${carterOne.variable} ${publicSans.variable} antialiased bg-[#2C2A2A] text-black h-screen`}
       >
-        <Navbar />
-        {children}
+        <DrawerMenu children={children} />
       </body>
     </html>
   );

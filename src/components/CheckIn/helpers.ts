@@ -1,5 +1,4 @@
 import { NewLogEntry } from "@/lib/dbTypes";
-import { EntryItemNoId } from "@/lib/types";
 
 export const getModalProps = (
   message: string,
