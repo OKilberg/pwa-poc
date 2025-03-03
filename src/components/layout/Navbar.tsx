@@ -1,7 +1,6 @@
-import { Kanban, Menu, NotebookText, TableProperties } from "lucide-react";
+import { Kanban, NotebookText } from "lucide-react";
 import React from "react";
 import HiddenButton from "../HiddenButton";
-import Link from "next/link";
 
 const Navbar = () => {
   return (

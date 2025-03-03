@@ -8,9 +8,7 @@ export const getCurrentTime = () => {
   });
 };
 
-export const getCurrentDate = () => {
-  
-};
+export const getCurrentDate = () => {};
 
 export function getHoursMinutesDifference(startISO: string, endISO: string) {
   const start = new Date(startISO);
@@ -55,3 +53,10 @@ export const tryFetch = async <T>(
     return undefined;
   }
 };
+
+export function withSubcomponents<
+  T extends object,
+  S extends Record<string, unknown>
+>(Component: T, subcomponents: S): T & S {
+  return Object.assign(Component, subcomponents);
+}

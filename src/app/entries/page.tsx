@@ -1,12 +1,16 @@
 import EntryTableBody from "@/components/EntryTableBody";
+import { TableProperties } from "lucide-react";
 import React from "react";
 
 const Entries = () => {
   return (
-    <div className="overflow-x-auto flex justify-center max-h-[90vh] bg-tresLight rounded-md">
+    <div className="overflow-x-auto flex justify-center max-h-[90vh] bg-tresLight font-publicSans rounded-md">
       <div className="card flex-1">
         <div className="card-body">
-          <h1 className="card-title">Log</h1>
+          <h1 className="card-title">
+            <TableProperties />
+            Log
+          </h1>
           <table className="table table-md prose overflow-y-scroll prose flex flex-col h-full">
             <thead className="">
               <tr className="">

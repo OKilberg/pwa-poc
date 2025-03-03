@@ -68,7 +68,7 @@ const DrawerMenu = ({ children }: Props) => {
               href="/entries"
             >
               <TableProperties />
-              Entries
+              Log
             </Link>
           </li>
           <li className="">
