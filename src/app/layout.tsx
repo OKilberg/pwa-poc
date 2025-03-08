@@ -3,6 +3,10 @@ import { Public_Sans, Carter_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import DrawerMenu from "@/components/layout/DrawerMenu";
+import TopBar from "@/shared/components/TopBar/TopBar";
+import TopBarSide from "@/shared/components/TopBar/Subcomponents/TopBarSide";
+import TopBarMid from "@/shared/components/TopBar/Subcomponents/TopBarMid";
+import Logo from "@/shared/components/Logo";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -67,9 +71,22 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr">
       <body
-        className={`${carterOne.variable} ${publicSans.variable} antialiased bg-[#2C2A2A] text-black h-screen`}
+        className={`${carterOne.variable} ${publicSans.variable} antialiased bg-white text-black font-publicSans h-dvh w-dvw flex flex-col`}
       >
-        <DrawerMenu children={children} />
+        <TopBar>
+          <TopBarSide />
+          <TopBarMid>
+            <Logo
+              style={{
+                textShadow:
+                  "2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black, 0px 2px 0px black, 2px 0px 0px black, 0px -2px 0px black, -2px 0px 0px black",
+              }}
+              className="text-[26px]"
+            />
+          </TopBarMid>
+          <TopBarSide />
+        </TopBar>
+        {children}
       </body>
     </html>
   );

@@ -40,9 +40,9 @@ const DrawerMenu = ({ children }: Props) => {
           {/* Sidebar content here */}
           <HiddenButton>
             <div className="flex-1 flex-col">
-              <p className="font-carterOne text-tresContrastYellow text-base">
+              <div className="font-carterOne text-tresContrastYellow text-base">
                 TRES AMIGOS
-              </p>
+              </div>
               <p className="flex justify-center items-center text-xl gap-1 font-bold">
                 <NotebookText height={20} width={20} />
                 WorkLog
