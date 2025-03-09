@@ -22,10 +22,11 @@ const ClockIn = () => {
       <MainPane className="animate-slideInRight">
         <Header />
         <Content>
+          <p className="text-[24px]">What would you like to do?</p>
           <ClockInButton />
           <Button variant="secondary">
             <Calendar />
-            Attendance
+            View Attendance
           </Button>
           <div>
             <Button variant="tertiary" onClick={onLogout}>

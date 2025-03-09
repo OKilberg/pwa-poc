@@ -39,7 +39,7 @@ const PinForm = ({ action, isLoading }: Props) => {
   };
 
   return (
-    <form className="max-w-sm mx-auto mt-4" action={action} ref={formRef}>
+    <form className="max-w-sm mx-auto" action={action} ref={formRef}>
       <div className="flex mb-2 space-x-2 justify-center">
         <DigitField
           afterChange={afterChange}

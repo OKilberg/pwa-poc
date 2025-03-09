@@ -14,9 +14,9 @@ const ClockInButton = () => {
   return (
     <Button variant="primary" className="h-[88px] active:brightness-95">
       <CirclePlay size={32} />
-      <div className="flex flex-col justify-center items-start">
-        <p className="text-[24px]">Clock in</p>
-        <time className="text-[24px] font-bold">{time}</time>
+      <div className="flex flex-col justify-center items-start gap-1">
+        <p className="text-[24px] leading-none">Clock in</p>
+        <time className="text-[24px] leading-none font-bold">{time}</time>
       </div>
     </Button>
   );

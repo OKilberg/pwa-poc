@@ -12,6 +12,7 @@ import { startUserSession } from "@/lib/session/Session";
 import { getUser } from "@/lib/db/users";
 import { redirect } from "next/navigation";
 import PinForm from "@/shared/components/PinForm/PinForm";
+import toast, { Toaster } from "react-hot-toast";
 
 type Props = {};
 
@@ -34,6 +35,8 @@ const Home = (props: Props) => {
       startUserSession(user);
       redirect("/clockin");
     }
+
+    toast.error("Invalid PIN, try again", { duration: 1500 });
     return undefined;
   };
 
@@ -41,6 +44,7 @@ const Home = (props: Props) => {
 
   return (
     <MainPane>
+      <Toaster position="top-right" />
       <Header>
         <HeaderTitle>
           <CurrentTime />
