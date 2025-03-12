@@ -33,6 +33,7 @@ export default {
         tresLight: "#D9D9D9",
         success: "#75C44D",
         successDark: "#5B973E",
+        danger: "#C46B4D",
       },
       fontFamily: {
         carterOne: ["var(--font-carter-one)", "sans-serif"],

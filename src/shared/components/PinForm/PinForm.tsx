@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import DigitField from "./DigitField/DigitField";
+import DigitField from "./Components/DigitField/DigitField";
 
 type Props = {
   action: (formData: FormData) => void;

@@ -1,20 +1,19 @@
 "use client";
 
-import Button from "@/shared/components/Button/Button";
+import { getActiveLogEntry } from "@/lib/db/logs";
+import { getUser } from "@/lib/db/users";
+import { redirect } from "next/navigation";
+import { startUserSession } from "@/lib/session/Session";
 import Content from "@/shared/components/Content/Content";
+import CurrentTime from "../ClockIn/Components/CurrentTime";
 import Header from "@/shared/components/Header/Header";
 import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubtitle";
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
-import React, { useActionState } from "react";
-import CurrentTime from "../ClockIn/Components/CurrentTime";
-import { startUserSession } from "@/lib/session/Session";
-import { getUser } from "@/lib/db/users";
-import { redirect } from "next/navigation";
 import PinForm from "@/shared/components/PinForm/PinForm";
+import React, { useActionState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
-type Props = {};
+import useCurrentDate from "@/shared/hooks/useCurrentDate";
 
 const getCode = (formData: FormData) => {
   const number1 = formData.get("code-1");
@@ -26,13 +25,24 @@ const getCode = (formData: FormData) => {
   return code;
 };
 
-const Home = (props: Props) => {
+const Home = () => {
   const submitPIN = async (_prevData: unknown, formData: FormData) => {
     const code = getCode(formData);
     const user = await getUser(code);
 
     if (user) {
-      startUserSession(user);
+      const { id } = user;
+      const activeLogEntry = await getActiveLogEntry(id);
+
+      const isClockedIn = !!activeLogEntry;
+      if (isClockedIn) {
+        const { inTime, id } = activeLogEntry;
+
+        startUserSession({ ...user, isClockedIn, inTime, entryId: id });
+      } else {
+        startUserSession({ ...user, isClockedIn });
+      }
+
       redirect("/clockin");
     }
 
@@ -41,6 +51,7 @@ const Home = (props: Props) => {
   };
 
   const [state, action, isLoading] = useActionState(submitPIN, undefined);
+  const currentDate = useCurrentDate();
 
   return (
     <MainPane>
@@ -49,7 +60,7 @@ const Home = (props: Props) => {
         <HeaderTitle>
           <CurrentTime />
         </HeaderTitle>
-        <HeaderSubtitle>8 March, 2025</HeaderSubtitle>
+        <HeaderSubtitle>{currentDate}</HeaderSubtitle>
       </Header>
       <Content>
         <p className="text-[24px]">Enter your PIN</p>

@@ -10,8 +10,6 @@ const useOnChange = (afterChange?: VoidFunction) => {
     const input = event.target;
     const hasOneValue = getHasOneValue(input);
 
-    console.log("hasOneValue");
-
     if (hasOneValue) {
       const nextInputId = getNextInputId(input);
 

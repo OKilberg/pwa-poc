@@ -25,7 +25,7 @@ const DigitField = ({
       </label>
       <input
         autoFocus={autoFocus}
-        className="block w-20 h-[88px] py-3 text-sm font-extrabold text-center text-gray-900 bg-white border-4 border-[#666666] rounded-3xl focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        className="block w-20 h-[88px] appearance-none py-3 text-4xl font-extrabold text-center text-gray-900 bg-white border-4 border-[#666666] rounded-3xl focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
         data-focus-input-init
         data-focus-input-next={inputNext}
         id={inputName}

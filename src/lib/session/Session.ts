@@ -1,14 +1,24 @@
 import { User } from "../dbTypes";
 
-export const startUserSession = (user: User) => {
+export type UserWithAdditionalProps =
+  | (User & {
+      isClockedIn: true;
+      inTime: string;
+      entryId: number;
+    })
+  | (User & { isClockedIn: false });
+
+export const startUserSession = (user: UserWithAdditionalProps) => {
   const userString = JSON.stringify(user);
   sessionStorage.setItem("userSession", userString);
 };
 
 export const getUserSession = () => {
+  if (typeof window === "undefined") return null;
+
   const userSession = sessionStorage.getItem("userSession");
   if (userSession) {
-    const user: User = JSON.parse(userSession);
+    const user: UserWithAdditionalProps = JSON.parse(userSession);
 
     return user;
   }

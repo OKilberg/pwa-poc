@@ -8,8 +8,9 @@ import UserSessionProvider from "@/shared/context/UserSessionContext.tsx/UserSes
 import { redirect } from "next/navigation";
 import Content from "@/shared/components/Content/Content";
 import Header from "./Components/Header";
-import ClockInButton from "./Components/ClockInButton";
+import ClockInButton from "./Components/ClockInButton/ClockInButton";
 import { Calendar, LogOut } from "lucide-react";
+import Label from "./Components/Label";
 
 const ClockIn = () => {
   const onLogout = () => {
@@ -22,7 +23,7 @@ const ClockIn = () => {
       <MainPane className="animate-slideInRight">
         <Header />
         <Content>
-          <p className="text-[24px]">What would you like to do?</p>
+          <Label />
           <ClockInButton />
           <Button variant="secondary">
             <Calendar />
