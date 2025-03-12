@@ -2,6 +2,8 @@ import useUser from "@/shared/context/UserSessionContext.tsx/ContextHooks/useUse
 import getNewCheckInEntry from "../Helpers/getNewCheckInEntry";
 import { addLogEntry, editLogEntry } from "@/lib/db/logs";
 import useLogout from "@/shared/context/UserSessionContext.tsx/ContextHooks/useLogout";
+import toast from "react-hot-toast";
+import { getISOTime } from "@/util/util";
 
 const useOnClick = () => {
   const user = useUser();
@@ -9,7 +11,7 @@ const useOnClick = () => {
 
   const onClick = async () => {
     if (user) {
-      const { id, isClockedIn } = user;
+      const { id, isClockedIn, firstName } = user;
 
       if (isClockedIn) {
         const entryEdits = {
@@ -22,12 +24,25 @@ const useOnClick = () => {
 
         await editLogEntry(entryId, entryEdits);
 
+        const clockedOutMessage = `${firstName} clocked out at ${getISOTime(
+          entryEdits.outTime
+        )}`;
+
+        toast.success(clockedOutMessage, { icon: "👋", className: "text-xl" });
+
         return logout();
       }
 
       const newCheckInEntry = getNewCheckInEntry(id);
 
       await addLogEntry(newCheckInEntry);
+
+      const clockedInMessage = `${firstName} clocked in at ${getISOTime(
+        newCheckInEntry.inTime
+      )}`;
+
+      toast.success(clockedInMessage, { icon: "💼", className: "text-xl" });
+
       return logout();
     }
 

@@ -55,7 +55,6 @@ const Home = () => {
 
   return (
     <MainPane>
-      <Toaster position="top-right" />
       <Header>
         <HeaderTitle>
           <CurrentTime />

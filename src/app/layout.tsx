@@ -7,6 +7,7 @@ import TopBar from "@/shared/components/TopBar/TopBar";
 import TopBarSide from "@/shared/components/TopBar/Subcomponents/TopBarSide";
 import TopBarMid from "@/shared/components/TopBar/Subcomponents/TopBarMid";
 import Logo from "@/shared/components/Logo";
+import { Toaster } from "react-hot-toast";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -86,6 +87,7 @@ export default function RootLayout({
           </TopBarMid>
           <TopBarSide />
         </TopBar>
+        <Toaster position="top-right" />
         {children}
       </body>
     </html>
