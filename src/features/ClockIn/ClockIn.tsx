@@ -25,7 +25,10 @@ const ClockIn = () => {
         <Content>
           <Label />
           <ClockInButton />
-          <Button variant="secondary">
+          <Button
+            variant="secondary"
+            onClick={() => redirect("/clockin/attendance")}
+          >
             <Calendar />
             View Attendance
           </Button>

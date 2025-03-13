@@ -54,6 +54,19 @@ export const getLatestLogEntry = async (userId: User["id"]) => {
   return response;
 };
 
+export const getClockedInEntries = async () => {
+  const response = await tryFetch(() =>
+    db.logs
+      .where("userId")
+      .above(0)
+      .and((log) => !log.outTime)
+      .toArray()
+  );
+
+  console.log("Response", response);
+  return response;
+};
+
 export const editLogEntry = async (
   id: LogEntry["id"],
   updates: Partial<LogEntry>

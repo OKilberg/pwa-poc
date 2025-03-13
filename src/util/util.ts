@@ -60,3 +60,14 @@ export function withSubcomponents<
 >(Component: T, subcomponents: S): T & S {
   return Object.assign(Component, subcomponents);
 }
+
+export function getTimeDifferenceISO(isoDate1: string, isoDate2: string) {
+  const date1 = new Date(isoDate1); // Convert ISO string to Date object
+  const date2 = new Date(isoDate2); // Convert ISO string to Date object
+
+  const diffInMs = Math.abs(date2.getTime() - date1.getTime()); // Difference in milliseconds
+  const hours = Math.floor(diffInMs / (1000 * 60 * 60)); // Convert to hours
+  const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60)); // Remaining minutes
+
+  return { hours, minutes }; // Return the result as an object
+}

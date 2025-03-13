@@ -11,9 +11,12 @@ import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubti
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import PinForm from "@/shared/components/PinForm/PinForm";
-import React, { useActionState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import React, { Suspense, useActionState } from "react";
+import toast from "react-hot-toast";
 import useCurrentDate from "@/shared/hooks/useCurrentDate";
+import ContentTitle from "@/shared/components/ContentTitle";
+import ClockedInSuspenseWrapper from "./Components/ClockedInList";
+import ClockedInList from "./Components/ClockedInList";
 
 const getCode = (formData: FormData) => {
   const number1 = formData.get("code-1");
@@ -64,6 +67,12 @@ const Home = () => {
       <Content>
         <p className="text-[24px]">Enter your PIN</p>
         <PinForm action={action} isLoading={isLoading} />
+      </Content>
+      <Content className="gap-2">
+        <ContentTitle label="Clocked in" />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ClockedInList />
+        </Suspense>
       </Content>
     </MainPane>
   );
