@@ -43,10 +43,17 @@ const AttendanceItem = ({ logs, month }: AttendanceItemProps) => {
           <p className="flex-1 text-right text-xl font-light">{timeTotal}</p>
         </summary>
         <ul className="mt-2">
-          {logs.map((log) => {
+          {logs.map((log, index) => {
             const { inTime, outTime } = log;
             const day = getISODate(inTime);
-            return <EntryItem day={day} inTime={inTime} outTime={outTime} />;
+            return (
+              <EntryItem
+                key={index}
+                day={day}
+                inTime={inTime}
+                outTime={outTime}
+              />
+            );
           })}
         </ul>
       </details>

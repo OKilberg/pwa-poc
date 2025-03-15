@@ -3,7 +3,7 @@
 import { getActiveLogEntry } from "@/lib/db/logs";
 import { getUser } from "@/lib/db/users";
 import { redirect } from "next/navigation";
-import { startUserSession } from "@/lib/session/Session";
+import { clearUserSession, startUserSession } from "@/lib/session/Session";
 import Content from "@/shared/components/Content/Content";
 import CurrentTime from "../ClockIn/Components/CurrentTime";
 import Header from "@/shared/components/Header/Header";
@@ -33,7 +33,7 @@ const Home = () => {
     const user = await getUser(code);
 
     if (user) {
-      const { id } = user;
+      const { id, role } = user;
       const activeLogEntry = await getActiveLogEntry(id);
 
       const isClockedIn = !!activeLogEntry;
@@ -45,6 +45,9 @@ const Home = () => {
         startUserSession({ ...user, isClockedIn });
       }
 
+      if (role === "admin") {
+        redirect("/admin");
+      }
       redirect("/clockin");
     }
 

@@ -30,16 +30,30 @@ export const editUser = async (id: User["id"], updates: Partial<User>) => {
   return response;
 };
 
+export const getEmployees = async () => {
+  const response = await tryFetch(() =>
+    db.users.where("role").equals("employee").toArray()
+  );
+
+  if (!response) {
+    return [];
+  }
+
+  console.log("Response", response);
+
+  return response;
+};
+
 export const getEmployeesMap = async () => {
   const response = await tryFetch(() =>
     db.users.where("role").equals("employee").toArray()
   );
 
   if (!response) {
-    return new Map();
+    return new Map<number, User>();
   }
 
-  const employeeMap = new Map(
+  const employeeMap = new Map<number, User>(
     response.map((employee) => [employee.id, employee])
   );
 

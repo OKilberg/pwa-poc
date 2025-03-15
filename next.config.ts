@@ -4,6 +4,9 @@ import withSerwistInit from "@serwist/next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
+  experimental: {
+    authInterrupts: true,
+  },
 };
 
 const withSerwist = withSerwistInit({

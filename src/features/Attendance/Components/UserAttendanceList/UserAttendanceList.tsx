@@ -1,9 +1,12 @@
 import React from "react";
 import { Year } from "./Components/Year";
-import useUser from "@/shared/context/UserSessionContext.tsx/ContextHooks/useUser";
+import { User } from "@/lib/dbTypes";
 
-const UserAttendanceList = () => {
-  const user = useUser();
+type UserAttendanceListProps = {
+  user: User;
+};
+
+const UserAttendanceList = ({ user }: UserAttendanceListProps) => {
   const userId = user ? user.id : 0;
 
   return (

@@ -7,7 +7,7 @@ import Content from "@/shared/components/Content/Content";
 import Button from "@/shared/components/Button/Button";
 import { redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import UserAttendanceList from "./Components/UserAttendanceList/UserAttendanceList";
+import AttendanceList from "./Components/AttendanceList";
 
 const Attendance = () => {
   return (
@@ -15,7 +15,7 @@ const Attendance = () => {
       <MainPane>
         <Header />
         <Content className="py-0">
-          <UserAttendanceList />
+          <AttendanceList />
           <div>
             <Button variant="tertiary" onClick={() => redirect("/clockin")}>
               <ArrowLeft className="" />

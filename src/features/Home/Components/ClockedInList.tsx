@@ -8,7 +8,7 @@ import { User } from "@/lib/dbTypes";
 import { getEmployeesMap } from "@/lib/db/users";
 
 const ClockedInList = () => {
-  const employeeMap = useQuery({ fn: getEmployeesMap, key: "employees" });
+  const employeeMap = useQuery({ fn: getEmployeesMap, key: "employeesMap" });
   const clockedIn = useQuery({ fn: getClockedInEntries, key: "clockedIn" });
 
   return (

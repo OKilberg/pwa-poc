@@ -11,10 +11,11 @@ type Props = {
 };
 
 const getMonthsMatrix = (yearLogs: Array<LogEntry>) => {
+  // Create an array of length 12
   const monthsMatrix: Array<Array<LogEntry>> = Array.from(
     { length: 12 },
     () => []
-  ); // Create an array of length 12
+  );
 
   // Add all the logs to their respective month-array
   for (let i = yearLogs.length - 1; i >= 0; i--) {
