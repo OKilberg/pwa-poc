@@ -34,8 +34,6 @@ serwist.addToPrecacheList([
   { url: "/clockin", revision: "1" },
   { url: "/clockin/attendance", revision: "1" },
   { url: "/admin", revision: "1" },
-
-  // Other entries...
 ]);
 
 // BACKGROUND SYNC QUEUE
