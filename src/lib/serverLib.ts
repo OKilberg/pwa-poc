@@ -18,7 +18,7 @@ const post = async (data: unknown, url: string) => {
 
     return jsonData;
   } catch (error) {
-    console.log("Error, not possible to post to server.");
+    console.log("Error, not possible to post to server.", error);
 
     return null;
   }

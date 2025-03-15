@@ -38,6 +38,7 @@ self.addEventListener("fetch", (event) => {
       return response;
     } catch (error) {
       await queue.pushRequest({ request: event.request });
+      console.log(error);
       return Response.error();
     }
   };

@@ -22,7 +22,9 @@ const useOnChange = (afterChange?: VoidFunction) => {
       nextInput?.focus();
     }
 
-    typeof afterChange === "function" && afterChange();
+    if (typeof afterChange === "function") {
+      afterChange();
+    }
   };
 
   return onChange;

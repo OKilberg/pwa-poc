@@ -79,10 +79,13 @@ export const getModalPropsCheckOutSuccess = (
 };
 
 export const createCheckInEntry = (code: number) => {
+  const newDate = new Date();
   const checkInEntry: NewLogEntry = {
     userId: code,
-    inTime: new Date().toISOString(),
+    inTime: newDate.toISOString(),
     outTime: null,
+    month: newDate.getMonth(),
+    year: newDate.getFullYear(),
   };
 
   return checkInEntry;

@@ -35,7 +35,7 @@ const getFormattedTimeString = (timeObj: TimeObj | null) => {
     return "?";
   }
 
-  const { day, hour, minute, month, year } = timeObj;
+  const { day, hour, minute, month } = timeObj;
 
   const completeHour = hour < 10 ? `0${hour}` : hour;
   const completeMinute = minute < 10 ? `0${minute}` : minute;
@@ -46,7 +46,7 @@ const getFormattedTimeString = (timeObj: TimeObj | null) => {
 };
 
 const Entry = ({ logEntry }: Props) => {
-  const { id, userId, inTime, outTime } = logEntry;
+  const { userId, inTime, outTime } = logEntry;
   const currentTime = new Date().toISOString();
   const finalOutTime = outTime ? outTime : currentTime;
   const inTimeObj = getTime(inTime);

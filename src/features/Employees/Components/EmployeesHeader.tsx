@@ -3,9 +3,7 @@ import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubti
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import React from "react";
 
-type Props = {};
-
-const EmployeesHeader = (props: Props) => {
+const EmployeesHeader = () => {
   return (
     <Header>
       <HeaderTitle>Employees</HeaderTitle>

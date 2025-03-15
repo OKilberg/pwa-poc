@@ -1,11 +1,11 @@
 "use client";
 
-import { clearUserSession, getUserSession } from "@/lib/session/Session";
+import { clearUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import UserSessionProvider from "@/shared/context/UserSessionContext.tsx/UserSessionProvider";
 import { DatabaseBackup, LogOut, Sheet, Users } from "lucide-react";
-import { redirect, unauthorized } from "next/navigation";
+import { redirect } from "next/navigation";
 import Content from "@/shared/components/Content/Content";
 import AdminHeader from "./Components/AdminHeader";
 import { ensureAuth } from "@/lib/session/auth";
@@ -15,7 +15,7 @@ const Admin = () => {
 
   const onLogout = () => {
     clearUserSession();
-    redirect("/new");
+    redirect("/");
   };
 
   return (

@@ -2,12 +2,12 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Next.js PWA",
-    short_name: "NextPWA",
+    name: "Worklog Mobile Web App",
+    short_name: "Worklog",
     description: "A Progressive Web App built with Next.js",
     start_url: "/",
     display: "standalone",
-    background_color: "#2C2A2A",
+    background_color: "#FFFFFF",
     theme_color: "#000000",
     orientation: "portrait",
     icons: [

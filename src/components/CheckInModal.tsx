@@ -15,12 +15,11 @@ type Props = {
 };
 
 const CheckInModal = ({ result }: Props) => {
-  const { message, success, description, action, checkIn, checkOut } =
-    result || {
-      message: "",
-      success: false,
-      description: "",
-    };
+  const { message, success, description, checkIn, checkOut } = result || {
+    message: "",
+    success: false,
+    description: "",
+  };
   return (
     <dialog id="my_modal_1" className="modal">
       <div className="modal-box">

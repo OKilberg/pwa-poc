@@ -15,7 +15,7 @@ import Label from "./Components/Label";
 const ClockIn = () => {
   const onLogout = () => {
     clearUserSession();
-    redirect("/new");
+    redirect("/");
   };
 
   return (

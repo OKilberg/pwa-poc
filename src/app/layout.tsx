@@ -19,9 +19,9 @@ const publicSans = Public_Sans({
 });
 
 const APP_NAME = "PWA App";
-const APP_DEFAULT_TITLE = "My Awesome PWA App";
+const APP_DEFAULT_TITLE = "Worklog";
 const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "Best PWA app in the world!";
+const APP_DESCRIPTION = "A Progressive Web App built with Next.js";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2C2A2A",
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({

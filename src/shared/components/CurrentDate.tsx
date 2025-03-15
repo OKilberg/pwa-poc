@@ -3,9 +3,7 @@
 import React from "react";
 import useCurrentTime from "../hooks/useCurrentTime";
 
-type Props = {};
-
-const CurrentDate = (props: Props) => {
+const CurrentDate = () => {
   const currentTime = useCurrentTime();
 
   const dateWeekdayDayMonth = currentTime.toLocaleDateString("sv-SE", {

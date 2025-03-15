@@ -2,9 +2,7 @@ import TabView from "@/components/TabView";
 import { ShieldUser } from "lucide-react";
 import React from "react";
 
-type Props = {};
-
-const Admin = (props: Props) => {
+const Admin = () => {
   return (
     <div className="flex flex-col justify-center bg-base-200 rounded-md font-publicSans">
       <div className="card flex-1">

@@ -6,7 +6,7 @@ import { startUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
 import { Check, KeyRound, User as UserIcon } from "lucide-react";
 import { redirect } from "next/navigation";
-import React, { RefObject, useActionState, useEffect, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const generatePIN = () => {
@@ -15,7 +15,7 @@ const generatePIN = () => {
   return randomPin;
 };
 
-const AddAdminForm = ({ ref }: { ref?: RefObject<HTMLDialogElement> }) => {
+const AddAdminForm = () => {
   const addAdmin = async (_prevData: unknown, formData: FormData) => {
     const firstName = String(formData.get("firstName"));
     const lastName = String(formData.get("lastName"));
@@ -53,7 +53,7 @@ const AddAdminForm = ({ ref }: { ref?: RefObject<HTMLDialogElement> }) => {
     checkPin();
   }, [randomPin]);
 
-  const [state, action, isLoading] = useActionState(addAdmin, undefined);
+  const [_state, action, _isLoading] = useActionState(addAdmin, undefined);
   return (
     <form
       action={action}

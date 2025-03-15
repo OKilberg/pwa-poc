@@ -7,13 +7,7 @@ import Content from "@/shared/components/Content/Content";
 import Header from "@/shared/components/Header/Header";
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
-import {
-  ArrowLeft,
-  Check,
-  Key,
-  KeyRound,
-  User as UserIcon,
-} from "lucide-react";
+import { ArrowLeft, Check, KeyRound, User as UserIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -60,7 +54,7 @@ const AddEmployee = () => {
     checkPin();
   }, [randomPin]);
 
-  const [state, action, isLoading] = useActionState(addEmployee, undefined);
+  const [_state, action, _isLoading] = useActionState(addEmployee, undefined);
   return (
     <MainPane>
       <Header>

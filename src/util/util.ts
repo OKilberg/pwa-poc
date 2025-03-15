@@ -16,7 +16,7 @@ export function getHoursMinutesDifference(startISO: string, endISO: string) {
 
   if (end < start) return "0h 0m"; // Prevent negative results
 
-  let diffMs = end.getTime() - start.getTime(); // Difference in milliseconds
+  const diffMs = end.getTime() - start.getTime(); // Difference in milliseconds
   let totalMinutes = Math.floor(diffMs / (1000 * 60)); // Convert to full minutes
   const hasRemainingSeconds = diffMs % (1000 * 60) !== 0; // Check if there are leftover seconds
 

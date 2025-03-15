@@ -3,7 +3,7 @@
 import { getActiveLogEntry } from "@/lib/db/logs";
 import { getAdmins, getUser } from "@/lib/db/users";
 import { redirect } from "next/navigation";
-import { clearUserSession, startUserSession } from "@/lib/session/Session";
+import { startUserSession } from "@/lib/session/Session";
 import Content from "@/shared/components/Content/Content";
 import CurrentTime from "../ClockIn/Components/CurrentTime";
 import Header from "@/shared/components/Header/Header";
@@ -72,7 +72,7 @@ const Home = () => {
     return undefined;
   };
 
-  const [state, action, isLoading] = useActionState(submitPIN, undefined);
+  const [_state, action, isLoading] = useActionState(submitPIN, undefined);
   const currentDate = useCurrentDate();
 
   return (
