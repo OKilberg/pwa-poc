@@ -33,7 +33,6 @@ const CurrentTime = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
-      console.log("Updated Time");
     }, TIME_15_SECONDS);
 
     return () => clearInterval(interval);

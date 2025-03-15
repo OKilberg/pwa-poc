@@ -40,6 +40,15 @@ export function getISOTime(isoString: string) {
   });
 }
 
+export function getISODate(isoString: string) {
+  const date = new Date(isoString);
+
+  return date.toLocaleDateString("sv-SE", {
+    day: "numeric",
+    weekday: "short",
+  });
+}
+
 export const tryFetch = async <T>(
   asyncFunction: () => Promise<T>
 ): Promise<T | undefined> => {
@@ -70,4 +79,24 @@ export function getTimeDifferenceISO(isoDate1: string, isoDate2: string) {
   const minutes = Math.floor((diffInMs % (1000 * 60 * 60)) / (1000 * 60)); // Remaining minutes
 
   return { hours, minutes }; // Return the result as an object
+}
+
+export function getTimeDifferenceMinutesISO(
+  isoDate1: string,
+  isoDate2: string
+) {
+  const date1 = new Date(isoDate1); // Convert ISO string to Date object
+  const date2 = new Date(isoDate2); // Convert ISO string to Date object
+
+  const diffInMs = Math.abs(date2.getTime() - date1.getTime()); // Difference in milliseconds
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60)); // Convert to minutes
+
+  return diffInMinutes; // Return the result
+}
+
+export function convertMinutesToHoursAndMinutes(minutes: number) {
+  const hours = Math.floor(minutes / 60); // Calculate the number of hours
+  const remainingMinutes = minutes % 60; // Get the remaining minutes after hours
+
+  return { hours, minutes: remainingMinutes }; // Return as an object
 }

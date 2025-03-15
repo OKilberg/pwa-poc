@@ -14,6 +14,8 @@ export type LogEntry = {
   userId: number;
   inTime: string; // ISO-like datetime string
   outTime: string | null; // ISO-like datetime string
+  month: number;
+  year: number;
 };
 
 export type NewLogEntry = Omit<LogEntry, "id">;

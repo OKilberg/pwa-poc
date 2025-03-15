@@ -15,7 +15,6 @@ import React, { Suspense, useActionState } from "react";
 import toast from "react-hot-toast";
 import useCurrentDate from "@/shared/hooks/useCurrentDate";
 import ContentTitle from "@/shared/components/ContentTitle";
-import ClockedInSuspenseWrapper from "./Components/ClockedInList";
 import ClockedInList from "./Components/ClockedInList";
 
 const getCode = (formData: FormData) => {
@@ -70,7 +69,11 @@ const Home = () => {
       </Content>
       <Content className="gap-2">
         <ContentTitle label="Clocked in" />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <span className="loading loading-spinner loading-lg"></span>
+          }
+        >
           <ClockedInList />
         </Suspense>
       </Content>

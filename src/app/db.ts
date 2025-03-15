@@ -4,7 +4,7 @@ import Dexie from "dexie";
 export const db = new Dexie("offlineDB") as Dexie & Tables;
 
 db.version(1).stores({
-  logs: "++id, userId, inTime, outTime",
+  logs: "++id, userId, inTime, outTime, month, year, [userId+year]",
   users: "&id, role, firstName, lastName",
 });
 

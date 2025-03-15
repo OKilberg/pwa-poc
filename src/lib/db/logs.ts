@@ -38,6 +38,27 @@ export const getActiveLogEntry = async (userId: User["id"]) => {
   return response;
 };
 
+export const getRecordsByUserMonthYear = async (
+  userId: User["id"],
+  year: LogEntry["year"],
+  month: LogEntry["month"]
+) => {
+  return db.logs
+    .where("[userId+year+month]") // Compound index for efficient lookup
+    .equals([userId, year, month]) // Ensure case consistency
+    .toArray();
+};
+
+export const getRecordsByUserYear = async (
+  userId: User["id"],
+  year: LogEntry["year"]
+) => {
+  return db.logs
+    .where("[userId+year]") // Compound index for efficient lookup
+    .equals([userId, year]) // Ensure case consistency
+    .toArray();
+};
+
 // DEPRECATED
 export const getLatestLogEntry = async (userId: User["id"]) => {
   console.warn("Deprecated, use getActiveLogEntry()");

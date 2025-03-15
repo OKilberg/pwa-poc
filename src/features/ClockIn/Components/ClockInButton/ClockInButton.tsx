@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/shared/components/Button/Button";
 import useCurrentTime from "@/shared/hooks/useCurrentTime";
-import { CirclePlay } from "lucide-react";
 import React from "react";
 import useOnClick from "./Hooks/useOnClick";
 import useVariant from "./Hooks/useVariant";

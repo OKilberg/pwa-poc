@@ -34,8 +34,6 @@ const CodeInput = ({ action, isLoading }: Props) => {
       code3Ref.current,
     ]);
 
-    console.log("Laggy");
-
     if (!allCodesHaveValues) {
       return setSubmitDisabled(true);
     }
@@ -45,8 +43,6 @@ const CodeInput = ({ action, isLoading }: Props) => {
 
   useEffect(() => {
     const submit = submitRef.current;
-
-    console.log("My effect ran");
 
     if (submit && !submitDisabled) {
       submit.focus();

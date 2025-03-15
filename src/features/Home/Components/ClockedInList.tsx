@@ -5,18 +5,16 @@ import React from "react";
 import ClockedIn from "./ClockedIn";
 import useQuery from "./useQuery";
 import { User } from "@/lib/dbTypes";
-
-const userMap = new Map<number, Partial<User>>();
-userMap.set(111, { firstName: "John", lastName: "K" });
-userMap.set(222, { firstName: "Alice", lastName: "H" });
+import { getEmployeesMap } from "@/lib/db/users";
 
 const ClockedInList = () => {
-  const clockedIn = useQuery({ fn: getClockedInEntries, key: "entries" });
+  const employeeMap = useQuery({ fn: getEmployeesMap, key: "employees" });
+  const clockedIn = useQuery({ fn: getClockedInEntries, key: "clockedIn" });
 
   return (
-    <ul className="flex flex-col w-full max-h-[300px]">
+    <ul className="flex flex-col w-full max-h-[300px] animate-fadeIn">
       {clockedIn?.map(({ inTime, id, userId }) => {
-        const { firstName, lastName } = userMap.get(userId) as User;
+        const { firstName, lastName } = employeeMap.get(userId) as User;
         return (
           <ClockedIn
             key={id}
