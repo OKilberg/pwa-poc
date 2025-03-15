@@ -14,7 +14,7 @@ const Employees = () => {
     <MainPane>
       <EmployeesHeader />
       <Content>
-        <div className="w-full flex flex-row-reverse">
+        <div className="w-full flex flex-row-reverse justify-center">
           <Button
             onClick={() => redirect("/admin/employees/add")}
             className="w-1/4"

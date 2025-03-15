@@ -7,7 +7,7 @@ const EmployeesList = () => {
   const employees = useQuery({ fn: getEmployees, key: "employees" });
 
   return (
-    <ul className="flex flex-col gap-2 w-full max-h-[360px] overflow-scroll">
+    <ul className="flex flex-col gap-2 w-full max-h-[295px] md:max-h-[360px] overflow-scroll">
       {employees.map((employee, index) => (
         <Employee key={index} user={employee} />
       ))}

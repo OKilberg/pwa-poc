@@ -5,7 +5,7 @@ import { ParentComponent, Styleable } from "../types";
 type TopBarProps = ParentComponent & Styleable;
 
 const TopBar = ({ children, className }: TopBarProps) => {
-  const classTopBar = clsx("h-20 flex items-center", className);
+  const classTopBar = clsx("h-12 md:h-20 flex items-center", className);
 
   return <nav className={classTopBar}>{children}</nav>;
 };

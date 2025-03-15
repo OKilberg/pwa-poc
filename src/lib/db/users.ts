@@ -44,6 +44,20 @@ export const getEmployees = async () => {
   return response;
 };
 
+export const getAdmins = async () => {
+  const response = await tryFetch(() =>
+    db.users.where("role").equals("admin").toArray()
+  );
+
+  if (!response) {
+    return 0;
+  }
+
+  console.log("Response", response);
+
+  return response.length;
+};
+
 export const getEmployeesMap = async () => {
   const response = await tryFetch(() =>
     db.users.where("role").equals("employee").toArray()

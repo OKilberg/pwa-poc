@@ -28,7 +28,7 @@ const Button = ({
   const buttonType = type ? type : "button";
 
   const classButton = clsx(
-    "flex justify-center items-center py-6 w-[496px] gap-2 rounded-2xl text-[24px]",
+    "flex justify-center items-center py-3 md:py-6 w-[295px] md:w-[496px] gap-2 rounded-md md:rounded-2xl text-md md:text-[24px]",
     className,
     isSecondary && "border-2 border-black",
     isPrimary && "bg-success text-white",

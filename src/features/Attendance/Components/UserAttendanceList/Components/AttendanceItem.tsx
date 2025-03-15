@@ -33,14 +33,14 @@ const AttendanceItem = ({ logs, month }: AttendanceItemProps) => {
   const shifts = logs.length;
   const timeTotal = getTimeTotal(logs);
   return (
-    <li className="flex p-5 bg-[#EAEAEA] rounded-2xl">
+    <li className="flex p-2 md:p-5 bg-[#EAEAEA] rounded-md md:rounded-2xl">
       <details className="flex flex-col w-full">
-        <summary className="flex w-full">
-          <p className="flex-1 text-2xl">{month}</p>
-          <p className="flex-1 text-center text-xl font-light">
+        <summary className="flex w-full text-sm">
+          <p className="flex-1 md:text-2xl">{month}</p>
+          <p className="flex-1 text-center md:text-xl font-light">
             {shifts} shifts
           </p>
-          <p className="flex-1 text-right text-xl font-light">{timeTotal}</p>
+          <p className="flex-1 text-right md:text-xl font-light">{timeTotal}</p>
         </summary>
         <ul className="mt-2">
           {logs.map((log, index) => {
@@ -76,7 +76,7 @@ const EntryItem = ({ day, inTime, outTime }: EntryItemProps) => {
   const timeOut = outTime ? getISOTime(outTime) : "Ongoing";
 
   return (
-    <li className="flex w-full py-1">
+    <li className="flex w-full py-1 text-xs font-light">
       <p className="flex-1">{day}</p>
       <p className="flex-1 text-center">{`${timeIn} - ${timeOut}`}</p>
       <p className="flex-1 text-right">{timeTotal}</p>

@@ -32,7 +32,10 @@ const useOnClick = () => {
           entryEdits.outTime
         )}`;
 
-        toast.success(clockedOutMessage, { icon: "👋", className: "text-xl" });
+        toast.success(clockedOutMessage, {
+          icon: "👋",
+          className: "md:text-xl",
+        });
 
         return logout();
       }
@@ -48,7 +51,7 @@ const useOnClick = () => {
         newCheckInEntry.inTime
       )}`;
 
-      toast.success(clockedInMessage, { icon: "💼", className: "text-xl" });
+      toast.success(clockedInMessage, { icon: "💼", className: "md:text-xl" });
 
       return logout();
     }

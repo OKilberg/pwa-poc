@@ -24,12 +24,12 @@ const ClockInButton = () => {
     <Button
       onClick={onClick}
       variant={variant}
-      className="h-[88px] active:brightness-95"
+      className="active:brightness-95"
     >
-      <Icon size={32} />
+      <Icon className="md:size-[32px]" />
       <div className="flex flex-col justify-center items-start gap-1">
-        <p className="text-[24px] leading-none">{label}</p>
-        <time className="text-[24px] leading-none font-bold">{time}</time>
+        <p className="leading-none">{label}</p>
+        <time className="leading-none font-bold">{time}</time>
       </div>
     </Button>
   );

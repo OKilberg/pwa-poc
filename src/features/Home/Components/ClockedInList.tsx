@@ -12,7 +12,7 @@ const ClockedInList = () => {
   const clockedIn = useQuery({ fn: getClockedInEntries, key: "clockedIn" });
 
   return (
-    <ul className="flex flex-col w-full max-h-[300px] animate-fadeIn">
+    <ul className="flex flex-col w-full max-h-[250px] md:max-h-[300px] animate-fadeIn">
       {clockedIn?.map(({ inTime, id, userId }) => {
         const { firstName, lastName } = employeeMap.get(userId) as User;
         return (

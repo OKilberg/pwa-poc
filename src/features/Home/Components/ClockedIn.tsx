@@ -16,10 +16,10 @@ const ClockedIn = ({ firstname, lastname, inTime }: ClockedInProps) => {
   return (
     <li
       suppressHydrationWarning={true}
-      className="flex w-full p-5 items-center text-xl"
+      className="flex w-full p-2 md:p-5 items-center text-sm md:text-xl font-light"
     >
       <div className="flex flex-col flex-1 justify-center items-start gap-1">
-        <p className="text-2xl">
+        <p className="md:text-2xl">
           {firstname} {lastname}
         </p>
         <time suppressHydrationWarning={true}>{`${time} - Ongoing`}</time>

@@ -1,14 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Public_Sans, Carter_One } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import DrawerMenu from "@/components/layout/DrawerMenu";
 import TopBar from "@/shared/components/TopBar/TopBar";
 import TopBarSide from "@/shared/components/TopBar/Subcomponents/TopBarSide";
 import TopBarMid from "@/shared/components/TopBar/Subcomponents/TopBarMid";
 import Logo from "@/shared/components/Logo";
 import { Toaster } from "react-hot-toast";
-import HiddenButton from "@/components/HiddenButton";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -83,7 +80,7 @@ export default function RootLayout({
                 textShadow:
                   "2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black, 0px 2px 0px black, 2px 0px 0px black, 0px -2px 0px black, -2px 0px 0px black",
               }}
-              className="text-[26px]"
+              className="text-[18px] md:text-[26px]"
             />
           </TopBarMid>
           <TopBarSide />

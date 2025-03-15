@@ -6,7 +6,7 @@ import useSetUser from "@/shared/context/ReportsContext/ContextHooks/useSetUser"
 import React, { ChangeEvent } from "react";
 
 const EmployeeSelector = () => {
-  const employees = useQuery({ fn: getEmployeesMap, key: "employees" });
+  const employees = useQuery({ fn: getEmployeesMap, key: "employeesMap" });
   const setUser = useSetUser();
 
   const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -19,11 +19,11 @@ const EmployeeSelector = () => {
   return (
     <div className="w-full flex justify-center">
       <select
-        defaultValue={undefined}
-        className="select select-lg select-bordered w-full max-w-md"
+        defaultValue={"select"}
+        className="select md:select-lg select-bordered w-full md:max-w-md"
         onChange={onSelectChange}
       >
-        <option disabled selected value={undefined}>
+        <option disabled value={"select"}>
           Select employee
         </option>
         {Array.from(employees.entries()).map(([key, employee]) => (

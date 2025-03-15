@@ -35,7 +35,7 @@ const ClockIn = () => {
           <div>
             <Button variant="tertiary" onClick={onLogout}>
               <LogOut className="transform rotate-180" />
-              Back
+              Logout
             </Button>
           </div>
         </Content>

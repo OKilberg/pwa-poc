@@ -1,7 +1,7 @@
 "use client";
 
 import { getActiveLogEntry } from "@/lib/db/logs";
-import { getUser } from "@/lib/db/users";
+import { getAdmins, getUser } from "@/lib/db/users";
 import { redirect } from "next/navigation";
 import { clearUserSession, startUserSession } from "@/lib/session/Session";
 import Content from "@/shared/components/Content/Content";
@@ -11,11 +11,13 @@ import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubti
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import PinForm from "@/shared/components/PinForm/PinForm";
-import React, { Suspense, useActionState } from "react";
+import React, { Suspense, useActionState, useEffect } from "react";
 import toast from "react-hot-toast";
 import useCurrentDate from "@/shared/hooks/useCurrentDate";
 import ContentTitle from "@/shared/components/ContentTitle";
 import ClockedInList from "./Components/ClockedInList";
+import useQuery from "./Components/useQuery";
+import CreateAdminModal from "./Components/CreateAdminModal";
 
 const getCode = (formData: FormData) => {
   const number1 = formData.get("code-1");
@@ -28,6 +30,21 @@ const getCode = (formData: FormData) => {
 };
 
 const Home = () => {
+  const admins = useQuery({ fn: getAdmins, key: "admins" });
+  const shouldShowCreateAdminModal = !admins;
+
+  useEffect(() => {
+    if (shouldShowCreateAdminModal) {
+      const modalElement = document.getElementById(
+        "create_admin_modal"
+      ) as HTMLDialogElement | null;
+
+      if (modalElement) {
+        modalElement.showModal();
+      }
+    }
+  }, [shouldShowCreateAdminModal]);
+
   const submitPIN = async (_prevData: unknown, formData: FormData) => {
     const code = getCode(formData);
     const user = await getUser(code);
@@ -60,6 +77,7 @@ const Home = () => {
 
   return (
     <MainPane>
+      <CreateAdminModal />
       <Header>
         <HeaderTitle>
           <CurrentTime />
@@ -67,11 +85,11 @@ const Home = () => {
         <HeaderSubtitle>{currentDate}</HeaderSubtitle>
       </Header>
       <Content>
-        <p className="text-[24px]">Enter your PIN</p>
+        <p className="text-[16px] md:text-[24px]">Enter your PIN</p>
         <PinForm action={action} isLoading={isLoading} />
       </Content>
       <Content className="gap-2">
-        <ContentTitle label="Clocked in" />
+        <ContentTitle label="Clocked in employees" />
         <Suspense
           fallback={
             <span className="loading loading-spinner loading-lg"></span>

@@ -7,7 +7,13 @@ import Content from "@/shared/components/Content/Content";
 import Header from "@/shared/components/Header/Header";
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
-import { ArrowLeft, Check, Key, User as UserIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Key,
+  KeyRound,
+  User as UserIcon,
+} from "lucide-react";
 import { redirect } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -34,7 +40,7 @@ const AddEmployee = () => {
     };
 
     addUser(newEmployee).then(() => {
-      toast.success(`Added ${firstName}`, { className: "text-xl" });
+      toast.success(`Added ${firstName}`, { className: "md:text-xl" });
       promiseCache.delete("employees");
       promiseCache.delete("employeesMap");
       redirect("/admin/employees");
@@ -66,7 +72,7 @@ const AddEmployee = () => {
           className="flex flex-col gap-6 w-full justify-center items-center"
         >
           <div className="flex flex-col gap-4 w-2/3">
-            <label className="input input-lg input-bordered flex items-center gap-2">
+            <label className="input md:input-lg input-bordered flex items-center gap-2">
               <UserIcon />
               <input
                 autoFocus
@@ -79,7 +85,7 @@ const AddEmployee = () => {
                 maxLength={30}
               />
             </label>
-            <label className="input input-lg input-bordered flex items-center gap-2">
+            <label className="input md:input-lg input-bordered flex items-center gap-2">
               <UserIcon />
               <input
                 className="grow"
@@ -91,8 +97,8 @@ const AddEmployee = () => {
                 maxLength={30}
               />
             </label>
-            <label className="input input-lg flex items-center gap-2">
-              <Key />
+            <label className="input md:input-lg flex items-center gap-2">
+              <KeyRound />
               <input
                 readOnly
                 type="number"
