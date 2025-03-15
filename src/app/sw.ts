@@ -24,6 +24,20 @@ const serwist = new Serwist({
   runtimeCaching: defaultCache,
 });
 
+serwist.addToPrecacheList([
+  { url: "/", revision: "1" },
+  { url: "/_not-found", revision: "1" },
+  { url: "/admin", revision: "1" },
+  { url: "/admin/employees", revision: "1" },
+  { url: "/admin/reports", revision: "1" },
+  { url: "/admin/employees/add", revision: "1" },
+  { url: "/clockin", revision: "1" },
+  { url: "/clockin/attendance", revision: "1" },
+  { url: "/admin", revision: "1" },
+
+  // Other entries...
+]);
+
 // BACKGROUND SYNC QUEUE
 self.addEventListener("fetch", (event) => {
   // Add in your own criteria here to return early if this
