@@ -1,5 +1,6 @@
 "use client";
 
+import { DATE_LOCALE, TIME_LOCALE } from "@/app/constants";
 import React, { useEffect, useState } from "react";
 
 const TIME_5_SECONDS = 5 * 1000;
@@ -8,7 +9,7 @@ const CurrentTime = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const getTimeHours = () => {
-    const timeHours = currentTime.toLocaleTimeString("sv-SE", {
+    const timeHours = currentTime.toLocaleTimeString(TIME_LOCALE, {
       hour: "2-digit",
     });
 
@@ -16,7 +17,7 @@ const CurrentTime = () => {
   };
 
   const getTimeMinutes = () => {
-    const timeSeconds = currentTime.toLocaleTimeString("sv-SE", {
+    const timeSeconds = currentTime.toLocaleTimeString(TIME_LOCALE, {
       minute: "2-digit",
     });
 

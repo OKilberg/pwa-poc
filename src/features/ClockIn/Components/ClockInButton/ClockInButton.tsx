@@ -6,6 +6,7 @@ import useOnClick from "./Hooks/useOnClick";
 import useVariant from "./Hooks/useVariant";
 import useLabel from "./Hooks/useLabel";
 import useIcon from "./Hooks/useIcon";
+import { TIME_LOCALE } from "@/app/constants";
 
 const ClockInButton = () => {
   const variant = useVariant();
@@ -13,7 +14,7 @@ const ClockInButton = () => {
   const Icon = useIcon();
 
   const currentTime = useCurrentTime();
-  const time = currentTime.toLocaleTimeString("sv-SE", {
+  const time = currentTime.toLocaleTimeString(TIME_LOCALE, {
     hour: "2-digit",
     minute: "2-digit",
   });

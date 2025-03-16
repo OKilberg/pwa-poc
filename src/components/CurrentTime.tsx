@@ -1,5 +1,6 @@
 "use client";
 
+import { DATE_LOCALE, TIME_LOCALE } from "@/app/constants";
 import { Clock4 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
@@ -9,7 +10,7 @@ const CurrentTime = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const getTimeHours = () => {
-    const timeHours = currentTime.toLocaleTimeString("sv-SE", {
+    const timeHours = currentTime.toLocaleTimeString(TIME_LOCALE, {
       hour: "2-digit",
     });
 
@@ -17,14 +18,14 @@ const CurrentTime = () => {
   };
 
   const getTimeMinutes = () => {
-    const timeSeconds = currentTime.toLocaleTimeString("sv-SE", {
+    const timeSeconds = currentTime.toLocaleTimeString(TIME_LOCALE, {
       minute: "2-digit",
     });
 
     return timeSeconds;
   };
 
-  const dateWeekdayDayMonth = currentTime.toLocaleDateString("sv-SE", {
+  const dateWeekdayDayMonth = currentTime.toLocaleDateString(DATE_LOCALE, {
     weekday: "long",
     day: "numeric",
     month: "long",

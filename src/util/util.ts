@@ -1,8 +1,10 @@
+import { DATE_LOCALE, TIME_LOCALE } from "@/app/constants";
+
 export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getCurrentTime = () => {
-  return new Date().toLocaleTimeString("sv-SE", {
+  return new Date().toLocaleTimeString(TIME_LOCALE, {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -33,7 +35,7 @@ export function getHoursMinutesDifference(startISO: string, endISO: string) {
 export function getISOTime(isoString: string) {
   const date = new Date(isoString);
 
-  return date.toLocaleTimeString("sv-SE", {
+  return date.toLocaleTimeString(TIME_LOCALE, {
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
@@ -43,7 +45,7 @@ export function getISOTime(isoString: string) {
 export function getISODate(isoString: string) {
   const date = new Date(isoString);
 
-  return date.toLocaleDateString("sv-SE", {
+  return date.toLocaleDateString(DATE_LOCALE, {
     day: "numeric",
     weekday: "short",
   });
