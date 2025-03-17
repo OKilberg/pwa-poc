@@ -1,6 +1,6 @@
 import { defaultCache } from "@serwist/next/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-import { BackgroundSyncQueue, Serwist } from "serwist";
+import { Serwist } from "serwist";
 
 // This declares the value of `injectionPoint` to TypeScript.
 // `injectionPoint` is the string that will be replaced by the
@@ -14,7 +14,7 @@ declare global {
 
 declare const self: ServiceWorkerGlobalScope;
 
-const queue = new BackgroundSyncQueue("myQueueName");
+// const queue = new BackgroundSyncQueue("myQueueName");
 
 const serwist = new Serwist({
   precacheEntries: self.__SW_MANIFEST,
@@ -24,6 +24,7 @@ const serwist = new Serwist({
   runtimeCaching: defaultCache,
 });
 
+/*
 serwist.addToPrecacheList([
   { url: "/", revision: "1" },
   { url: "/_not-found", revision: "1" },
@@ -35,8 +36,10 @@ serwist.addToPrecacheList([
   { url: "/clockin/attendance", revision: "1" },
   { url: "/admin", revision: "1" },
 ]);
+*/
 
 // BACKGROUND SYNC QUEUE
+/*
 self.addEventListener("fetch", (event) => {
   // Add in your own criteria here to return early if this
   // isn't a request that should use background sync.
@@ -58,6 +61,27 @@ self.addEventListener("fetch", (event) => {
   console.log("BACKGROUND SYNC");
 
   event.respondWith(backgroundSync());
+})
+*/
+
+const urlsToPrecache = [
+  "/",
+  "/clockin",
+  "/clockin/attendance",
+  "/admin",
+  "/admin/employees",
+  "/admin/employees/add",
+  "/admin/reports"
+] as const;
+
+self.addEventListener("install", (event) => {
+  const requestPromises = Promise.all(
+    urlsToPrecache.map((entry) => {
+      return serwist.handleRequest({ request: new Request(entry), event });
+    }),
+  );
+
+  event.waitUntil(requestPromises);
 });
 
 serwist.addEventListeners();
