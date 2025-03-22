@@ -102,3 +102,15 @@ export function convertMinutesToHoursAndMinutes(minutes: number) {
 
   return { hours, minutes: remainingMinutes }; // Return as an object
 }
+
+export const getRandomIdentityNumber =()=>{
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let randomString = '';
+
+  for (let i = 0; i < 9; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters[randomIndex];
+  }
+
+  return randomString;
+}

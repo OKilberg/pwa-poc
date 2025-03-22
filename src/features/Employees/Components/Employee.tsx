@@ -7,7 +7,7 @@ type EmployeeProps = {
 };
 
 const Employee = ({ user }: EmployeeProps) => {
-  const { id, firstName, lastName, role } = user;
+  const { id, idn, firstName, lastName, role } = user;
   return (
     <li className="flex p-2 md:p-5 bg-[#EAEAEA] rounded-md md:rounded-2xl">
       <details className="flex flex-col w-full group">
@@ -22,6 +22,7 @@ const Employee = ({ user }: EmployeeProps) => {
         <ul className="mt-2">
           <li className="flex w-full text-sm md:text-md">
             <div className="flex-1">Role: {role}</div>
+            <div className="flex-1 text-center">Idn: {idn}</div>
             <div className="flex-1 text-right">PIN: {id}</div>
           </li>
         </ul>

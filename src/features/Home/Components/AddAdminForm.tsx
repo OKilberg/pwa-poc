@@ -4,7 +4,7 @@ import { promiseCache } from "@/features/Home/Components/useQuery";
 import { addUser, getUser } from "@/lib/db/users";
 import { startUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
-import { Check, KeyRound, User as UserIcon } from "lucide-react";
+import { Check, IdCard, KeyRound, User as UserIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -19,6 +19,7 @@ const AddAdminForm = () => {
   const addAdmin = async (_prevData: unknown, formData: FormData) => {
     const firstName = String(formData.get("firstName"));
     const lastName = String(formData.get("lastName"));
+    const idn = String(formData.get("idn"));
     const pin = Number(formData.get("pin"));
 
     console.log(firstName, lastName, pin);
@@ -28,6 +29,7 @@ const AddAdminForm = () => {
       firstName,
       lastName,
       role: "admin" as const,
+      idn
     };
 
     addUser(newAdmin).then(() => {
@@ -85,6 +87,18 @@ const AddAdminForm = () => {
             maxLength={30}
           />
         </label>
+        <label className="input md:input-lg input-bordered flex items-center gap-2">
+              <IdCard />
+              <input
+                className="grow"
+                type="text"
+                required
+                name="idn"
+                placeholder="Identity Number"
+                minLength={9}
+                maxLength={9}
+              />
+            </label>
         <label className="input md:input-lg flex items-center gap-2">
           <KeyRound />
           <input

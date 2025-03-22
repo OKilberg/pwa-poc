@@ -7,6 +7,7 @@ export type User = {
   role: UserRole;
   firstName: string;
   lastName: string;
+  idn: string;
 };
 
 export type LogEntry = {
