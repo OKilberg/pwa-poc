@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import Content from "@/shared/components/Content/Content";
 import AdminHeader from "./Components/AdminHeader";
 import { ensureAuth } from "@/lib/session/auth";
+import { exportMonthlyLogsToXLSX } from "@/lib/export/export";
 
 const Admin = () => {
   ensureAuth();
@@ -39,8 +40,8 @@ const Admin = () => {
           </Button>
           <Button
             variant="secondary"
-            state="disabled"
-            onClick={() => redirect("/admin/reports")}
+            // state="disabled"
+            onClick={() => exportMonthlyLogsToXLSX(2025,2)}
           >
             <DatabaseBackup />
             Data Backup

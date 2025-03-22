@@ -59,6 +59,17 @@ export const getRecordsByUserYear = async (
     .toArray();
 };
 
+export const getRecordsByMonthYear = async (
+  year: LogEntry["year"],
+  month: LogEntry["month"]
+) => {
+  return db.logs
+    .where("year") // Compound index for efficient lookup
+    .equals(year) // Ensure case consistency
+    .and(log=>log.month === month)
+    .toArray();
+};
+
 // DEPRECATED
 export const getLatestLogEntry = async (userId: User["id"]) => {
   console.warn("Deprecated, use getActiveLogEntry()");

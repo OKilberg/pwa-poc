@@ -95,8 +95,7 @@ const AddAdminForm = () => {
                 required
                 name="idn"
                 placeholder="Identity Number"
-                minLength={9}
-                maxLength={9}
+                maxLength={15}
               />
             </label>
         <label className="input md:input-lg flex items-center gap-2">
