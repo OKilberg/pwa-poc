@@ -13,6 +13,7 @@ import DateAttendance from "./Components/DateAttendance";
 import Button from "@/shared/components/Button/Button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import EditLogModal from "./Components/EditLogModal";
 
 const Calendar = () => {
   const { push } = useRouter();
@@ -32,6 +33,7 @@ const Calendar = () => {
         </Header>
         <Content>
           <DatePicker
+            disableFuture
             label="Select a date"
             value={date}
             onChange={handleDateChange}

@@ -1,6 +1,6 @@
+import React from "react";
 import { User } from "@/lib/dbTypes";
 import { ChevronDown } from "lucide-react";
-import React from "react";
 
 type EmployeeProps = {
   user: User;

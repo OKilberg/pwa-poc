@@ -1,11 +1,13 @@
+"use client"
+
 import React from "react";
-import { ParentComponent } from "./types";
+import { Clickable, ParentComponent } from "./types";
 
-type ListItemProps = {} & ParentComponent;
+type ListItemProps = {} & ParentComponent & Clickable;
 
-const ListItem = ({ children }: ListItemProps) => {
+const ListItem = ({ children, onClick }: ListItemProps) => {
   return (
-    <li className="flex p-2 md:p-5 bg-[#EAEAEA] rounded-md md:rounded-2xl">
+    <li onClick={onClick} className="flex p-2 md:p-5 bg-[#EAEAEA] rounded-md md:rounded-2xl">
       {children}
     </li>
   );
