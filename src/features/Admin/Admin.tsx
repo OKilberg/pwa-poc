@@ -4,8 +4,15 @@ import { clearUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import UserSessionProvider from "@/shared/context/UserSessionContext.tsx/UserSessionProvider";
-import { DatabaseBackup, LogOut, Sheet, Users } from "lucide-react";
-import { redirect } from "next/navigation";
+import {
+  Calendar,
+  DatabaseBackup,
+  HardDriveDownload,
+  LogOut,
+  Sheet,
+  Users,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
 import Content from "@/shared/components/Content/Content";
 import AdminHeader from "./Components/AdminHeader";
 import { ensureAuth } from "@/lib/session/auth";
@@ -13,10 +20,11 @@ import { exportMonthlyLogsToXLSX } from "@/lib/export/export";
 
 const Admin = () => {
   ensureAuth();
+  const { push } = useRouter();
 
   const onLogout = () => {
     clearUserSession();
-    redirect("/");
+    push("/");
   };
 
   return (
@@ -24,27 +32,25 @@ const Admin = () => {
       <MainPane className="animate-slideInRight">
         <AdminHeader />
         <Content>
-          <Button
-            variant="secondary"
-            onClick={() => redirect("/admin/employees")}
-          >
+          <Button variant="secondary" onClick={() => push("/admin/employees")}>
             <Users />
             Employees
           </Button>
-          <Button
-            variant="secondary"
-            onClick={() => redirect("/admin/reports")}
-          >
+          <Button variant="secondary" onClick={() => push("/admin/calendar")}>
+            <Calendar />
+            Calendar
+          </Button>
+          <Button variant="secondary" onClick={() => push("/admin/reports")}>
             <Sheet />
             Time Reports
           </Button>
           <Button
             variant="secondary"
             // state="disabled"
-            onClick={() => exportMonthlyLogsToXLSX(2025,2)}
+            onClick={() => push("/admin/export")}
           >
-            <DatabaseBackup />
-            Data Backup
+            <HardDriveDownload />
+            Data Export
           </Button>
           <div>
             <Button variant="tertiary" onClick={onLogout}>

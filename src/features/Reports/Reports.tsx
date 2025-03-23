@@ -3,7 +3,7 @@
 import Button from "@/shared/components/Button/Button";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import { ArrowLeft } from "lucide-react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import Content from "@/shared/components/Content/Content";
 import Header from "@/shared/components/Header/Header";
@@ -14,6 +14,8 @@ import ReportsList from "./Components/ReportsList";
 import EmployeeSelector from "./Components/EmployeeSelector";
 
 const Reports = () => {
+  const { push } = useRouter();
+
   return (
     <ReportsContextProvider>
       <MainPane>
@@ -25,7 +27,7 @@ const Reports = () => {
           <EmployeeSelector />
           <ReportsList />
           <div>
-            <Button variant="tertiary" onClick={() => redirect("/admin")}>
+            <Button variant="tertiary" onClick={() => push("/admin")}>
               <ArrowLeft className="" />
               Back
             </Button>

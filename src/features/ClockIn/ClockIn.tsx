@@ -5,7 +5,7 @@ import { clearUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import UserSessionProvider from "@/shared/context/UserSessionContext.tsx/UserSessionProvider";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Content from "@/shared/components/Content/Content";
 import Header from "./Components/Header";
 import ClockInButton from "./Components/ClockInButton/ClockInButton";
@@ -13,9 +13,11 @@ import { Calendar, LogOut } from "lucide-react";
 import Label from "./Components/Label";
 
 const ClockIn = () => {
+  const { push } = useRouter();
+
   const onLogout = () => {
     clearUserSession();
-    redirect("/");
+    push("/");
   };
 
   return (
@@ -27,7 +29,7 @@ const ClockIn = () => {
           <ClockInButton />
           <Button
             variant="secondary"
-            onClick={() => redirect("/clockin/attendance")}
+            onClick={() => push("/clockin/attendance")}
           >
             <Calendar />
             View Attendance

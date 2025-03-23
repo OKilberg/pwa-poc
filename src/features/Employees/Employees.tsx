@@ -7,16 +7,18 @@ import Content from "@/shared/components/Content/Content";
 import EmployeesList from "./Components/EmployeesList";
 import Button from "@/shared/components/Button/Button";
 import { ArrowLeft, UserPlus } from "lucide-react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Employees = () => {
+  const { push } = useRouter();
+  
   return (
     <MainPane>
       <EmployeesHeader />
       <Content>
         <div className="w-full flex flex-row-reverse justify-center">
           <Button
-            onClick={() => redirect("/admin/employees/add")}
+            onClick={() => push("/admin/employees/add")}
             className="w-1/4"
             variant="secondary"
           >
@@ -26,7 +28,7 @@ const Employees = () => {
         </div>
         <EmployeesList />
         <div>
-          <Button variant="tertiary" onClick={() => redirect("/admin")}>
+          <Button variant="tertiary" onClick={() => push("/admin")}>
             <ArrowLeft className="" />
             Back
           </Button>

@@ -38,6 +38,18 @@ export const getActiveLogEntry = async (userId: User["id"]) => {
   return response;
 };
 
+export const getRecordsByDate = async (date: string) => {
+  const response = await tryFetch(() =>
+    db.logs.where("inTime").startsWith(date).toArray()
+  );
+
+  if (!response) {
+    return [];
+  }
+
+  return response;
+};
+
 export const getRecordsByUserMonthYear = async (
   userId: User["id"],
   year: LogEntry["year"],
@@ -66,7 +78,7 @@ export const getRecordsByMonthYear = async (
   return db.logs
     .where("year") // Compound index for efficient lookup
     .equals(year) // Ensure case consistency
-    .and(log=>log.month === month)
+    .and((log) => log.month === month)
     .toArray();
 };
 

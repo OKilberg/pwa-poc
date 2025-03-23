@@ -7,8 +7,14 @@ import Content from "@/shared/components/Content/Content";
 import Header from "@/shared/components/Header/Header";
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
-import { ArrowLeft, Check, IdCard, KeyRound, User as UserIcon } from "lucide-react";
-import { redirect } from "next/navigation";
+import {
+  ArrowLeft,
+  Check,
+  IdCard,
+  KeyRound,
+  User as UserIcon,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -19,6 +25,8 @@ const generatePIN = () => {
 };
 
 const AddEmployee = () => {
+  const { push } = useRouter();
+
   const addEmployee = async (_prevData: unknown, formData: FormData) => {
     const firstName = String(formData.get("firstName"));
     const lastName = String(formData.get("lastName"));
@@ -32,14 +40,14 @@ const AddEmployee = () => {
       firstName,
       lastName,
       role: "employee" as const,
-      idn
+      idn,
     };
 
     addUser(newEmployee).then(() => {
       toast.success(`Added ${firstName}`, { className: "md:text-xl" });
       promiseCache.delete("employees");
       promiseCache.delete("employeesMap");
-      redirect("/admin/employees");
+      push("/admin/employees");
     });
   };
   const [randomPin, setRandomPin] = useState(generatePIN());
@@ -121,7 +129,7 @@ const AddEmployee = () => {
             <Button
               className="w-1/3"
               variant="tertiary"
-              onClick={() => redirect("/admin/employees")}
+              onClick={() => push("/admin/employees")}
             >
               <ArrowLeft />
               Cancel

@@ -2,7 +2,7 @@
 
 import { getActiveLogEntry } from "@/lib/db/logs";
 import { getAdmins, getUser } from "@/lib/db/users";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { startUserSession } from "@/lib/session/Session";
 import Content from "@/shared/components/Content/Content";
 import CurrentTime from "../ClockIn/Components/CurrentTime";
@@ -30,6 +30,8 @@ const getCode = (formData: FormData) => {
 };
 
 const Home = () => {
+  const { push } = useRouter();
+
   const admins = useQuery({ fn: getAdmins, key: "admins" });
   const shouldShowCreateAdminModal = !admins;
 
@@ -63,9 +65,9 @@ const Home = () => {
       }
 
       if (role === "admin") {
-        redirect("/admin");
+        return push("/admin");
       }
-      redirect("/clockin");
+      return push("/clockin");
     }
 
     toast.error("Invalid PIN, try again", { duration: 1500 });

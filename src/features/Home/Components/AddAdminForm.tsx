@@ -5,7 +5,7 @@ import { addUser, getUser } from "@/lib/db/users";
 import { startUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
 import { Check, IdCard, KeyRound, User as UserIcon } from "lucide-react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -16,6 +16,8 @@ const generatePIN = () => {
 };
 
 const AddAdminForm = () => {
+  const { push } = useRouter();
+
   const addAdmin = async (_prevData: unknown, formData: FormData) => {
     const firstName = String(formData.get("firstName"));
     const lastName = String(formData.get("lastName"));
@@ -29,7 +31,7 @@ const AddAdminForm = () => {
       firstName,
       lastName,
       role: "admin" as const,
-      idn
+      idn,
     };
 
     addUser(newAdmin).then(() => {
@@ -38,7 +40,7 @@ const AddAdminForm = () => {
       promiseCache.delete("admins");
       promiseCache.delete("employeesMap");
       startUserSession({ ...newAdmin, isClockedIn: false });
-      redirect("/admin");
+      push("/admin");
     });
   };
   const [randomPin, setRandomPin] = useState(generatePIN());
@@ -88,16 +90,16 @@ const AddAdminForm = () => {
           />
         </label>
         <label className="input md:input-lg input-bordered flex items-center gap-2">
-              <IdCard />
-              <input
-                className="grow"
-                type="text"
-                required
-                name="idn"
-                placeholder="Identity Number"
-                maxLength={15}
-              />
-            </label>
+          <IdCard />
+          <input
+            className="grow"
+            type="text"
+            required
+            name="idn"
+            placeholder="Identity Number"
+            maxLength={15}
+          />
+        </label>
         <label className="input md:input-lg flex items-center gap-2">
           <KeyRound />
           <input

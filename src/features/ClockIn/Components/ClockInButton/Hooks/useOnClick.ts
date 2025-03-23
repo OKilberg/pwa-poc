@@ -5,6 +5,7 @@ import useLogout from "@/shared/context/UserSessionContext.tsx/ContextHooks/useL
 import toast from "react-hot-toast";
 import { getISOTime } from "@/util/util";
 import { promiseCache } from "@/features/Home/Components/useQuery";
+import dayjs from "dayjs";
 
 const useOnClick = () => {
   const user = useUser();
@@ -28,6 +29,10 @@ const useOnClick = () => {
         promiseCache.delete("clockedIn");
         promiseCache.delete(`att-${id}-${clockedOutDate.getFullYear()}`);
 
+        const dateFormatted = dayjs().format("YYYY-MM-DD");
+        const calendarDatesKey = String(`date-${dateFormatted}`);
+        promiseCache.delete(calendarDatesKey);
+
         const clockedOutMessage = `${firstName} clocked out at ${getISOTime(
           entryEdits.outTime
         )}`;
@@ -46,6 +51,10 @@ const useOnClick = () => {
       await addLogEntry(newCheckInEntry);
       promiseCache.delete("clockedIn"); // clear clocked in cache
       promiseCache.delete(`att-${id}-${newCheckInEntry.year}`); // clear attendance cache for the user and year
+
+      const dateFormatted = dayjs().format("YYYY-MM-DD");
+      const calendarDatesKey = String(`date-${dateFormatted}`);
+      promiseCache.delete(calendarDatesKey);
 
       const clockedInMessage = `${firstName} clocked in at ${getISOTime(
         newCheckInEntry.inTime
