@@ -62,6 +62,8 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
 
+const versionNumber = "0.8.1";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -83,7 +85,9 @@ export default function RootLayout({
               className="text-[18px] md:text-[26px]"
             />
           </TopBarMid>
-          <TopBarSide />
+          <TopBarSide className="flex">
+            <p className="pt-2 mx-auto text-xs opacity-45">{versionNumber}</p>
+          </TopBarSide>
         </TopBar>
         <Toaster position="top-right" />
         {children}
