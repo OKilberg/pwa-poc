@@ -11,8 +11,6 @@ import { MobileDateTimePicker } from "@mui/x-date-pickers";
 import toast from "react-hot-toast";
 
 const DateAttendance = ({ date }: { date: Dayjs }) => {
-  if (!date) return null;
-
   const dateFormatted = date.format("YYYY-MM-DD");
   const key = String(`date-${dateFormatted}`);
 

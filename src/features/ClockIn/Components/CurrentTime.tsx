@@ -1,6 +1,6 @@
 "use client";
 
-import { DATE_LOCALE, TIME_LOCALE } from "@/app/constants";
+import { TIME_LOCALE } from "@/app/constants";
 import React, { useEffect, useState } from "react";
 
 const TIME_5_SECONDS = 5 * 1000;
