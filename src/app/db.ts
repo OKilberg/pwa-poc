@@ -58,7 +58,8 @@ declare global {
     db: Dexie;
   }
 }
-
+/*
 if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
   window.db = db;
 }
+*/
