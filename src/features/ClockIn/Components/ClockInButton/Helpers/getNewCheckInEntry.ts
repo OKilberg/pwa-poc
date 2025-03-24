@@ -12,6 +12,7 @@ const getNewCheckInEntry = (id: NewLogEntry["userId"]) => {
     outTime: null,
     month,
     year,
+    note: null,
   };
 
   return checkInEntry;

@@ -15,7 +15,7 @@ export const exportMonthlyLogsToXLSX = async (year: number, month: number) => {
     if (!employee) return;
 
     const { firstName, lastName, idn } = employee;
-    const { inTime, outTime, month, year } = log;
+    const { inTime, outTime, month, year, note } = log;
 
     const formattedInTime = getISOTime(inTime);
     const formattedOutTime = outTime ? getISOTime(outTime) : "";
@@ -28,6 +28,7 @@ export const exportMonthlyLogsToXLSX = async (year: number, month: number) => {
     const formattedName = `${firstName} ${lastName}`;
 
     const formattedDay = getISODate(inTime);
+    const formattedNote = note ? note : "";
 
     return {
       Name: formattedName,
@@ -38,6 +39,7 @@ export const exportMonthlyLogsToXLSX = async (year: number, month: number) => {
       "Hours Worked": formattedDuration,
       Month: formattedMonth,
       Year: year,
+      Note: formattedNote,
     };
   });
 

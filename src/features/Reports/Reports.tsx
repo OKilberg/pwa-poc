@@ -12,8 +12,10 @@ import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubti
 import ReportsContextProvider from "@/shared/context/ReportsContext/ReportsContext";
 import ReportsList from "./Components/ReportsList";
 import EmployeeSelector from "./Components/EmployeeSelector";
+import { ensureAuth } from "@/lib/session/auth";
 
 const Reports = () => {
+  ensureAuth();
   const { push } = useRouter();
 
   return (

@@ -86,6 +86,7 @@ export const createCheckInEntry = (code: number) => {
     outTime: null,
     month: newDate.getMonth(),
     year: newDate.getFullYear(),
+    note: null,
   };
 
   return checkInEntry;

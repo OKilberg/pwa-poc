@@ -21,7 +21,7 @@ const serwist = new Serwist({
   skipWaiting: true,
   clientsClaim: true,
   navigationPreload: true,
-  runtimeCaching: defaultCache
+  runtimeCaching: defaultCache,
   /*
   runtimeCaching: [
     {
@@ -71,7 +71,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(backgroundSync());
 })
 */
-
+/*
 const urlsToPrecache = [
   "/",
   "/clockin",
@@ -91,5 +91,6 @@ self.addEventListener("install", (event) => {
 
   event.waitUntil(requestPromises);
 });
+*/
 
 serwist.addEventListeners();

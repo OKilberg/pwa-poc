@@ -13,9 +13,10 @@ import DateAttendance from "./Components/DateAttendance";
 import Button from "@/shared/components/Button/Button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-import EditLogModal from "./Components/EditLogModal";
+import { ensureAuth } from "@/lib/session/auth";
 
 const Calendar = () => {
+  ensureAuth();
   const { push } = useRouter();
   const [date, setDate] = useState<Dayjs>(dayjs());
 

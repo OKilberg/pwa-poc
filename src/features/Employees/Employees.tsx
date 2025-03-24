@@ -8,10 +8,12 @@ import EmployeesList from "./Components/EmployeesList";
 import Button from "@/shared/components/Button/Button";
 import { ArrowLeft, UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { ensureAuth } from "@/lib/session/auth";
 
 const Employees = () => {
+  ensureAuth();
   const { push } = useRouter();
-  
+
   return (
     <MainPane>
       <EmployeesHeader />

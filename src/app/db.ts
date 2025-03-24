@@ -9,14 +9,33 @@ db.version(1).stores({
   users: "&id, role, firstName, lastName",
 });
 
-db.version(2).stores({
-  logs: "++id, userId, inTime, outTime, month, year, [userId+year]",
-  users: "&id, role, firstName, lastName, idn",
-}).upgrade(tables => {
-  return tables.table('users').toCollection().modify (user =>{
-    user.idn = getRandomIdentityNumber();
+db.version(2)
+  .stores({
+    logs: "++id, userId, inTime, outTime, month, year, [userId+year]",
+    users: "&id, role, firstName, lastName, idn",
   })
-})
+  .upgrade((tables) => {
+    return tables
+      .table("users")
+      .toCollection()
+      .modify((user) => {
+        user.idn = getRandomIdentityNumber();
+      });
+  });
+
+db.version(3)
+  .stores({
+    logs: "++id, userId, inTime, outTime, month, year, [userId+year], note",
+    users: "&id, role, firstName, lastName, idn",
+  })
+  .upgrade((tables) => {
+    return tables
+      .table("logs")
+      .toCollection()
+      .modify((log) => {
+        log.note = null;
+      });
+  });
 
 /*
 db.on("populate", ()=>{

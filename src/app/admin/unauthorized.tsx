@@ -9,7 +9,7 @@ const Unauthorized = () => {
     <MainPane>
       <Content>
         Unauthorized - You do not have permission to view this page.
-        <Link className="" href={"/new"}>
+        <Link className="" href={"/"}>
           <Button variant="tertiary" className="underline">
             Return Home
           </Button>

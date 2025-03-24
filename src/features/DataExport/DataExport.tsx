@@ -1,6 +1,7 @@
 "use client";
 
 import { exportMonthlyLogsToXLSX } from "@/lib/export/export";
+import { ensureAuth } from "@/lib/session/auth";
 import Button from "@/shared/components/Button/Button";
 import Content from "@/shared/components/Content/Content";
 import Header from "@/shared/components/Header/Header";
@@ -16,6 +17,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 const DataExport = () => {
+  ensureAuth();
   const { push } = useRouter();
   const [date, setDate] = useState(dayjs());
 

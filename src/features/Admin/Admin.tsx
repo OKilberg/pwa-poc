@@ -6,7 +6,6 @@ import MainPane from "@/shared/components/MainPane/MainPane";
 import UserSessionProvider from "@/shared/context/UserSessionContext.tsx/UserSessionProvider";
 import {
   Calendar,
-  DatabaseBackup,
   HardDriveDownload,
   LogOut,
   Sheet,
@@ -16,7 +15,6 @@ import { useRouter } from "next/navigation";
 import Content from "@/shared/components/Content/Content";
 import AdminHeader from "./Components/AdminHeader";
 import { ensureAuth } from "@/lib/session/auth";
-import { exportMonthlyLogsToXLSX } from "@/lib/export/export";
 
 const Admin = () => {
   ensureAuth();

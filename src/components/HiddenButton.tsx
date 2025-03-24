@@ -13,6 +13,7 @@ const HiddenButton = ({ children }: Props) => {
       role: "admin" as const,
       firstName: "Adam",
       lastName: "N",
+      idn: "1337",
     };
 
     await addUser(admin);
