@@ -27,14 +27,16 @@ const DataExport = () => {
 
     exportMonthlyLogsToXLSX(year, month)
       .then(() => {
-        const exportMessage = `Exported logs from ${year}-${month}`;
+        const exportMessage = `Exported logs from ${year}-${month + 1}`;
         toast.success(exportMessage, {
           icon: "✅",
           className: "md:text-xl",
         });
       })
       .catch(() => {
-        const exportMessage = `An error occured when trying to export logs from ${year}-${month}`;
+        const exportMessage = `An error occured when trying to export logs from ${year}-${
+          month + 1
+        }`;
         toast.error(exportMessage, {
           icon: "❌",
           className: "md:text-xl",
