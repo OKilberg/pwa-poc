@@ -113,7 +113,7 @@ const getFormattedDuration = (hours: number, minutes: number) => {
 };
 
 const getFormattedLogInfo = (log: LogEntry) => {
-  const { inTime, outTime, month, year, note } = log;
+  const { inTime, outTime, month, note } = log;
 
   const formattedInTime = getISOTime(inTime);
   const formattedOutTime = outTime ? getISOTime(outTime) : "";

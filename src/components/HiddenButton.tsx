@@ -14,6 +14,7 @@ const HiddenButton = ({ children }: Props) => {
       firstName: "Adam",
       lastName: "N",
       idn: "1337",
+      state: "active" as const,
     };
 
     await addUser(admin);

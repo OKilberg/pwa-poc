@@ -1,5 +1,5 @@
 import { LogEntry } from "@/lib/dbTypes";
-import { ensureAuth, isAdminSession } from "@/lib/session/auth";
+import { isAdminSession } from "@/lib/session/auth";
 import Button from "@/shared/components/Button/Button";
 import {
   convertMinutesToHoursAndMinutes,
