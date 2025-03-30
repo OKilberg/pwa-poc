@@ -76,7 +76,7 @@ const EntryItem = ({ day, inTime, outTime }: EntryItemProps) => {
   const timeOut = outTime ? getISOTime(outTime) : "Ongoing";
 
   return (
-    <li className="flex w-full py-1 text-xs font-light">
+    <li className="flex w-full py-1 text-sm font-light">
       <p className="flex-1">{day}</p>
       <p className="flex-1 text-center">{`${timeIn} - ${timeOut}`}</p>
       <p className="flex-1 text-right">{timeTotal}</p>

@@ -18,7 +18,7 @@ const publicSans = Public_Sans({
   variable: "--font-public-sans",
 });
 
-const APP_NAME = "PWA App";
+const APP_NAME = "Worklog";
 const APP_DEFAULT_TITLE = "Worklog";
 const APP_TITLE_TEMPLATE = "%s - PWA App";
 const APP_DESCRIPTION = "A Progressive Web App built with Next.js";
