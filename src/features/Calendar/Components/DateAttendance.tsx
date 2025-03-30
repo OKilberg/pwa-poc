@@ -9,6 +9,7 @@ import { Dayjs } from "dayjs";
 import React from "react";
 import { MobileDateTimePicker } from "@mui/x-date-pickers";
 import toast from "react-hot-toast";
+import { ChevronDown } from "lucide-react";
 
 const DateAttendance = ({ date }: { date: Dayjs }) => {
   const dateFormatted = date.format("YYYY-MM-DD");
@@ -68,13 +69,16 @@ const DateAttendance = ({ date }: { date: Dayjs }) => {
         return (
           <ListItem key={index}>
             <div className="flex-1">
-              <details className="flex flex-col">
+              <details className="flex flex-col group">
                 <summary className="flex ">
                   <p className="flex-1 md:text-2xl">
                     {employee?.firstName} {employee?.lastName}
                   </p>
                   <p className="flex-1 md:text-2xl text-right">
                     {timeIn} - {timeOut}
+                  </p>
+                  <p className="flex-1 text-right text-xl font-light">
+                    <ChevronDown className="ml-auto group-open:rotate-180" />
                   </p>
                 </summary>
                 <div className="flex items-center justify-end">
