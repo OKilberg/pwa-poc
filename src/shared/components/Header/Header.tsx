@@ -6,7 +6,7 @@ type HeaderProps = ParentComponent & Styleable;
 
 const Header = ({ children, className }: HeaderProps) => {
   const classHeader = clsx(
-    "flex flex-col p-6 md:p-14 gap-2 md:gap-4 w-full items-center",
+    "flex flex-col p-6 lg:p-2 md:p-14 gap-2 md:gap-4 w-full items-center",
     className
   );
 

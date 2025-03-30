@@ -6,7 +6,7 @@ type ContentProps = ParentComponent & Styleable;
 
 const Content = ({ children, className }: ContentProps) => {
   const classContent = clsx(
-    "flex flex-col p-8 md:p-14 gap-4 md:gap-6 w-full items-center",
+    "flex flex-col p-8 lg:p-4 md:p-14 gap-4 md:gap-6 w-full items-center",
     className
   );
 
