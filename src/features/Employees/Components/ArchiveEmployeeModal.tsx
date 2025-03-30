@@ -21,7 +21,7 @@ const ArchiveEmployeeModal = ({
   const handleArchiveEmployee = () => {
     setUserState(id, "archived")
       .then(() => {
-        clearCacheKeys(["employees", "employeesMap"]);
+        clearCacheKeys(["employees", "activeEmployeesMap"]);
         toast.success(`Archived ${employeeDetails}`);
       })
       .catch(() => {

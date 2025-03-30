@@ -15,8 +15,6 @@ const DateAttendance = ({ date }: { date: Dayjs }) => {
   const dateFormatted = date.format("YYYY-MM-DD");
   const key = String(`date-${dateFormatted}`);
 
-  console.log("dateFormatted", dateFormatted);
-
   const logs = useQuery({
     fn: () => getRecordsByDate(dateFormatted),
     key: key,

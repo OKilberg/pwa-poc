@@ -8,7 +8,7 @@ import React, { ChangeEvent } from "react";
 const EmployeeSelector = () => {
   const employees = useQuery({
     fn: getActiveEmployeesMap,
-    key: "employeesMap",
+    key: "activeEmployeesMap",
   });
   const setUser = useSetUser();
 
