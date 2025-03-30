@@ -26,6 +26,22 @@ export const showModal = () => {
   }
 };
 
+export const showModalById = (id: string) => {
+  const modal = document.getElementById(id) as HTMLDialogElement | null;
+
+  if (document && modal) {
+    modal.showModal();
+  }
+};
+
+export const closeModalById = (id: string) => {
+  const modal = document.getElementById(id) as HTMLDialogElement | null;
+
+  if (document && modal) {
+    modal.close();
+  }
+};
+
 export const getModalPropsNoCodeMatch = (code: number) => {
   const modalProps = getModalProps(
     `No user with code ${code} exists.`,
