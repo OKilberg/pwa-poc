@@ -8,9 +8,11 @@ import Button from "@/shared/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import AttendanceList from "./Components/AttendanceList";
+import { useTranslations } from "next-intl";
 
 const Attendance = () => {
   const { push } = useRouter();
+  const t = useTranslations("Attendance");
 
   return (
     <UserSessionProvider onLogout={() => null}>
@@ -21,7 +23,7 @@ const Attendance = () => {
           <div>
             <Button variant="tertiary" onClick={() => push("/clockin")}>
               <ArrowLeft className="" />
-              Back
+              {t("back")}
             </Button>
           </div>
         </Content>

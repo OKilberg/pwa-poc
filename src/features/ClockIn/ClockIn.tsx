@@ -11,9 +11,11 @@ import Header from "./Components/Header";
 import ClockInButton from "./Components/ClockInButton/ClockInButton";
 import { Calendar, LogOut } from "lucide-react";
 import Label from "./Components/Label";
+import { useTranslations } from "next-intl";
 
 const ClockIn = () => {
   const { push } = useRouter();
+  const t = useTranslations("ClockedIn");
 
   const onLogout = () => {
     clearUserSession();
@@ -32,12 +34,12 @@ const ClockIn = () => {
             onClick={() => push("/clockin/attendance")}
           >
             <Calendar />
-            View Attendance
+            {t("viewAttendance")}
           </Button>
           <div>
             <Button variant="tertiary" onClick={onLogout}>
               <LogOut className="transform rotate-180" />
-              Logout
+              {t("logout")}
             </Button>
           </div>
         </Content>

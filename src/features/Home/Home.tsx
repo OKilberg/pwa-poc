@@ -18,6 +18,7 @@ import ContentTitle from "@/shared/components/ContentTitle";
 import ClockedInList from "./Components/ClockedInList";
 import useQuery from "./Components/useQuery";
 import CreateAdminModal from "./Components/CreateAdminModal";
+import { useTranslations } from "next-intl";
 
 const getCode = (formData: FormData) => {
   const number1 = formData.get("code-1");
@@ -76,6 +77,7 @@ const Home = () => {
 
   const [_state, action, isLoading] = useActionState(submitPIN, undefined);
   const currentDate = useCurrentDate();
+  const t = useTranslations("Home");
 
   return (
     <MainPane>
@@ -87,11 +89,11 @@ const Home = () => {
         <HeaderSubtitle>{currentDate}</HeaderSubtitle>
       </Header>
       <Content>
-        <p className="text-[16px] md:text-[24px]">Enter your PIN</p>
+        <p className="text-[16px] md:text-[24px]">{t("enterYourPin")}</p>
         <PinForm action={action} isLoading={isLoading} />
       </Content>
       <Content className="gap-2">
-        <ContentTitle label="Clocked in employees" />
+        <ContentTitle label={t("clockedInEmployees")} />
         <Suspense
           fallback={
             <span className="loading loading-spinner loading-lg"></span>
