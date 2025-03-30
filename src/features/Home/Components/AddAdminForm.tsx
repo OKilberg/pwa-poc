@@ -2,6 +2,7 @@
 
 import { promiseCache } from "@/features/Home/Components/useQuery";
 import { addUser, getUser } from "@/lib/db/users";
+import { User } from "@/lib/dbTypes";
 import { startUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
 import { Check, IdCard, KeyRound, User as UserIcon } from "lucide-react";
@@ -26,12 +27,13 @@ const AddAdminForm = () => {
 
     console.log(firstName, lastName, pin);
 
-    const newAdmin = {
+    const newAdmin: User = {
       id: pin,
       firstName,
       lastName,
       role: "admin" as const,
       idn,
+      state: "active" as const,
     };
 
     addUser(newAdmin).then(() => {

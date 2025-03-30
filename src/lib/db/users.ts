@@ -30,9 +30,33 @@ export const editUser = async (id: User["id"], updates: Partial<User>) => {
   return response;
 };
 
+export const setUserState = async (id: User["id"], state: User["state"]) => {
+  const updates = {
+    state,
+  };
+
+  const response = await tryFetch(() => db.users.update(id, { ...updates }));
+
+  return response;
+};
+
 export const getEmployees = async () => {
   const response = await tryFetch(() =>
     db.users.where("role").equals("employee").toArray()
+  );
+
+  if (!response) {
+    return [];
+  }
+
+  console.log("Response", response);
+
+  return response;
+};
+
+export const getActiveEmployees = async () => {
+  const response = await tryFetch(() =>
+    db.users.where({ role: "employee", state: "active" }).toArray()
   );
 
   if (!response) {
@@ -61,6 +85,22 @@ export const getAdmins = async () => {
 export const getEmployeesMap = async () => {
   const response = await tryFetch(() =>
     db.users.where("role").equals("employee").toArray()
+  );
+
+  if (!response) {
+    return new Map<number, User>();
+  }
+
+  const employeeMap = new Map<number, User>(
+    response.map((employee) => [employee.id, employee])
+  );
+
+  return employeeMap;
+};
+
+export const getActiveEmployeesMap = async () => {
+  const response = await tryFetch(() =>
+    db.users.where({ role: "employee", state: "active" }).toArray()
   );
 
   if (!response) {

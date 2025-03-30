@@ -1,6 +1,7 @@
 import { EntityTable } from "dexie";
 
 type UserRole = "admin" | "employee";
+type UserState = "active" | "archived";
 
 export type User = {
   id: number;
@@ -8,6 +9,7 @@ export type User = {
   firstName: string;
   lastName: string;
   idn: string;
+  state: UserState;
 };
 
 export type LogEntry = {

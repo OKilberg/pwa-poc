@@ -2,6 +2,7 @@
 
 import { promiseCache } from "@/features/Home/Components/useQuery";
 import { addUser, getUser } from "@/lib/db/users";
+import { User } from "@/lib/dbTypes";
 import Button from "@/shared/components/Button/Button";
 import Content from "@/shared/components/Content/Content";
 import Header from "@/shared/components/Header/Header";
@@ -35,12 +36,13 @@ const AddEmployee = () => {
 
     console.log(firstName, lastName, pin);
 
-    const newEmployee = {
+    const newEmployee: User = {
       id: pin,
       firstName,
       lastName,
       role: "employee" as const,
       idn,
+      state: "active",
     };
 
     addUser(newEmployee).then(() => {

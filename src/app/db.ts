@@ -37,6 +37,20 @@ db.version(3)
       });
   });
 
+db.version(4)
+  .stores({
+    logs: "++id, userId, inTime, outTime, month, year, [userId+year], note",
+    users: "&id, role, firstName, lastName, idn, state",
+  })
+  .upgrade((tables) => {
+    return tables
+      .table("users")
+      .toCollection()
+      .modify((user) => {
+        user.state = "active";
+      });
+  });
+
 /*
 db.on("populate", ()=>{
   db.users.add({
