@@ -55,10 +55,7 @@ export const getRecordsByUserMonthYear = async (
   year: LogEntry["year"],
   month: LogEntry["month"]
 ) => {
-  return db.logs
-    .where("[userId+year+month]") // Compound index for efficient lookup
-    .equals([userId, year, month]) // Ensure case consistency
-    .toArray();
+  return db.logs.where({ userId: userId, year: year, month: month }).toArray();
 };
 
 export const getRecordsByUserYear = async (

@@ -4,6 +4,8 @@ import { LogEntry } from "@/lib/dbTypes";
 import React from "react";
 import AttendanceItem from "./AttendanceItem";
 import { fullMonthNames } from "@/lib/date/constants";
+import { exportEmployeeMonthlyLogsToXLSX } from "@/lib/export/export";
+import toast from "react-hot-toast";
 
 type Props = {
   userId: number;
@@ -41,8 +43,20 @@ export const Year = ({ userId, year }: Props) => {
       <time className="divider">{2025}</time>
       {monthsMatrix.map((month, index) => {
         if (month.length === 0) return null;
+
+        const exportMonth = () => {
+          exportEmployeeMonthlyLogsToXLSX(userId, year, index)
+            .then(() => {
+              toast.success(`Exported ${year}-${index + 1}`);
+            })
+            .catch(() => {
+              toast.error(`Error exporting ${year}-${index + 1}`);
+            });
+        };
+
         return (
           <AttendanceItem
+            exportMonth={exportMonth}
             key={index}
             logs={month}
             month={fullMonthNames[index]}

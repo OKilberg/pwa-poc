@@ -8,3 +8,13 @@ export const ensureAuth = () => {
   }
   unauthorized();
 };
+
+export const isAdminSession = () => {
+  const userSession = getUserSession();
+
+  if (userSession && userSession.role === "admin") {
+    return true;
+  }
+
+  return false;
+};

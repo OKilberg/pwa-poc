@@ -1,4 +1,6 @@
 import { LogEntry } from "@/lib/dbTypes";
+import { ensureAuth, isAdminSession } from "@/lib/session/auth";
+import Button from "@/shared/components/Button/Button";
 import {
   convertMinutesToHoursAndMinutes,
   getISODate,
@@ -6,11 +8,13 @@ import {
   getTimeDifferenceISO,
   getTimeDifferenceMinutesISO,
 } from "@/util/util";
+import { ChevronDown, HardDriveDownload } from "lucide-react";
 import React from "react";
 
 type AttendanceItemProps = {
   logs: Array<LogEntry>;
   month: string;
+  exportMonth: () => void;
 };
 
 const getTimeTotal = (logs: Array<LogEntry>) => {
@@ -29,18 +33,21 @@ const getTimeTotal = (logs: Array<LogEntry>) => {
   return `${hours}h ${minutes}m`;
 };
 
-const AttendanceItem = ({ logs, month }: AttendanceItemProps) => {
+const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
   const shifts = logs.length;
   const timeTotal = getTimeTotal(logs);
   return (
     <li className="flex p-2 md:p-5 bg-[#EAEAEA] rounded-md md:rounded-2xl">
-      <details className="flex flex-col w-full">
+      <details className="flex flex-col w-full group">
         <summary className="flex w-full text-sm">
           <p className="flex-1 md:text-2xl">{month}</p>
           <p className="flex-1 text-center md:text-xl font-light">
             {shifts} shifts
           </p>
           <p className="flex-1 text-right md:text-xl font-light">{timeTotal}</p>
+          <p className="flex-1 text-right text-xl font-light">
+            <ChevronDown className="ml-auto group-open:rotate-180" />
+          </p>
         </summary>
         <ul className="mt-2">
           {logs.map((log, index) => {
@@ -55,6 +62,14 @@ const AttendanceItem = ({ logs, month }: AttendanceItemProps) => {
               />
             );
           })}
+          {isAdminSession() && (
+            <li className="flex w-full flex-row-reverse text-sm md:text-md mt-2">
+              <Button variant="positive" onClick={exportMonth} size="xs">
+                <HardDriveDownload className="size-4" />
+                Export {month}
+              </Button>
+            </li>
+          )}
         </ul>
       </details>
     </li>
