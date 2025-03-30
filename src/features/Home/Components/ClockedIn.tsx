@@ -1,4 +1,7 @@
+"use client";
+
 import { getISOTime, getTimeDifferenceISO } from "@/util/util";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 type ClockedInProps = {
@@ -13,6 +16,9 @@ const ClockedIn = ({ firstname, lastname, inTime }: ClockedInProps) => {
     inTime,
     new Date().toISOString()
   );
+
+  const t = useTranslations("ClockedIn");
+
   return (
     <li
       suppressHydrationWarning={true}
@@ -22,7 +28,9 @@ const ClockedIn = ({ firstname, lastname, inTime }: ClockedInProps) => {
         <p className="md:text-2xl">
           {firstname} {lastname}
         </p>
-        <time suppressHydrationWarning={true}>{`${time} - Ongoing`}</time>
+        <time suppressHydrationWarning={true}>{`${time} - ${t(
+          "ongoing"
+        )}`}</time>
       </div>
       <div>{`${hours}h ${minutes}m`}</div>
     </li>
