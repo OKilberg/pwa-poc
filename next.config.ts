@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -16,4 +17,6 @@ const withSerwist = withSerwistInit({
   swDest: "public/sw.js",
 });
 
-export default withSerwist(nextConfig);
+const withNextIntl = createNextIntlPlugin();
+
+export default withNextIntl(withSerwist(nextConfig));

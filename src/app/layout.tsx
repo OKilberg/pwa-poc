@@ -6,6 +6,8 @@ import TopBarSide from "@/shared/components/TopBar/Subcomponents/TopBarSide";
 import TopBarMid from "@/shared/components/TopBar/Subcomponents/TopBarMid";
 import Logo from "@/shared/components/Logo";
 import { Toaster } from "react-hot-toast";
+import { getLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -64,13 +66,15 @@ export const viewport: Viewport = {
 
 const versionNumber = "0.8.1";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html lang="en" dir="ltr">
+    <html lang={locale} dir="ltr">
       <body
         className={`${carterOne.variable} ${publicSans.variable} antialiased bg-white text-black font-publicSans h-dvh w-dvw flex flex-col overflow-hidden`}
       >
@@ -90,7 +94,7 @@ export default function RootLayout({
           </TopBarSide>
         </TopBar>
         <Toaster position="top-right" />
-        {children}
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   );

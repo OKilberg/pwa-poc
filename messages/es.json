@@ -1,0 +1,21 @@
+{
+  "Test": "TestES",
+  "Home": {
+    "clockedInEmployees": "Empleados fichados",
+    "enterYourPin": "Introduzca su PIN"
+  },
+  "ClockedIn": {
+    "Welcome": "Bienvenido",
+    "clockInTitle": "",
+    "whatToDo": "¿Qué le gustaría hacer?",
+    "ongoing": "En curso",
+    "clockIn": "Fichar",
+    "clockOut": "Completar",
+    "logout": "Salir",
+    "viewAttendance": "Ver asistencia"
+  },
+  "Attendance": {
+    "attendanceTitle": "Asistencia",
+    "back": "Volver"
+  }
+}
