@@ -1,12 +1,15 @@
 "use client";
 
 import useQuery from "@/features/Home/Components/useQuery";
-import { getEmployeesMap } from "@/lib/db/users";
+import { getActiveEmployeesMap } from "@/lib/db/users";
 import useSetUser from "@/shared/context/ReportsContext/ContextHooks/useSetUser";
 import React, { ChangeEvent } from "react";
 
 const EmployeeSelector = () => {
-  const employees = useQuery({ fn: getEmployeesMap, key: "employeesMap" });
+  const employees = useQuery({
+    fn: getActiveEmployeesMap,
+    key: "employeesMap",
+  });
   const setUser = useSetUser();
 
   const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
