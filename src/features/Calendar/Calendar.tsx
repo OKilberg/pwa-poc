@@ -14,6 +14,9 @@ import Button from "@/shared/components/Button/Button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ensureAuth } from "@/lib/session/auth";
+import "dayjs/locale/en-gb"; // Import the Spanish locale
+
+dayjs.locale("en-gb");
 
 const Calendar = () => {
   ensureAuth();
@@ -27,7 +30,7 @@ const Calendar = () => {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
       <MainPane>
         <Header>
           <HeaderTitle>Calendar</HeaderTitle>
