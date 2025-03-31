@@ -104,7 +104,6 @@ export const getClockedInEntries = async () => {
       .toArray()
   );
 
-  console.log("Response", response);
   return response;
 };
 

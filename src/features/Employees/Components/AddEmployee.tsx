@@ -34,8 +34,6 @@ const AddEmployee = () => {
     const idn = String(formData.get("idn"));
     const pin = Number(formData.get("pin"));
 
-    console.log(firstName, lastName, pin);
-
     const newEmployee: User = {
       id: pin,
       firstName,
@@ -57,8 +55,6 @@ const AddEmployee = () => {
   useEffect(() => {
     const checkPin = async () => {
       const user = await getUser(randomPin);
-
-      console.log("user", user);
 
       if (user) setRandomPin(generatePIN());
     };

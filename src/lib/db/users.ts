@@ -49,8 +49,6 @@ export const getEmployees = async () => {
     return [];
   }
 
-  console.log("Response", response);
-
   return response;
 };
 
@@ -63,8 +61,6 @@ export const getActiveEmployees = async () => {
     return [];
   }
 
-  console.log("Response", response);
-
   return response;
 };
 
@@ -76,8 +72,6 @@ export const getAdmins = async () => {
   if (!response) {
     return 0;
   }
-
-  console.log("Response", response);
 
   return response.length;
 };

@@ -64,8 +64,6 @@ const useOnClick = () => {
 
       return logout();
     }
-
-    console.log("Could not clock in: No active user session.");
   };
 
   return onClick;
