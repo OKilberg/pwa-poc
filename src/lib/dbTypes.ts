@@ -24,7 +24,23 @@ export type LogEntry = {
 
 export type NewLogEntry = Omit<LogEntry, "id">;
 
+export type AbsenceCause = "sickLeave" | "vacation" | "other";
+
+export type WorkAbsence = {
+  id: number;
+  userId: number;
+  dateStart: string; // iso date,
+  dateEnd: string; // not required if single day
+  month: number;
+  year: number;
+  cause: AbsenceCause;
+  note: string | null;
+};
+
+export type NewWorkAbsence = Omit<WorkAbsence, "id">;
+
 export type Tables = {
   logs: EntityTable<LogEntry, "id">;
   users: EntityTable<User, "id">;
+  absences: EntityTable<WorkAbsence, "id">;
 };
