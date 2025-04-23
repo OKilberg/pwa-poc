@@ -17,5 +17,10 @@
   "Attendance": {
     "attendanceTitle": "Asistencia",
     "back": "Volver"
+  },
+  "Absence": {
+    "sickLeave": "Sick Leave",
+    "vacation": "Vacation",
+    "other": "Other"
   }
 }
