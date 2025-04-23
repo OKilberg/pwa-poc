@@ -10,6 +10,7 @@ const EmployeeSelector = () => {
     fn: getActiveEmployeesMap,
     key: "activeEmployeesMap",
   });
+
   const setUser = useSetUser();
 
   const onSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -19,6 +20,7 @@ const EmployeeSelector = () => {
       setUser(selectedUser);
     }
   };
+
   return (
     <div className="w-full flex justify-center">
       <select
