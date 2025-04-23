@@ -124,16 +124,3 @@ const createAbsenceWorkbookSheet = async (year: number, month: number) => {
 
   return absencesSheet;
 };
-
-// TODO
-export const exportMonthlyAbsenceToXLSX = async (
-  year: number,
-  month: number
-) => {
-  const absences = await getWorkAbsenceByYearMonth(year, month);
-
-  const formattedAbsences = await getAbsencesFormatted(absences);
-
-  const workbook = utils.book_new();
-  const logsSheet = utils.json_to_sheet(absences);
-};
