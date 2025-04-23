@@ -14,7 +14,7 @@ import Button from "@/shared/components/Button/Button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ensureAuth } from "@/lib/session/auth";
-import "dayjs/locale/en-gb"; // Import the Spanish locale
+import "dayjs/locale/en-gb";
 
 dayjs.locale("en-gb");
 
