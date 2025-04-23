@@ -6,7 +6,7 @@ type HeaderTitleProps = ParentComponent & Styleable;
 
 const HeaderTitle = ({ children, className }: HeaderTitleProps) => {
   const classHeaderTitle = clsx(
-    "text-[32px] md:text-[64px] font-bold",
+    "text-[26px] md:text-[52px] font-bold",
     className
   );
 

@@ -1,9 +1,17 @@
 import { utils, writeFileXLSX } from "xlsx";
 import { getRecordsByMonthYear, getRecordsByUserMonthYear } from "../db/logs";
 import { getEmployeesMap } from "../db/users";
-import { getISODate, getISOTime, getTimeDifferenceISO } from "@/util/util";
 import { fullMonthNames } from "../date/constants";
-import { LogEntry, User } from "../dbTypes";
+import { User } from "../dbTypes";
+import {
+  appendSheetToWorkbook,
+  createWorkbookSheetFromJson,
+  exportWorkbook,
+  getFormattedLogInfo,
+  getWorkbookFilename,
+} from "./utils";
+import { getWorkAbsenceByYearMonth } from "../db/absence";
+import { getAbsencesFormatted } from "./format";
 
 export const exportEmployeeMonthlyLogsToXLSX = async (
   id: User["id"],
@@ -95,44 +103,24 @@ export const exportMonthlyLogsToXLSX = async (year: number, month: number) => {
     };
   });
 
-  const logsSheet = utils.json_to_sheet(logsWithEmployeeInfo);
+  const logsSheet = createWorkbookSheetFromJson(logsWithEmployeeInfo);
+  // const logsSheet = utils.json_to_sheet(logsWithEmployeeInfo); // TODO: Extract each sheet to a function
+  const absencesSheet = await createAbsenceWorkbookSheet(year, month);
 
-  utils.book_append_sheet(workbook, logsSheet, "Work logs");
+  appendSheetToWorkbook(workbook, logsSheet, "Work logs");
+  appendSheetToWorkbook(workbook, absencesSheet, "Absence logs");
 
-  const fileName = `WorkLogExport${year}-${month + 1}.xlsx`;
+  const workbookFilename = getWorkbookFilename("WorkLogExport", year, month);
 
-  writeFileXLSX(workbook, fileName);
+  exportWorkbook(workbook, workbookFilename);
 };
 
-const getFormattedDuration = (hours: number, minutes: number) => {
-  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+const createAbsenceWorkbookSheet = async (year: number, month: number) => {
+  const absences = await getWorkAbsenceByYearMonth(year, month);
 
-  const formattedDuration = `${hours}:${formattedMinutes}`;
+  const formattedAbsences = await getAbsencesFormatted(absences);
 
-  return formattedDuration;
-};
+  const absencesSheet = createWorkbookSheetFromJson(formattedAbsences);
 
-const getFormattedLogInfo = (log: LogEntry) => {
-  const { inTime, outTime, month, note } = log;
-
-  const formattedInTime = getISOTime(inTime);
-  const formattedOutTime = outTime ? getISOTime(outTime) : "";
-  const duration = outTime ? getTimeDifferenceISO(inTime, outTime) : null;
-  const formattedDuration = duration
-    ? getFormattedDuration(duration.hours, duration.minutes)
-    : "";
-
-  const formattedMonth = fullMonthNames[month];
-
-  const formattedDay = getISODate(inTime);
-  const formattedNote = note ? note : "";
-
-  return {
-    formattedInTime,
-    formattedOutTime,
-    formattedDuration,
-    formattedMonth,
-    formattedDay,
-    formattedNote,
-  };
+  return absencesSheet;
 };
