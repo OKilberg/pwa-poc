@@ -51,14 +51,19 @@ db.version(4)
       });
   });
 
+db.version(5).stores({
+  logs: "++id, userId, inTime, outTime, month, year, [userId+year], note",
+  users: "&id, role, firstName, lastName, idn, state",
+  absences: "++id, userId, dateStart, dateEnd, month, year, cause, note",
+});
+
 /*
 db.on("populate", ()=>{
-  db.users.add({
-    id: 123, role: 'admin', firstName: 'Adman', lastName: 'Testsson',
-    idn: getRandomIdentityNumber()
+  db.absences.add({
+    userId: 333, cause: 'sickLeave', dateStart: new Date().toDateString(), dateEnd: null, month: 3, year: 2025, note: 'Very sick'
   })
 })
-*/
+  */
 
 /*
 db.version(1).stores({
