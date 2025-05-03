@@ -1,6 +1,7 @@
 import { LogEntry } from "@/lib/dbTypes";
 import { isAdminSession } from "@/lib/session/auth";
 import Button from "@/shared/components/Button/Button";
+import ListItem from "@/shared/components/ListItem";
 import {
   convertMinutesToHoursAndMinutes,
   getISODate,
@@ -8,8 +9,15 @@ import {
   getTimeDifferenceISO,
   getTimeDifferenceMinutesISO,
 } from "@/util/util";
-import { ChevronDown, HardDriveDownload } from "lucide-react";
-import React from "react";
+import Drawer from "@mui/material/Drawer";
+import {
+  Archive,
+  ChevronDown,
+  Ellipsis,
+  HardDriveDownload,
+  SquarePen,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 type AttendanceItemProps = {
   logs: Array<LogEntry>;
@@ -63,7 +71,7 @@ const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
             );
           })}
           {isAdminSession() && (
-            <li className="flex w-full flex-row-reverse text-sm md:text-md mt-2">
+            <li className="flex w-full flex-row-reverse text-sm md:text-md mt-4">
               <Button variant="positive" onClick={exportMonth} size="xs">
                 <HardDriveDownload className="size-4" />
                 Export {month}
@@ -89,12 +97,39 @@ const EntryItem = ({ day, inTime, outTime }: EntryItemProps) => {
   const timeTotal = outTime ? `${hours}h ${minutes}m` : "";
   const timeIn = getISOTime(inTime);
   const timeOut = outTime ? getISOTime(outTime) : "Ongoing";
+  const [showDrawer, setShowDrawer] = useState(false);
+
+  const DrawerContent = (
+    <div className="py-2 flex flex-col gap-2">
+      <ListItem className="px-4 py-2 gap-4">
+        <SquarePen className="size-5" />
+        Edit
+      </ListItem>
+      <ListItem className="px-4 py-2 gap-4 text-red-500">
+        <Archive className="size-5" />
+        Archive
+      </ListItem>
+    </div>
+  );
 
   return (
-    <li className="flex w-full py-1 text-sm font-light">
+    <li className="flex w-full py-2 px-2 rounded-sm text-sm font-base bg-gray-100">
       <p className="flex-1">{day}</p>
       <p className="flex-1 text-center">{`${timeIn} - ${timeOut}`}</p>
       <p className="flex-1 text-right">{timeTotal}</p>
+      {isAdminSession() && (
+        <p className="text-right ml-4" onClick={() => setShowDrawer(true)}>
+          <Ellipsis />
+        </p>
+      )}
+      <Drawer
+        variant="temporary"
+        open={showDrawer}
+        anchor="bottom"
+        onClick={() => setShowDrawer(false)}
+      >
+        {DrawerContent}
+      </Drawer>
     </li>
   );
 };
