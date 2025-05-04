@@ -16,9 +16,9 @@ import toast from "react-hot-toast";
 import useCurrentDate from "@/shared/hooks/useCurrentDate";
 import ContentTitle from "@/shared/components/ContentTitle";
 import ClockedInList from "./Components/ClockedInList";
-import useQuery from "./Components/useQuery";
 import CreateAdminModal from "./Components/CreateAdminModal";
 import { useTranslations } from "next-intl";
+import useQuery from "@/shared/hooks/useQuery";
 
 const getCode = (formData: FormData) => {
   const number1 = formData.get("code-1");

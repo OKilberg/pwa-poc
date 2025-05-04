@@ -1,10 +1,10 @@
 "use client";
 
-import { promiseCache } from "@/features/Home/Components/useQuery";
 import { addUser, getUser } from "@/lib/db/users";
 import { User } from "@/lib/dbTypes";
 import { startUserSession } from "@/lib/session/Session";
 import Button from "@/shared/components/Button/Button";
+import { promiseCache } from "@/shared/hooks/useQuery";
 import { Check, IdCard, KeyRound, User as UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
