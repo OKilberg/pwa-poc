@@ -1,6 +1,5 @@
 "use client";
 
-import useQuery from "@/features/Home/Components/useQuery";
 import { getUser } from "@/lib/db/users";
 import { AbsenceCause, User } from "@/lib/dbTypes";
 import React, { ChangeEvent, useState } from "react";
@@ -18,6 +17,7 @@ import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubti
 import Content from "@/shared/components/Content/Content";
 import "dayjs/locale/en-gb";
 import { useTranslations } from "next-intl";
+import useQuery from "@/shared/hooks/useQuery";
 
 dayjs.locale("en-gb");
 
