@@ -18,6 +18,7 @@ import {
   PlayCircle,
   SquarePen,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type AttendanceItemProps = {
@@ -45,6 +46,8 @@ const getTimeTotal = (logs: Array<LogEntry>) => {
 const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
   const shifts = logs.length;
   const timeTotal = getTimeTotal(logs);
+  const { push } = useRouter();
+
   return (
     <li className="flex p-2 md:p-5 bg-[#EAEAEA] rounded-md md:rounded-2xl">
       <details className="flex flex-col w-full group">
@@ -58,7 +61,7 @@ const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
             <ChevronDown className="ml-auto group-open:rotate-180" />
           </p>
         </summary>
-        <ul className="mt-2">
+        <ul className="mt-2 flex flex-col gap-2">
           {logs.map((log, index) => {
             const { inTime, outTime } = log;
             const day = getISODate(inTime);
@@ -77,7 +80,13 @@ const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
                 <HardDriveDownload className="size-4" />
                 Export {month}
               </Button>
-              <Button variant="secondary" onClick={() => {}} size="xs">
+              <Button
+                variant="secondary"
+                onClick={() =>
+                  push(`/admin/logs/create?employee=${logs[0].userId}`)
+                }
+                size="xs"
+              >
                 <PlayCircle className="size-4" />
                 Add log
               </Button>
@@ -123,7 +132,7 @@ const EntryItem = ({ day, inTime, outTime }: EntryItemProps) => {
       <p className="flex-1 text-center">{`${timeIn} - ${timeOut}`}</p>
       <p className="flex-1 text-right">{timeTotal}</p>
       {isAdminSession() && (
-        <p className="text-right ml-4" onClick={() => setShowDrawer(true)}>
+        <p className="text-right ml-6" onClick={() => setShowDrawer(true)}>
           <Ellipsis />
         </p>
       )}

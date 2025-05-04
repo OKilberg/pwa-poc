@@ -5,11 +5,21 @@ import AppBarIconAction from "./AppBarIconAction";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const AppBarBack = () => {
-  const { back } = useRouter();
+type AppBarBackProps = {
+  url?: string;
+};
+
+const AppBarBack = ({ url }: AppBarBackProps) => {
+  const { back, push } = useRouter();
+
+  const onClick = url
+    ? () => {
+        push(url);
+      }
+    : back;
 
   return (
-    <AppBarIconAction onClick={back}>
+    <AppBarIconAction onClick={onClick}>
       <ArrowLeft />
     </AppBarIconAction>
   );

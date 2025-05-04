@@ -2,11 +2,17 @@ import React, { ReactNode } from "react";
 
 export type AppBarProps = {
   pageTitle: string;
-  leftChildren: ReactNode;
-  rightChildren: ReactNode;
+  pageDescription?: string;
+  leftChildren?: ReactNode;
+  rightChildren?: ReactNode;
 };
 
-const AppBar = ({ pageTitle, leftChildren, rightChildren }: AppBarProps) => {
+const AppBar = ({
+  pageTitle,
+  pageDescription,
+  leftChildren,
+  rightChildren,
+}: AppBarProps) => {
   return (
     <nav className="min-h-16 px-4 flex flex-col pt-5 pb-6">
       <div className="flex justify-between h-16">
@@ -15,6 +21,9 @@ const AppBar = ({ pageTitle, leftChildren, rightChildren }: AppBarProps) => {
       </div>
       <div>
         <h1 className="text-2xl">{pageTitle}</h1>
+        {pageDescription && (
+          <h2 className="text-lg text-gray-700">{pageDescription}</h2>
+        )}
       </div>
     </nav>
   );
