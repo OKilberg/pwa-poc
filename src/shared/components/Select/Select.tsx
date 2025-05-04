@@ -1,22 +1,40 @@
 import React, { ChangeEvent } from "react";
 
 type SelectProps = {
-  value: string;
+  defaultValue?: { value: string; label: string };
+  value: string | undefined | null;
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
   options: Array<{ value: string; label: string }>;
   name: string;
 };
 
-const Select = ({ value, onChange, options, name }: SelectProps) => {
+const Select = ({
+  defaultValue,
+  value,
+  onChange,
+  options,
+  name,
+}: SelectProps) => {
+  const nonNullValue = value === null ? undefined : value;
+  const _defaultValue = defaultValue ? defaultValue.value : nonNullValue;
+
   return (
     <select
-      className="select md:select-lg select-bordered w-full md:max-w-md"
+      defaultValue={_defaultValue}
+      className="select md:select-lg select-bordered w-full"
       name={name}
-      value={value}
+      value={nonNullValue}
       onChange={onChange}
     >
+      {defaultValue && (
+        <option disabled value={defaultValue.value}>
+          {defaultValue.label}
+        </option>
+      )}
       {options.map(({ value, label }) => (
-        <option value={value}>{label}</option>
+        <option key={value} value={value}>
+          {label}
+        </option>
       ))}
     </select>
   );

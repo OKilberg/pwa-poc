@@ -4,8 +4,8 @@ import { addLogEntry, editLogEntry } from "@/lib/db/logs";
 import useLogout from "@/shared/context/UserSessionContext.tsx/ContextHooks/useLogout";
 import toast from "react-hot-toast";
 import { getISOTime } from "@/util/util";
-import { promiseCache } from "@/features/Home/Components/useQuery";
 import dayjs from "dayjs";
+import { promiseCache } from "@/shared/hooks/useQuery";
 
 const useOnClick = () => {
   const user = useUser();
