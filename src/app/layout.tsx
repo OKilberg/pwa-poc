@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import DatePickerProvider from "@/shared/providers/DatePickerProvider";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -79,25 +80,29 @@ export default async function RootLayout({
       <body
         className={`${carterOne.variable} ${publicSans.variable} antialiased bg-white text-black font-publicSans h-dvh w-dvw flex flex-col overflow-hidden`}
       >
-        <NuqsAdapter>
-          <TopBar>
-            <TopBarSide />
-            <TopBarMid>
-              <Logo
-                style={{
-                  textShadow:
-                    "2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black, 0px 2px 0px black, 2px 0px 0px black, 0px -2px 0px black, -2px 0px 0px black",
-                }}
-                className="text-[18px] md:text-[26px]"
-              />
-            </TopBarMid>
-            <TopBarSide className="flex">
-              <p className="pt-2 mx-auto text-xs opacity-45">{versionNumber}</p>
-            </TopBarSide>
-          </TopBar>
-          <Toaster position="top-right" />
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
-        </NuqsAdapter>
+        <DatePickerProvider>
+          <NuqsAdapter>
+            <TopBar>
+              <TopBarSide />
+              <TopBarMid>
+                <Logo
+                  style={{
+                    textShadow:
+                      "2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black, 0px 2px 0px black, 2px 0px 0px black, 0px -2px 0px black, -2px 0px 0px black",
+                  }}
+                  className="text-[18px] md:text-[26px]"
+                />
+              </TopBarMid>
+              <TopBarSide className="flex">
+                <p className="pt-2 mx-auto text-xs opacity-45">
+                  {versionNumber}
+                </p>
+              </TopBarSide>
+            </TopBar>
+            <Toaster position="top-right" />
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </NuqsAdapter>
+        </DatePickerProvider>
       </body>
     </html>
   );

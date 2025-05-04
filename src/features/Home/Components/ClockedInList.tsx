@@ -3,9 +3,9 @@
 import { getClockedInEntries } from "@/lib/db/logs";
 import React from "react";
 import ClockedIn from "./ClockedIn";
-import useQuery from "./useQuery";
 import { User } from "@/lib/dbTypes";
 import { getEmployeesMap } from "@/lib/db/users";
+import useQuery from "@/shared/hooks/useQuery";
 
 const ClockedInList = () => {
   const employeeMap = useQuery({ fn: getEmployeesMap, key: "employeesMap" });

@@ -1,4 +1,4 @@
-import { promiseCache } from "@/features/Home/Components/useQuery";
+import { promiseCache } from "@/shared/hooks/useQuery";
 
 export const clearCacheKeys = (keys: Array<string>) => {
   keys.forEach((key) => {

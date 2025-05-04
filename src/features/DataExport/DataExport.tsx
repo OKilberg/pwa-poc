@@ -8,8 +8,8 @@ import Header from "@/shared/components/Header/Header";
 import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubtitle";
 import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers";
+
 import dayjs, { Dayjs } from "dayjs";
 import { ArrowLeft, HardDriveDownload } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -51,31 +51,29 @@ const DataExport = () => {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <MainPane>
-        <Header>
-          <HeaderTitle>Data Export</HeaderTitle>
-          <HeaderSubtitle>Download monthly logs in xlsx format</HeaderSubtitle>
-        </Header>
-        <Content>
-          <DatePicker
-            label="Select a month to export"
-            value={date}
-            openTo="month"
-            onChange={handleDateChange}
-            views={["year", "month"]}
-          />
-          <Button variant="primary" onClick={handleExport}>
-            <HardDriveDownload />
-            Download
-          </Button>
-          <Button variant="tertiary" onClick={() => push("/admin")}>
-            <ArrowLeft className="" />
-            Back
-          </Button>
-        </Content>
-      </MainPane>
-    </LocalizationProvider>
+    <MainPane>
+      <Header>
+        <HeaderTitle>Data Export</HeaderTitle>
+        <HeaderSubtitle>Download monthly logs in xlsx format</HeaderSubtitle>
+      </Header>
+      <Content>
+        <DatePicker
+          label="Select a month to export"
+          value={date}
+          openTo="month"
+          onChange={handleDateChange}
+          views={["year", "month"]}
+        />
+        <Button variant="primary" onClick={handleExport}>
+          <HardDriveDownload />
+          Download
+        </Button>
+        <Button variant="tertiary" onClick={() => push("/admin")}>
+          <ArrowLeft className="" />
+          Back
+        </Button>
+      </Content>
+    </MainPane>
   );
 };
 
