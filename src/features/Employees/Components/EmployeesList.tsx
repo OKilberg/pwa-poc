@@ -1,7 +1,7 @@
-import useQuery from "@/features/Home/Components/useQuery";
 import { getActiveEmployees } from "@/lib/db/users";
 import React from "react";
 import Employee from "./Employee";
+import useQuery from "@/shared/hooks/useQuery";
 
 const EmployeesList = () => {
   const employees = useQuery({ fn: getActiveEmployees, key: "employees" });

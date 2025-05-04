@@ -15,6 +15,7 @@ import {
   ChevronDown,
   Ellipsis,
   HardDriveDownload,
+  PlayCircle,
   SquarePen,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
@@ -71,10 +72,14 @@ const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
             );
           })}
           {isAdminSession() && (
-            <li className="flex w-full flex-row-reverse text-sm md:text-md mt-4">
+            <li className="flex w-full flex-row-reverse text-sm md:text-md mt-4 gap-4">
               <Button variant="positive" onClick={exportMonth} size="xs">
                 <HardDriveDownload className="size-4" />
                 Export {month}
+              </Button>
+              <Button variant="secondary" onClick={() => {}} size="xs">
+                <PlayCircle className="size-4" />
+                Add log
               </Button>
             </li>
           )}
@@ -100,12 +105,12 @@ const EntryItem = ({ day, inTime, outTime }: EntryItemProps) => {
   const [showDrawer, setShowDrawer] = useState(false);
 
   const DrawerContent = (
-    <div className="py-2 flex flex-col gap-2">
-      <ListItem className="px-4 py-2 gap-4">
+    <div className="py-2 flex flex-col gap-2 min-h-[33vh]">
+      <ListItem className="px-4 py-2 gap-4 bg-white">
         <SquarePen className="size-5" />
         Edit
       </ListItem>
-      <ListItem className="px-4 py-2 gap-4 text-red-500">
+      <ListItem className="px-4 py-2 gap-4 text-red-500 bg-white">
         <Archive className="size-5" />
         Archive
       </ListItem>
