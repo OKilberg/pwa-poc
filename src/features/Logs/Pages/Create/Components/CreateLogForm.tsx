@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import Button from "@mui/material/Button";
@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 
 const SelectEmployee = dynamic(() => import("./SelectEmployee"), {
   ssr: false,
-  loading: () => <div>Loading...</div>,
+  loading: () => <div>Loading Employees...</div>,
 });
 
 export default function CreateLogForm() {

@@ -2,23 +2,20 @@
 
 import { exportMonthlyLogsToXLSX } from "@/lib/export/export";
 import { ensureAuth } from "@/lib/session/auth";
-import Button from "@/shared/components/Button/Button";
+import AppBar from "@/shared/components/AppBar/AppBar";
+import AppBarBack from "@/shared/components/AppBar/Subcomponents/AppBarBack";
 import Content from "@/shared/components/Content/Content";
-import Header from "@/shared/components/Header/Header";
-import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubtitle";
-import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import { DatePicker } from "@mui/x-date-pickers";
-
 import dayjs, { Dayjs } from "dayjs";
-import { ArrowLeft, HardDriveDownload } from "lucide-react";
+import { HardDriveDownload } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { Button } from "@mui/material";
 
 const DataExport = () => {
   ensureAuth();
-  const { push } = useRouter();
   const [date, setDate] = useState(dayjs());
 
   const handleExport = async () => {
@@ -52,26 +49,29 @@ const DataExport = () => {
 
   return (
     <MainPane>
-      <Header>
-        <HeaderTitle>Data Export</HeaderTitle>
-        <HeaderSubtitle>Download monthly logs in xlsx format</HeaderSubtitle>
-      </Header>
+      <AppBar
+        pageTitle={"Data Export"}
+        pageDescription="Download work logs for export"
+        leftChildren={<AppBarBack url="/admin" />}
+        rightChildren={undefined}
+      />
       <Content>
-        <DatePicker
-          label="Select a month to export"
-          value={date}
-          openTo="month"
-          onChange={handleDateChange}
-          views={["year", "month"]}
-        />
-        <Button variant="primary" onClick={handleExport}>
-          <HardDriveDownload />
-          Download
-        </Button>
-        <Button variant="tertiary" onClick={() => push("/admin")}>
-          <ArrowLeft className="" />
-          Back
-        </Button>
+        <div className="grid grid-cols-1 gap-4">
+          <DatePicker
+            label="Select a month to export"
+            value={date}
+            openTo="month"
+            onChange={handleDateChange}
+            views={["year", "month"]}
+          />
+          <Button
+            variant="contained"
+            onClick={handleExport}
+            startIcon={<HardDriveDownload />}
+          >
+            Download
+          </Button>
+        </div>
       </Content>
     </MainPane>
   );

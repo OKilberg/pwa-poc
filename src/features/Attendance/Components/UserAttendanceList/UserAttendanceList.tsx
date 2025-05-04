@@ -10,7 +10,7 @@ const UserAttendanceList = ({ user }: UserAttendanceListProps) => {
   const userId = user ? user.id : 0;
 
   return (
-    <ul className="flex flex-col gap-2 w-full max-h-[450px] overflow-scroll">
+    <ul className="flex flex-col gap-2 flex-1 w-full overflow-scroll">
       <Year userId={userId} year={2025} />
     </ul>
   );
