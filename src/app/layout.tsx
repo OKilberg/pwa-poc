@@ -10,6 +10,7 @@ import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import DatePickerProvider from "@/shared/providers/DatePickerProvider";
+import MountTestCommands from "@/lib/test/MountTestCommands";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -82,6 +83,7 @@ export default async function RootLayout({
       >
         <DatePickerProvider>
           <NuqsAdapter>
+            <MountTestCommands />
             <TopBar>
               <TopBarSide />
               <TopBarMid>

@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const generatePIN = () => {
+export const generatePIN = () => {
   const randomPin = Math.floor(Math.random() * 900) + 100; // 100 - 999
 
   return randomPin;

@@ -1,4 +1,5 @@
 import { Tables } from "@/lib/dbTypes";
+import { generateTestData } from "@/lib/test/generate";
 import { getRandomIdentityNumber } from "@/util/util";
 import Dexie from "dexie";
 
@@ -58,12 +59,12 @@ db.version(5).stores({
 });
 
 /*
-db.on("populate", ()=>{
-  db.absences.add({
-    userId: 333, cause: 'sickLeave', dateStart: new Date().toDateString(), dateEnd: null, month: 3, year: 2025, note: 'Very sick'
-  })
-})
-  */
+db.on("populate", () => {
+  db.users.bulkAdd(users);
+  db.absences.bulkAdd(workAbsences);
+  db.logs.bulkAdd(logEntries);
+});
+*/
 
 /*
 db.version(1).stores({
@@ -75,10 +76,12 @@ db.version(1).stores({
 declare global {
   interface Window {
     db: Dexie;
+    createTestData: () => void;
   }
 }
+
 /*
 if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
-  window.db = db;
+  window.createTestData = createTestData;
 }
-*/
+  */

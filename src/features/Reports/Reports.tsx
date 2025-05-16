@@ -13,18 +13,24 @@ import ReportsContextProvider from "@/shared/context/ReportsContext/ReportsConte
 import ReportsList from "./Components/ReportsList";
 import EmployeeSelector from "./Components/EmployeeSelector";
 import { ensureAuth } from "@/lib/session/auth";
+import AppBar from "@/shared/components/AppBar/AppBar";
+import AppBarActions from "@/shared/components/AppBar/Subcomponents/AppBarActions";
+import AppBarBack from "@/shared/components/AppBar/Subcomponents/AppBarBack";
 
 const Reports = () => {
   ensureAuth();
   const { push } = useRouter();
 
+  const LeftAppBarChildren = (
+    <AppBarActions>
+      <AppBarBack />
+    </AppBarActions>
+  );
+
   return (
     <ReportsContextProvider>
-      <MainPane>
-        <Header>
-          <HeaderTitle>Time Reports</HeaderTitle>
-          <HeaderSubtitle>Employee Attendance</HeaderSubtitle>
-        </Header>
+      <MainPane className="max-h-">
+        <AppBar leftChildren={LeftAppBarChildren} pageTitle="Create Log" />
         <Content className="py-0">
           <EmployeeSelector />
           <ReportsList />
