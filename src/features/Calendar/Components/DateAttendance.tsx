@@ -36,7 +36,7 @@ const DateAttendance = ({ date }: { date: Dayjs }) => {
   }
 
   return (
-    <ul className="flex flex-col gap-2 w-full max-h-[300px] overflow-scroll p-1">
+    <ul className="flex flex-col gap-2 w-full p-1">
       {logs?.map((log, index) => {
         const { id, inTime, outTime, userId } = log;
         const employee = employees.get(userId);

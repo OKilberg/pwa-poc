@@ -12,6 +12,7 @@ import Button from "@/shared/components/Button/Button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ensureAuth } from "@/lib/session/auth";
+import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 
 const Calendar = () => {
   ensureAuth();
@@ -25,25 +26,21 @@ const Calendar = () => {
   };
 
   return (
-    <MainPane>
-      <Header>
-        <HeaderTitle>Calendar</HeaderTitle>
-      </Header>
-      <Content>
+    <MainPane className="h-[calc(100vh-3rem)]">
+      <DefaultAppBar
+        pageTitle="Calendar"
+        pageDescription="View work per date"
+      />
+      <section className="flex flex-col flex-1 overflow-y-scroll py-2 px-4">
         <DatePicker
           disableFuture
           label="Select a date"
           value={date}
           onChange={handleDateChange}
         />
+        <div className="divider"></div>
         <DateAttendance date={date} />
-        <div>
-          <Button variant="tertiary" onClick={() => push("/admin")}>
-            <ArrowLeft className="" />
-            Back
-          </Button>
-        </div>
-      </Content>
+      </section>
     </MainPane>
   );
 };
