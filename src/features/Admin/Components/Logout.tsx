@@ -1,16 +1,15 @@
-import Button from "@/shared/components/Button/Button";
 import useLogout from "@/shared/context/UserSessionContext.tsx/ContextHooks/useLogout";
 import { LogOut } from "lucide-react";
 import React from "react";
 
-const Logout = () => {
+const Logout = ({ iconOnly }: { iconOnly?: boolean }) => {
   const logout = useLogout();
 
   return (
-    <Button variant="tertiary" onClick={logout}>
+    <button onClick={logout} className="px-2 flex items-center gap-2">
       <LogOut className="transform rotate-180" />
-      Back
-    </Button>
+      {!iconOnly && "Logout"}
+    </button>
   );
 };
 

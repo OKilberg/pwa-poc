@@ -7,7 +7,7 @@ import React from "react";
 const ReportsList = () => {
   const user = useUser();
 
-  if (!user) return <div>Select a employee above.</div>;
+  if (!user) return <div>Select an employee above.</div>;
 
   return <UserAttendanceList user={user} />;
 };

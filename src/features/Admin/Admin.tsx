@@ -9,16 +9,14 @@ import {
   ChevronRight,
   Edit,
   HardDriveDownload,
-  LogOut,
   Sheet,
   Users,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Content from "@/shared/components/Content/Content";
 import AdminHeader from "./Components/AdminHeader";
 import { ensureAuth } from "@/lib/session/auth";
 import MenuItem from "@/shared/components/MenuItem/MenuItem";
-import CenterAppBar from "@/shared/components/AppBar/CenterAppBar";
+import Logout from "./Components/Logout";
 
 const Admin = () => {
   ensureAuth();
@@ -31,10 +29,10 @@ const Admin = () => {
 
   return (
     <UserSessionProvider onLogout={onLogout}>
-      <MainPane className="animate-slideInRight">
+      <MainPane className="animate-slideInRight h-[calc(100vh-3rem)]">
         <AdminHeader />
-        <Content>
-          <div className="grid grid-cols-2 gap-3">
+        <section className="flex flex-col flex-1 overflow-y-scroll px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pb-24">
             <MenuItem
               linkTo="/admin/employees"
               description="Manage your employees"
@@ -71,14 +69,7 @@ const Admin = () => {
               trailingIcon={<ChevronRight />}
             />
           </div>
-
-          <div>
-            <Button variant="tertiary" onClick={onLogout}>
-              <LogOut className="transform rotate-180" />
-              Logout
-            </Button>
-          </div>
-        </Content>
+        </section>
       </MainPane>
     </UserSessionProvider>
   );
