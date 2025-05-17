@@ -3,6 +3,7 @@
 import React from "react";
 import useUser from "@/shared/context/UserSessionContext.tsx/ContextHooks/useUser";
 import CenterAppBar from "@/shared/components/AppBar/CenterAppBar";
+import Logout from "./Logout";
 
 const AdminHeader = () => {
   const user = useUser();
@@ -13,7 +14,7 @@ const AdminHeader = () => {
     <CenterAppBar
       pageTitle="Admin"
       pageDescription={subtitle}
-      leftChildren={<div></div>}
+      leftChildren={<Logout />}
       rightChildren={<div></div>}
     />
   );
