@@ -13,7 +13,9 @@ const CenterAppBar = ({
         <div className="text-center">
           <h1 className="text-2xl">{pageTitle}</h1>
           {pageDescription && (
-            <h2 className="text-lg text-gray-700">{pageDescription}</h2>
+            <h2 className="text-lg text-gray-700 text-nowrap">
+              {pageDescription}
+            </h2>
           )}
         </div>
         <div className="w-1/3 my-auto">{rightChildren}</div>
