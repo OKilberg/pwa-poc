@@ -1,4 +1,5 @@
 import { promiseCache } from "@/shared/hooks/useQuery";
+import dayjs from "dayjs";
 
 export const clearCacheKeys = (keys: Array<string>) => {
   keys.forEach((key) => {
@@ -36,6 +37,13 @@ export const getLogsCacheKey = (isoDate: string) => {
 
 export const clearLogsCacheKey = (isoDate: string) => {
   const cacheKey = getLogsCacheKey(isoDate);
+
+  clearCacheKeys([cacheKey]);
+};
+
+export const clearUserLogsCache = (userId: number, isoDate: string) => {
+  const year = dayjs(isoDate).year();
+  const cacheKey = `att-${userId}-${year}`;
 
   clearCacheKeys([cacheKey]);
 };

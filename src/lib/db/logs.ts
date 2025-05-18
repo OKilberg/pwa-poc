@@ -31,7 +31,7 @@ export const getActiveLogEntry = async (userId: User["id"]) => {
       .equals(userId)
       .reverse()
       .first((log) => {
-        if (log && log.outTime === null) return log;
+        if (log && log.outTime === null) return log; // TODO: prone to bugs, rework
       })
   );
 

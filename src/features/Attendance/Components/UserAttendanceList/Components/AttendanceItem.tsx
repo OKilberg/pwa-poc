@@ -63,7 +63,7 @@ const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
         </summary>
         <ul className="mt-2 flex flex-col gap-2">
           {logs.map((log, index) => {
-            const { inTime, outTime } = log;
+            const { inTime, outTime, id } = log;
             const day = getISODate(inTime);
             return (
               <EntryItem
@@ -71,6 +71,7 @@ const AttendanceItem = ({ logs, month, exportMonth }: AttendanceItemProps) => {
                 day={day}
                 inTime={inTime}
                 outTime={outTime}
+                id={id}
               />
             );
           })}
@@ -102,9 +103,10 @@ type EntryItemProps = {
   day: string;
   inTime: string;
   outTime: string | null;
+  id: number;
 };
 
-const EntryItem = ({ day, inTime, outTime }: EntryItemProps) => {
+const EntryItem = ({ day, inTime, outTime, id }: EntryItemProps) => {
   const currentDate = new Date().toISOString();
   const diffTime = outTime ? outTime : currentDate;
   const { hours, minutes } = getTimeDifferenceISO(inTime, diffTime);
@@ -112,10 +114,14 @@ const EntryItem = ({ day, inTime, outTime }: EntryItemProps) => {
   const timeIn = getISOTime(inTime);
   const timeOut = outTime ? getISOTime(outTime) : "Ongoing";
   const [showDrawer, setShowDrawer] = useState(false);
+  const { push } = useRouter();
 
   const DrawerContent = (
     <div className="py-2 flex flex-col gap-2 min-h-[33vh]">
-      <ListItem className="px-4 py-2 gap-4 bg-white">
+      <ListItem
+        className="px-4 py-2 gap-4 bg-white"
+        onClick={() => push(`/admin/logs/${id}/edit`)}
+      >
         <SquarePen className="size-5" />
         Edit
       </ListItem>

@@ -8,7 +8,7 @@ const Logout = ({ iconOnly }: { iconOnly?: boolean }) => {
   return (
     <button onClick={logout} className="px-2 flex items-center gap-2">
       <LogOut className="transform rotate-180" />
-      {!iconOnly && "Logout"}
+      <p className="hidden md:block">Logout</p>
     </button>
   );
 };
