@@ -1,4 +1,4 @@
-import Edit from "@/features/Logs/Pages/Edit";
+import Edit from "@/features/Logs/Pages/Edit/Edit";
 import React from "react";
 
 const EditPage = () => {
