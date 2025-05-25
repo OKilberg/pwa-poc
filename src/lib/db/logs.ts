@@ -115,3 +115,9 @@ export const editLogEntry = async (
 
   return response;
 };
+
+export const removeLogEntry = async (id: LogEntry["id"]) => {
+  const response = await tryFetch(() => db.logs.delete(id));
+
+  return response;
+};

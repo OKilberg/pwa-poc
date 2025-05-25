@@ -10,6 +10,7 @@ import { addLogEntry } from "@/lib/db/logs";
 import { NewLogEntry } from "@/lib/dbTypes";
 import useEmployee from "@/features/Logs/Hooks/useEmployee";
 import toast from "react-hot-toast";
+import { clearUserLogsCache } from "@/lib/queryCache/queryCache";
 
 const SelectEmployee = dynamic(() => import("./SelectEmployee"), {
   ssr: false,
@@ -40,6 +41,7 @@ export default function CreateLogForm() {
 
       addLogEntry(logEntry)
         .then(() => {
+          clearUserLogsCache(logEntry.userId, logEntry.inTime);
           toast.success("Created log entry");
           reset();
         })
