@@ -1,7 +1,6 @@
 "use client";
 
 import MainPane from "@/shared/components/MainPane/MainPane";
-import { useRouter } from "next/navigation";
 import React from "react";
 import ReportsContextProvider from "@/shared/context/ReportsContext/ReportsContext";
 import ReportsList from "./Components/ReportsList";
@@ -11,7 +10,6 @@ import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 
 const Reports = () => {
   ensureAuth();
-  const { push } = useRouter();
 
   return (
     <ReportsContextProvider>
@@ -19,6 +17,7 @@ const Reports = () => {
         <DefaultAppBar
           pageTitle="Time Reports"
           pageDescription="View employee work reports"
+          url="/admin"
         />
         <EmployeeSelector />
         <section className="flex flex-col flex-1 overflow-y-scroll px-4">

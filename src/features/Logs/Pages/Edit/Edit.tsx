@@ -24,7 +24,11 @@ const Edit = () => {
     } on ${fullMonthNames[month]} ${getISODate(inTime)}, ${year}`;
     return (
       <MainPane>
-        <DefaultAppBar pageTitle="Edit log" pageDescription={pageDescription} />
+        <DefaultAppBar
+          pageTitle="Edit log"
+          pageDescription={pageDescription}
+          url="/admin/reports"
+        />
         <section className="px-4">
           <EditLogForm
             id={logId}

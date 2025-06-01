@@ -30,6 +30,7 @@ const Calendar = () => {
       <DefaultAppBar
         pageTitle="Calendar"
         pageDescription="View work per date"
+        url="/admin"
       />
       <section className="flex flex-col flex-1 overflow-y-scroll py-2 px-4">
         <DatePicker

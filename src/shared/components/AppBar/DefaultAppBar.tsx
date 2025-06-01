@@ -1,13 +1,18 @@
 import AppBar, { AppBarProps } from "./AppBar";
 import AppBarActions from "./Subcomponents/AppBarActions";
-import AppBarBack from "./Subcomponents/AppBarBack";
+import AppBarBack, { AppBarBackProps } from "./Subcomponents/AppBarBack";
 
-type DefaultAppBarProps = Pick<AppBarProps, "pageTitle" | "pageDescription">;
+type DefaultAppBarProps = Pick<AppBarProps, "pageTitle" | "pageDescription"> &
+  Pick<AppBarBackProps, "url">;
 
-const DefaultAppBar = ({ pageTitle, pageDescription }: DefaultAppBarProps) => {
+const DefaultAppBar = ({
+  pageTitle,
+  pageDescription,
+  url,
+}: DefaultAppBarProps) => {
   const LeftAppBarChildren = (
     <AppBarActions>
-      <AppBarBack />
+      <AppBarBack url={url} />
     </AppBarActions>
   );
 

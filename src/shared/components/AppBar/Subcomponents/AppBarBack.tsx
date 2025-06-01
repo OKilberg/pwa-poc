@@ -5,7 +5,7 @@ import AppBarIconAction from "./AppBarIconAction";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-type AppBarBackProps = {
+export type AppBarBackProps = {
   url?: string;
 };
 
