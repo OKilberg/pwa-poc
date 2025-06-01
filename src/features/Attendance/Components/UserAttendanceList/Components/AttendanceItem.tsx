@@ -4,7 +4,6 @@ import { clearUserLogsCache } from "@/lib/queryCache/queryCache";
 import { isAdminSession } from "@/lib/session/auth";
 import Button from "@/shared/components/Button/Button";
 import ListItem from "@/shared/components/ListItem";
-import useUser from "@/shared/context/ReportsContext/ContextHooks/useUser";
 import {
   convertMinutesToHoursAndMinutes,
   getISODate,
@@ -24,6 +23,7 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import useUser from "../Hooks/useUser";
 
 type AttendanceItemProps = {
   logs: Array<LogEntry>;
