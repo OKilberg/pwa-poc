@@ -9,6 +9,7 @@ const Create = () => {
       <DefaultAppBar
         pageTitle="Create log"
         pageDescription="Manually submit a work log for an employee"
+        url="/admin"
       />
       <CreateLogForm />
     </MainPane>

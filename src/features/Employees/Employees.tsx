@@ -19,6 +19,7 @@ const Employees = () => {
       <DefaultAppBar
         pageTitle="Employees"
         pageDescription="Manage your employees"
+        url="/admin"
       />
       <section className="w-full flex flex-row-reverse justify-start px-4">
         <Button
