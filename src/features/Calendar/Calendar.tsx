@@ -8,15 +8,11 @@ import React, { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import DateAttendance from "./Components/DateAttendance";
-import Button from "@/shared/components/Button/Button";
-import { ArrowLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { ensureAuth } from "@/lib/session/auth";
 import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 
 const Calendar = () => {
   ensureAuth();
-  const { push } = useRouter();
   const [date, setDate] = useState<Dayjs>(dayjs());
 
   const handleDateChange = (value: Dayjs | null) => {

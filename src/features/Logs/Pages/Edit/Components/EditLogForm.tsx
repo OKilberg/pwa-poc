@@ -5,7 +5,7 @@ import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import Button from "@mui/material/Button";
 import dayjs, { Dayjs } from "dayjs";
 import { getTimeDifferenceISO } from "@/util/util";
-import { addLogEntry, editLogEntry } from "@/lib/db/logs";
+import { editLogEntry } from "@/lib/db/logs";
 import { LogEntry, NewLogEntry } from "@/lib/dbTypes";
 import toast from "react-hot-toast";
 import { clearUserLogsCache } from "@/lib/queryCache/queryCache";
