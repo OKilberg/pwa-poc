@@ -1,7 +1,7 @@
 "use client";
 
 import Select from "@/shared/components/Select/Select";
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent } from "react";
 import useEmployeeOptions from "../Hooks/useEmployeeOptions";
 import useEmployee from "@/features/Logs/Hooks/useEmployee";
 

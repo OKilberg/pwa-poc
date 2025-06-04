@@ -15,7 +15,7 @@ import {
 } from "./util";
 
 export function generateTestData() {
-  let uid = 1;
+  // let uid = 1;
   let logId = 1;
   let absenceId = 1;
 
@@ -38,7 +38,7 @@ export function generateTestData() {
       state: "active" as const,
     })),
   ];
-  uid += 4; // advance counter
+  // uid += 4; // advance counter
 
   // --- Log entries ------------------------------------------------------
   const logEntries: LogEntry[] = [];

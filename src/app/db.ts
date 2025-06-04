@@ -1,5 +1,4 @@
 import { Tables } from "@/lib/dbTypes";
-import { generateTestData } from "@/lib/test/generate";
 import { getRandomIdentityNumber } from "@/util/util";
 import Dexie from "dexie";
 
