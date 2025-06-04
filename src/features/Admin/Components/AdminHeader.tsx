@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import Header from "@/shared/components/Header/Header";
-import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
-import HeaderSubtitle from "@/shared/components/Header/Subcomponents/HeaderSubtitle";
 import useUser from "@/shared/context/UserSessionContext.tsx/ContextHooks/useUser";
+import CenterAppBar from "@/shared/components/AppBar/CenterAppBar";
+import Logout from "./Logout";
 
 const AdminHeader = () => {
   const user = useUser();
@@ -12,10 +11,12 @@ const AdminHeader = () => {
   const subtitle = user ? `${user.firstName} ${user.lastName}` : "Unknown user";
 
   return (
-    <Header>
-      <HeaderTitle>Admin</HeaderTitle>
-      <HeaderSubtitle>{subtitle}</HeaderSubtitle>
-    </Header>
+    <CenterAppBar
+      pageTitle="Admin"
+      pageDescription={subtitle}
+      leftChildren={<Logout />}
+      rightChildren={<div></div>}
+    />
   );
 };
 

@@ -1,4 +1,3 @@
-import useQuery from "@/features/Home/Components/useQuery";
 import { getRecordsByUserYear } from "@/lib/db/logs";
 import { LogEntry } from "@/lib/dbTypes";
 import React from "react";
@@ -6,6 +5,7 @@ import AttendanceItem from "./AttendanceItem";
 import { fullMonthNames } from "@/lib/date/constants";
 import { exportEmployeeMonthlyLogsToXLSX } from "@/lib/export/export";
 import toast from "react-hot-toast";
+import useQuery from "@/shared/hooks/useQuery";
 
 type Props = {
   userId: number;

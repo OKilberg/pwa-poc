@@ -1,9 +1,14 @@
 import { tryFetch } from "@/util/util";
 import { NewWorkAbsence, WorkAbsence } from "../dbTypes";
 import { db } from "@/app/db";
+import { clearAbsenceCacheKey } from "../queryCache/queryCache";
 
 export const addWorkAbsence = async (workAbsence: NewWorkAbsence) => {
   const response = await tryFetch(() => db.absences.add(workAbsence));
+
+  if (response) {
+    clearAbsenceCacheKey(workAbsence.dateStart);
+  }
 
   return response;
 };

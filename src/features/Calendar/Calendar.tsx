@@ -6,17 +6,13 @@ import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import React, { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import DateAttendance from "./Components/DateAttendance";
 import Button from "@/shared/components/Button/Button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ensureAuth } from "@/lib/session/auth";
-import "dayjs/locale/en-gb";
-
-dayjs.locale("en-gb");
+import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 
 const Calendar = () => {
   ensureAuth();
@@ -30,28 +26,23 @@ const Calendar = () => {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
-      <MainPane>
-        <Header>
-          <HeaderTitle>Calendar</HeaderTitle>
-        </Header>
-        <Content>
-          <DatePicker
-            disableFuture
-            label="Select a date"
-            value={date}
-            onChange={handleDateChange}
-          />
-          <DateAttendance date={date} />
-          <div>
-            <Button variant="tertiary" onClick={() => push("/admin")}>
-              <ArrowLeft className="" />
-              Back
-            </Button>
-          </div>
-        </Content>
-      </MainPane>
-    </LocalizationProvider>
+    <MainPane className="h-[calc(100vh-3rem)]">
+      <DefaultAppBar
+        pageTitle="Calendar"
+        pageDescription="View work per date"
+        url="/admin"
+      />
+      <section className="flex flex-col flex-1 overflow-y-scroll py-2 px-4">
+        <DatePicker
+          disableFuture
+          label="Select a date"
+          value={date}
+          onChange={handleDateChange}
+        />
+        <div className="divider"></div>
+        <DateAttendance date={date} />
+      </section>
+    </MainPane>
   );
 };
 
