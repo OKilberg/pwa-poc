@@ -1,7 +1,6 @@
 "use client";
 
 import { clearUserSession } from "@/lib/session/Session";
-import Button from "@/shared/components/Button/Button";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import UserSessionProvider from "@/shared/context/UserSessionContext.tsx/UserSessionProvider";
 import {
@@ -16,7 +15,6 @@ import { useRouter } from "next/navigation";
 import AdminHeader from "./Components/AdminHeader";
 import { ensureAuth } from "@/lib/session/auth";
 import MenuItem from "@/shared/components/MenuItem/MenuItem";
-import Logout from "./Components/Logout";
 
 const Admin = () => {
   ensureAuth();

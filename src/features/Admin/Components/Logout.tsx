@@ -2,7 +2,7 @@ import useLogout from "@/shared/context/UserSessionContext.tsx/ContextHooks/useL
 import { LogOut } from "lucide-react";
 import React from "react";
 
-const Logout = ({ iconOnly }: { iconOnly?: boolean }) => {
+const Logout = () => {
   const logout = useLogout();
 
   return (
