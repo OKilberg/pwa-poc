@@ -6,7 +6,7 @@ type MainPaneProps = ParentComponent & Styleable;
 
 const MainPane = ({ children, className }: MainPaneProps) => {
   const classMainPane = clsx(
-    "flex-1 flex flex-col gap-2 max-w-screen-lg",
+    "flex-1 flex flex-col gap-2 max-w-screen-lg w-full",
     className
   );
 
