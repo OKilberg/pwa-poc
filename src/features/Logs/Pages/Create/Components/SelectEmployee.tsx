@@ -3,7 +3,7 @@
 import Select from "@/shared/components/Select/Select";
 import React, { ChangeEvent } from "react";
 import useEmployeeOptions from "../Hooks/useEmployeeOptions";
-import useEmployee from "@/features/Logs/Hooks/useEmployee";
+import useEmployee from "@/shared/queryState/useEmployee";
 
 const SelectEmployee = () => {
   const employeeOptions = useEmployeeOptions();
