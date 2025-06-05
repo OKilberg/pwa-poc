@@ -79,7 +79,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir="ltr">
       <body
-        className={`${carterOne.variable} ${publicSans.variable} antialiased bg-white text-black font-publicSans h-dvh w-dvw flex flex-col overflow-hidden`}
+        className={`${carterOne.variable} ${publicSans.variable} antialiased bg-white text-black font-publicSans h-dvh w-dvw flex flex-col overflow-hidden items-center`}
       >
         <DatePickerProvider>
           <NuqsAdapter>
