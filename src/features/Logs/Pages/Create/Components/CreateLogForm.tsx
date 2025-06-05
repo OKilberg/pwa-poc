@@ -8,9 +8,9 @@ import { Dayjs } from "dayjs";
 import { getTimeDifferenceISO } from "@/util/util";
 import { addLogEntry } from "@/lib/db/logs";
 import { NewLogEntry } from "@/lib/dbTypes";
-import useEmployee from "@/features/Logs/Hooks/useEmployee";
 import toast from "react-hot-toast";
 import { clearUserLogsCache } from "@/lib/queryCache/queryCache";
+import useEmployee from "@/shared/queryState/useEmployee";
 
 const SelectEmployee = dynamic(() => import("./SelectEmployee"), {
   ssr: false,
