@@ -29,7 +29,7 @@ const Admin = () => {
     <UserSessionProvider onLogout={onLogout}>
       <MainPane className="animate-slideInRight h-[calc(100vh-3rem)]">
         <AdminHeader />
-        <section className="flex flex-col flex-1 overflow-y-scroll px-4">
+        <section className="flex flex-col flex-1 overflow-y-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pb-24">
             <MenuItem
               linkTo="/admin/employees"

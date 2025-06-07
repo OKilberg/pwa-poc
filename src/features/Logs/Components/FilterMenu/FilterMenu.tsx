@@ -4,7 +4,33 @@ import { fullMonthNames } from "@/lib/date/constants";
 import useEmployees from "@/shared/hooks/queries/useEmployees";
 import useEmployee from "@/shared/queryState/useEmployee";
 import useMonth, { MONTHS, months } from "@/shared/queryState/useMonth";
-import React, { ChangeEvent } from "react";
+import clsx from "clsx";
+import React, { ChangeEvent, ReactNode } from "react";
+
+const WithLabel = ({
+  children,
+  label,
+  position,
+  w,
+}: {
+  children: ReactNode;
+  label: string;
+  position?: "left";
+  w?: string;
+}) => {
+  const className = clsx(
+    "flex flex-col flex-grow gap-1 text-xs",
+    position === "left" && "flex flex-row",
+    w && `w-${w}`
+  );
+
+  return (
+    <label className={className}>
+      <p className="pl-1">{label}</p>
+      {children}
+    </label>
+  );
+};
 
 // Multi-select checkbox filter, default = none (all)
 const EmployeeFilter = () => {
@@ -19,21 +45,23 @@ const EmployeeFilter = () => {
   };
 
   return (
-    <select
-      className="select select-bordered w-1/2"
-      value={employeeValue}
-      onChange={handleSelectEmployee}
-    >
-      <option defaultChecked disabled>
-        Select Employee
-      </option>
-      {employees.map(([number, { firstName, lastName, id }]) => (
-        <option value={id} key={number}>
-          {firstName}
-          {lastName}
+    <WithLabel label="Employee" w="1/2">
+      <select
+        className="select select-bordered w-full"
+        value={employeeValue}
+        onChange={handleSelectEmployee}
+      >
+        <option defaultChecked disabled>
+          Select Employee
         </option>
-      ))}
-    </select>
+        {employees.map(([number, { firstName, lastName, id }]) => (
+          <option value={id} key={number}>
+            {firstName}
+            {lastName}
+          </option>
+        ))}
+      </select>
+    </WithLabel>
   );
 };
 
@@ -47,26 +75,30 @@ const MonthFilter = () => {
   };
 
   return (
-    <select
-      className="select select-bordered w-1/4"
-      value={month}
-      onChange={handleSelectMonth}
-    >
-      {months.map((month) => (
-        <option value={month} key={month}>
-          {fullMonthNames[month]}
-        </option>
-      ))}
-    </select>
+    <WithLabel label="Month" w="1/4">
+      <select
+        className="select select-bordered w-full"
+        value={month}
+        onChange={handleSelectMonth}
+      >
+        {months.map((month) => (
+          <option value={month} key={month}>
+            {fullMonthNames[month]}
+          </option>
+        ))}
+      </select>
+    </WithLabel>
   );
 };
 
 // Year radio filter (default this year)
 const YearFilter = () => {
   return (
-    <select className="select select-bordered w-1/4">
-      <option>2025</option>
-    </select>
+    <WithLabel label="Year" w="1/4">
+      <select className="select select-bordered w-full">
+        <option>2025</option>
+      </select>
+    </WithLabel>
   );
 };
 
