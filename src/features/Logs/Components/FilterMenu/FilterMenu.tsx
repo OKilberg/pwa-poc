@@ -36,13 +36,15 @@ const WithLabel = ({
 const EmployeeFilter = () => {
   const { employee, setEmployee } = useEmployee();
   const employees = useEmployees();
-  const employeeValue = employee || undefined;
+  const employeeValue = employee || "null";
 
   const handleSelectEmployee = (e: ChangeEvent<HTMLSelectElement>) => {
     const { target } = e;
     const { value } = target;
     setEmployee(value);
   };
+
+  console.log("Employee", employee);
 
   return (
     <WithLabel label="Employee" w="1/2">
@@ -51,13 +53,12 @@ const EmployeeFilter = () => {
         value={employeeValue}
         onChange={handleSelectEmployee}
       >
-        <option defaultChecked disabled>
+        <option defaultChecked disabled value={"null"}>
           Select Employee
         </option>
         {employees.map(([number, { firstName, lastName, id }]) => (
           <option value={id} key={number}>
-            {firstName}
-            {lastName}
+            {`${firstName} ${lastName}`}
           </option>
         ))}
       </select>
