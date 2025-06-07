@@ -119,7 +119,7 @@ const EntryItem = ({ day, inTime, outTime, id }: EntryItemProps) => {
   const timeOut = outTime ? getISOTime(outTime) : "Ongoing";
   const [showDrawer, setShowDrawer] = useState(false);
   const { push, refresh } = useRouter();
-  const user = useUser();
+  const user = useUser(); // TODO: Create a method to use the correct user
 
   const archiveLog = () => {
     removeLogEntry(id)
