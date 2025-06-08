@@ -1,8 +1,5 @@
 "use client";
 
-import Content from "@/shared/components/Content/Content";
-import Header from "@/shared/components/Header/Header";
-import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import React, { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";

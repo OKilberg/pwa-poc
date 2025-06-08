@@ -14,7 +14,7 @@ const AppBar = ({
   rightChildren,
 }: AppBarProps) => {
   return (
-    <nav className="min-h-16 px-4 flex flex-col pt-5 pb-6">
+    <nav className="min-h-16 px-4 flex flex-row md:flex-col gap-4 md:gap-0 pt-5 pb-6">
       <div className="flex justify-between h-16">
         {leftChildren}
         {rightChildren}

@@ -6,9 +6,9 @@ import UserSessionProvider from "@/shared/context/UserSessionContext.tsx/UserSes
 import {
   Calendar,
   ChevronRight,
+  ClipboardList,
   Edit,
   HardDriveDownload,
-  Sheet,
   Users,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -39,17 +39,17 @@ const Admin = () => {
               trailingIcon={<ChevronRight />}
             />
             <MenuItem
+              linkTo="/admin/logs"
+              description="View and manage all work logs"
+              label="Logs"
+              leadingIcon={<ClipboardList />}
+              trailingIcon={<ChevronRight />}
+            />
+            <MenuItem
               linkTo="/admin/calendar"
               description="View work per date"
               label="Calendar"
               leadingIcon={<Calendar />}
-              trailingIcon={<ChevronRight />}
-            />
-            <MenuItem
-              linkTo="/admin/reports"
-              description="View employees time worked"
-              label="Time Reports"
-              leadingIcon={<Sheet />}
               trailingIcon={<ChevronRight />}
             />
             <MenuItem
