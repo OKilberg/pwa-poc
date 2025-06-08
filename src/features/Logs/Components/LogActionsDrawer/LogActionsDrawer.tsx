@@ -1,5 +1,4 @@
 import Drawer from "@mui/material/Drawer";
-import DrawerContent from "./Components/DrawerContent";
 import { ParentComponent } from "@/shared/components/types";
 
 type LogActionsDrawerProps = ParentComponent & {

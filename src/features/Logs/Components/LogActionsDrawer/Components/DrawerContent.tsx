@@ -11,7 +11,7 @@ const getLabel = (log: LogEntry) => {
 
   const showEndDate = startDate !== endDate;
 
-  const label = `Log ${id} (${month} ${startDate}, ${startTime} - 
+  const label = `Log #${id} (${month} ${startDate}, ${startTime} - 
   ${showEndDate ? endDate : ""} ${endTime}, ${duration})`;
 
   return label;
