@@ -7,7 +7,7 @@ const useEmployeeData = () => {
   const employees = useEmployees();
 
   const employeeDetails = employees.find(
-    ([index, { id }]) => employee === String(id)
+    ([_index, { id }]) => employee === String(id)
   );
 
   if (employeeDetails) {

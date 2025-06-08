@@ -27,7 +27,7 @@ const Edit = () => {
         <DefaultAppBar
           pageTitle="Edit log"
           pageDescription={pageDescription}
-          url="/admin/reports"
+          url="/admin/logs"
         />
         <section className="px-4">
           <EditLogForm
