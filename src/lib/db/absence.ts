@@ -45,3 +45,19 @@ export const getWorkAbsenceByYearMonth = async (
 ) => {
   return await db.absences.where({ year: year, month: month }).toArray();
 };
+
+export const getWorkAbsenceByYearMonthUser = async (
+  year: WorkAbsence["year"],
+  month: WorkAbsence["month"],
+  userId: WorkAbsence["userId"]
+) => {
+  return await db.absences
+    .where({ year: year, month: month, userId: userId })
+    .toArray();
+};
+
+export const removeWorkAbsence = async (id: WorkAbsence["id"]) => {
+  const response = await tryFetch(() => db.absences.delete(id));
+
+  return response;
+};

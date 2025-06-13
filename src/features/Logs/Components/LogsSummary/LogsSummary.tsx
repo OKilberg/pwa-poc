@@ -1,4 +1,4 @@
-import useMonth, { MONTHS } from "@/shared/queryState/useMonth";
+// import useMonth from "@/shared/queryState/useMonth";
 import useEmployeeData from "../../Hooks/useEmployeeData";
 import useFilterSummary from "../../Hooks/useFilterSummary";
 import { Button } from "@mui/material";
@@ -53,7 +53,7 @@ const LogStat = ({
 const LogsSummary = () => {
   const { shifts, time } = useFilterSummary();
   const employeeData = useEmployeeData();
-  const { month } = useMonth();
+  // const { month } = useMonth();
 
   if (!employeeData) {
     return null;
