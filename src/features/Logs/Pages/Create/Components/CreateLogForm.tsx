@@ -36,7 +36,7 @@ export default function CreateLogForm() {
         outTime: endDate.toISOString(),
         month: startDate.month(),
         year: startDate.year(),
-        note: "Entry registered by admin",
+        note: "Registered by admin",
       };
 
       addLogEntry(logEntry)
