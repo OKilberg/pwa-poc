@@ -1,4 +1,5 @@
 import { DATE_LOCALE, TIME_LOCALE } from "@/app/constants";
+import dayjs from "dayjs";
 
 export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
@@ -89,6 +90,17 @@ export const getLogDuration = (inTime: string, outTime: string) => {
   const logDuration = `${hours} hr ${minutes} min`;
 
   return logDuration;
+};
+
+export const getAbsenceDuration = (dateStart: string, dateEnd: string) => {
+  const start = dayjs(dateStart);
+  const end = dayjs(dateEnd);
+
+  const days = end.diff(start, "days") + 1;
+
+  const duration = `${days} day(s)`;
+
+  return duration;
 };
 
 export function getTimeDifferenceMinutesISO(
