@@ -27,6 +27,14 @@ export const clearAbsenceCacheKey = (isoDate: string) => {
   clearCacheKeys([cacheKey]);
 };
 
+export const clearAbsencesCacheKey = (userId: number, isoDate: string) => {
+  const year = dayjs(isoDate).year();
+  const month = dayjs(isoDate).month();
+  const cacheKey = `absences-${userId}-${month}-${year}`;
+
+  clearCacheKeys([cacheKey]);
+};
+
 export const getLogsCacheKey = (isoDate: string) => {
   const formattedDate = getFormattedDate(isoDate);
 

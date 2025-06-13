@@ -3,29 +3,31 @@
 import { fullMonthNames } from "@/lib/date/constants";
 import useEmployees from "@/shared/hooks/queries/useEmployees";
 import useEmployee from "@/shared/queryState/useEmployee";
+import useLogTypes, { LOGTYPE } from "@/shared/queryState/useLogTypes";
 import useMonth, { MONTHS, months } from "@/shared/queryState/useMonth";
 import clsx from "clsx";
-import React, { ChangeEvent, ReactNode } from "react";
+import { BriefcaseBusiness, ListFilter, TreePalm } from "lucide-react";
+import React, { ChangeEvent, ReactNode, useState } from "react";
 
 const WithLabel = ({
   children,
   label,
   position,
-  w,
+  className,
 }: {
   children: ReactNode;
   label: string;
   position?: "left";
-  w?: string;
+  className?: string;
 }) => {
-  const className = clsx(
+  const baseClassName = clsx(
     "flex flex-col flex-grow gap-1 text-xs",
     position === "left" && "flex flex-row",
-    w && `w-${w}`
+    className
   );
 
   return (
-    <label className={className}>
+    <label className={baseClassName}>
       <p className="pl-1">{label}</p>
       {children}
     </label>
@@ -47,9 +49,9 @@ const EmployeeFilter = () => {
   console.log("Employee", employee);
 
   return (
-    <WithLabel label="Employee" w="1/2">
+    <WithLabel label="Employee" className="max-w-fit">
       <select
-        className="select select-bordered w-full"
+        className="select select-sm md:select-md select-bordered w-full"
         value={employeeValue}
         onChange={handleSelectEmployee}
       >
@@ -76,9 +78,9 @@ const MonthFilter = () => {
   };
 
   return (
-    <WithLabel label="Month" w="1/4">
+    <WithLabel label="Month" className="max-w-fit">
       <select
-        className="select select-bordered w-full"
+        className="select select-sm md:select-md select-bordered w-full"
         value={month}
         onChange={handleSelectMonth}
       >
@@ -95,10 +97,68 @@ const MonthFilter = () => {
 // Year radio filter (default this year)
 const YearFilter = () => {
   return (
-    <WithLabel label="Year" w="1/4">
-      <select className="select select-bordered w-full">
+    <WithLabel label="Year" className="max-w-fit">
+      <select className="select select-sm md:select-md select-bordered w-full">
         <option>2025</option>
       </select>
+    </WithLabel>
+  );
+};
+
+const TypeFilter = () => {
+  const [isOpen, setOpen] = useState(false);
+  const { logTypes, setLogTypes } = useLogTypes();
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value as LOGTYPE;
+
+    if (!logTypes.includes(value)) {
+      setLogTypes([...logTypes, value]);
+    } else {
+      setLogTypes([...logTypes.filter((type) => value !== type)]);
+    }
+  };
+
+  return (
+    <WithLabel label="Types" className="max-w-fit">
+      <div className="relative">
+        <button
+          className="btn btn-sm md:btn-md btn-outline border-gray-300"
+          onClick={() => setOpen(!isOpen)}
+        >
+          <ListFilter size={20} />
+        </button>
+        {isOpen && (
+          <ul className="menu bg-base-100 rounded-box w-56 p-2  border absolute right-0 z-10">
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={logTypes.includes("log")}
+                  onChange={onChange}
+                  value={"log"}
+                  className="checkbox"
+                />
+                Show Logs
+                <BriefcaseBusiness size={20} />
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={logTypes.includes("absence")}
+                  onChange={onChange}
+                  value={"absence"}
+                  className="checkbox"
+                />
+                Show Absences
+                <TreePalm size={20} />
+              </label>
+            </li>
+          </ul>
+        )}
+      </div>
     </WithLabel>
   );
 };
@@ -109,6 +169,7 @@ const FilterMenu = () => {
       <EmployeeFilter />
       <MonthFilter />
       <YearFilter />
+      <TypeFilter />
     </div>
   );
 };
