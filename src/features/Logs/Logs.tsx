@@ -17,7 +17,13 @@ const Logs = () => {
         url="/admin"
       />
       <section className="px-4 pb-6 gap-2 flex flex-col min-h-0 flex-1">
-        <FilterMenu />
+        <Suspense
+          fallback={
+            <span className="loading loading-spinner loading-xs"></span>
+          }
+        >
+          <FilterMenu />
+        </Suspense>
         <Suspense fallback={<LogsContentSkeleton />}>
           <LogsSummary />
           <LogsTable />
