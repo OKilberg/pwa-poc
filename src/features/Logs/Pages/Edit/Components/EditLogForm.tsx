@@ -35,7 +35,7 @@ export default function EditLogForm({
         outTime: endDate.toISOString(),
         month: startDate.month(),
         year: startDate.year(),
-        note: "Entry edited by admin",
+        note: "Edited by admin",
       };
 
       editLogEntry(id, { ...logEntry })
