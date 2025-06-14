@@ -18,7 +18,11 @@ const useFilteredAbsences = () => {
 
   if (!logTypes.includes("absence")) return [];
 
-  return filteredAbsences;
+  const sortedAbsences = filteredAbsences.sort((a, b) =>
+    a.dateStart.localeCompare(b.dateStart)
+  );
+
+  return sortedAbsences;
 };
 
 export default useFilteredAbsences;

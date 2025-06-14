@@ -10,6 +10,8 @@ const AbsenceRow = ({ absence }: { absence: WorkAbsence }) => {
   // const t = useTranslations("Absence"); TODO: cause
   const { id, note } = absence;
   const { duration, endDate, startDate } = getReadableAbsence(absence);
+  const dates =
+    startDate !== endDate ? `${startDate} - ${endDate}` : `${startDate}`;
   const [showDrawer, setShowDrawer] = useState(false);
 
   return (
@@ -23,10 +25,10 @@ const AbsenceRow = ({ absence }: { absence: WorkAbsence }) => {
         <TreePalm size={18} />
       </td>
       <td className="text-center">
-        <time className="text-center">{`${startDate}`}</time>
+        <time className="text-center">{`${dates}`}</time>
       </td>
       <td className="text-center">
-        <time className="text-center">{`${endDate}`}</time>
+        <time className="text-center">{`-`}</time>
       </td>
       <td className="text-center">
         <div>{duration}</div>

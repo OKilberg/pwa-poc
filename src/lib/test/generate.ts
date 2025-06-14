@@ -94,7 +94,7 @@ export function generateTestData() {
           userId: u.id,
           dateStart: fmtDate(start),
           dateEnd: fmtDate(end),
-          month: start.getMonth() + 1,
+          month: start.getMonth(),
           year: start.getFullYear(),
           cause: causes[randInt(0, causes.length - 1)],
           note: null,
