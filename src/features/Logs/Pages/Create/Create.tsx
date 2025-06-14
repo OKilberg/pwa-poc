@@ -24,7 +24,10 @@ const Create = () => {
   };
   const month = searchParams.get("month");
   const employee = searchParams.get("employee");
-  const backLink = getBackLink(Number(employee), Number(month));
+  const backLink =
+    month && employee
+      ? getBackLink(Number(employee), Number(month))
+      : `/admin/logs`;
 
   return (
     <MainPane className="h-[calc(100vh-3rem)] min-h-0">
