@@ -1,4 +1,4 @@
-import { utils, writeFileXLSX } from "xlsx";
+import { utils } from "xlsx";
 import { getRecordsByMonthYear, getRecordsByUserMonthYear } from "../db/logs";
 import { getEmployeesMap } from "../db/users";
 import { fullMonthNames } from "../date/constants";
@@ -10,7 +10,10 @@ import {
   getFormattedLogInfo,
   getWorkbookFilename,
 } from "./utils";
-import { getWorkAbsenceByYearMonth } from "../db/absence";
+import {
+  getWorkAbsenceByYearMonth,
+  getWorkAbsenceByYearMonthUser,
+} from "../db/absence";
 import { getAbsencesFormatted } from "./format";
 
 export const exportEmployeeMonthlyLogsToXLSX = async (
@@ -48,9 +51,15 @@ export const exportEmployeeMonthlyLogsToXLSX = async (
   const formattedMonth = fullMonthNames[month];
   const sheetName = `${year}-${formattedMonth}`;
 
-  const logsSheet = utils.json_to_sheet(logs);
+  const logsSheet = createWorkbookSheetFromJson(logs);
+  const absenceSheet = await createEmployeeAbsenceWorkbookSheet(
+    id,
+    year,
+    month
+  );
 
-  utils.book_append_sheet(workbook, logsSheet, sheetName);
+  appendSheetToWorkbook(workbook, logsSheet, sheetName);
+  appendSheetToWorkbook(workbook, absenceSheet, `Absence ${sheetName}`);
 
   const employeesMap = await getEmployeesMap();
   const employee = employeesMap.get(id);
@@ -58,11 +67,11 @@ export const exportEmployeeMonthlyLogsToXLSX = async (
   if (employee) {
     const { firstName, lastName } = employee;
 
-    const fileName = `${firstName}${lastName}-WorkLogExport${year}-${
-      month + 1
-    }.xlsx`;
+    const fileNamePrefix = `${firstName}${lastName}-WorkLogExport`;
 
-    writeFileXLSX(workbook, fileName);
+    const workbookFilename = getWorkbookFilename(fileNamePrefix, year, month);
+
+    exportWorkbook(workbook, workbookFilename);
   }
 };
 
@@ -119,6 +128,22 @@ const createAbsenceWorkbookSheet = async (year: number, month: number) => {
   const absences = await getWorkAbsenceByYearMonth(year, month);
 
   const formattedAbsences = await getAbsencesFormatted(absences);
+
+  const absencesSheet = createWorkbookSheetFromJson(formattedAbsences);
+
+  return absencesSheet;
+};
+
+const createEmployeeAbsenceWorkbookSheet = async (
+  id: User["id"],
+  year: number,
+  month: number
+) => {
+  const absences = await getWorkAbsenceByYearMonthUser(year, month, id);
+
+  console.log("absences", absences);
+  const formattedAbsences = await getAbsencesFormatted(absences);
+  console.log("absencesFormatted", absences);
 
   const absencesSheet = createWorkbookSheetFromJson(formattedAbsences);
 
