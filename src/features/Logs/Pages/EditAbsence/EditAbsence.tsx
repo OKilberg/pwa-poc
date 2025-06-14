@@ -9,6 +9,7 @@ import { getEmployeesMap } from "@/lib/db/users";
 import { getWorkAbsence } from "@/lib/db/absence";
 import getReadableAbsence from "../../Helpers/getReadableAbsence";
 import EditAbsenceForm from "./Components/EditAbsenceForm";
+import getBackLink from "../../Helpers/getBackLink";
 
 const EditAbsence = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,16 +21,19 @@ const EditAbsence = () => {
   const employees = useQuery({ fn: getEmployeesMap, key: "employeesMap" });
 
   if (absence) {
-    const { userId, dateEnd, dateStart, year, note, cause } = absence;
+    const { userId, dateEnd, dateStart, year, note, cause, month } = absence;
     const { endDate, startDate } = getReadableAbsence(absence);
     const employee = employees.get(userId);
     const pageDescription = `Absence by ${employee?.firstName} ${employee?.lastName} on ${startDate} - ${endDate}, ${year}`;
+
+    const backLink = getBackLink(userId, month);
+
     return (
       <MainPane>
         <DefaultAppBar
           pageTitle="Edit absence"
           pageDescription={pageDescription}
-          url="/admin/logs"
+          url={backLink}
         />
         <section className="">
           <Suspense>

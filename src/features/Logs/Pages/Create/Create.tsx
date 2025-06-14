@@ -7,9 +7,12 @@ import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 import { LOGTYPE } from "@/shared/queryState/useLogTypes";
 import CreateAbsenceForm from "./Components/CreateAbsenceForm/CreateAbsenceForm";
 import LogTypeRadioButton from "./Components/LogTypeRadioButton/LogTypeRadioButton";
+import getBackLink from "../../Helpers/getBackLink";
+import { useSearchParams } from "next/navigation";
 
 const Create = () => {
   const [createType, setCreateType] = useState<LOGTYPE>("log");
+  const searchParams = useSearchParams();
 
   const showCreateLogForm = createType === "log";
   const showCreateAbsenceForm = createType === "absence";
@@ -19,13 +22,16 @@ const Create = () => {
 
     setCreateType(value);
   };
+  const month = searchParams.get("month");
+  const employee = searchParams.get("employee");
+  const backLink = getBackLink(Number(employee), Number(month));
 
   return (
     <MainPane className="h-[calc(100vh-3rem)] min-h-0">
       <DefaultAppBar
         pageTitle={`Create ${createType}`}
         pageDescription="Manually submit a work log for an employee"
-        url="/admin/logs"
+        url={backLink}
       />
       <div className="grid grid-cols-2 px-4 pb-3">
         <LogTypeRadioButton

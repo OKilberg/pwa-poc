@@ -55,6 +55,12 @@ export const clearLogsCacheKey = (isoDate: string) => {
   clearCacheKeys([cacheKey]);
 };
 
+export const clearLogEditCacheKey = (id: number) => {
+  const cacheKey = `log-${id}`;
+
+  clearCacheKeys([cacheKey]);
+};
+
 export const clearUserLogsCache = (userId: number, isoDate: string) => {
   const year = dayjs(isoDate).year();
   const month = dayjs(isoDate).month();

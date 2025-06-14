@@ -9,11 +9,15 @@ import EditLogForm from "./Components/EditLogForm";
 import { getEmployeesMap } from "@/lib/db/users";
 import { getISODate } from "@/util/util";
 import { fullMonthNames } from "@/lib/date/constants";
+import getBackLink from "../../Helpers/getBackLink";
 
 const Edit = () => {
   const { id } = useParams<{ id: string }>();
   const logId = Number(id);
-  const log = useQuery({ fn: () => getLogEntry(Number(logId)) });
+  const log = useQuery({
+    fn: () => getLogEntry(Number(logId)),
+    key: `log-${logId}`,
+  });
   const employees = useQuery({ fn: getEmployeesMap, key: "employeesMap" });
 
   if (log) {
@@ -22,12 +26,15 @@ const Edit = () => {
     const pageDescription = `Worklog by ${employee?.firstName} ${
       employee?.lastName
     } on ${fullMonthNames[month]} ${getISODate(inTime)}, ${year}`;
+
+    const backLink = getBackLink(userId, month);
+
     return (
       <MainPane>
         <DefaultAppBar
           pageTitle="Edit log"
           pageDescription={pageDescription}
-          url="/admin/logs"
+          url={backLink}
         />
         <section className="px-4">
           <EditLogForm

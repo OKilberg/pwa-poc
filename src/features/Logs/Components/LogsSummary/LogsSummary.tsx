@@ -1,12 +1,18 @@
-// import useMonth from "@/shared/queryState/useMonth";
 import useEmployeeData from "../../Hooks/useEmployeeData";
 import useFilterSummary from "../../Hooks/useFilterSummary";
 import { Button } from "@mui/material";
 import { HardDriveDownload, PlusCircle } from "lucide-react";
 import useExportFilteredLogs from "../../Hooks/useExportFilteredLogs";
 import { useRouter } from "next/navigation";
+import useMonth, { MONTHS } from "@/shared/queryState/useMonth";
 
-const LogSummaryActions = ({ userId }: { userId: number }) => {
+const LogSummaryActions = ({
+  userId,
+  month,
+}: {
+  userId: number;
+  month: MONTHS;
+}) => {
   const exportFilteredLogs = useExportFilteredLogs();
   const { push } = useRouter();
 
@@ -16,7 +22,9 @@ const LogSummaryActions = ({ userId }: { userId: number }) => {
         fullWidth
         endIcon={<PlusCircle className="size-4" />}
         variant="outlined"
-        onClick={() => push(`/admin/logs/create?employee=${userId}`)}
+        onClick={() =>
+          push(`/admin/logs/create?employee=${userId}&month=${month}`)
+        }
       >
         Add
       </Button>
@@ -53,7 +61,7 @@ const LogStat = ({
 const LogsSummary = () => {
   const { shifts, time } = useFilterSummary();
   const employeeData = useEmployeeData();
-  // const { month } = useMonth();
+  const { month } = useMonth();
 
   if (!employeeData) {
     return null;
@@ -65,7 +73,7 @@ const LogsSummary = () => {
     <div className="text-gray-600 flex items-center">
       <LogStat label="Time worked" value={time} />
       <LogStat label="Shifts" value={shifts} />
-      <LogSummaryActions userId={id} />
+      <LogSummaryActions userId={id} month={month} />
     </div>
   );
 };

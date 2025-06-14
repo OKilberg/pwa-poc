@@ -10,7 +10,9 @@ const LogRow = ({ log }: { log: LogEntry }) => {
   const { duration, endDate, startDate, startTime, endTime } =
     getReadableLog(log);
   const dates =
-    startDate !== endDate ? `${startDate} - ${endDate}` : `${startDate}`;
+    endDate && startDate !== endDate
+      ? `${startDate} - ${endDate}`
+      : `${startDate}`;
   const [showDrawer, setShowDrawer] = useState(false);
 
   return (
