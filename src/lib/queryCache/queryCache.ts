@@ -27,6 +27,12 @@ export const clearAbsenceCacheKey = (isoDate: string) => {
   clearCacheKeys([cacheKey]);
 };
 
+export const clearAbsenceEditCacheKey = (id: number) => {
+  const cacheKey = `edit-${id}`;
+
+  clearCacheKeys([cacheKey]);
+};
+
 export const clearAbsencesCacheKey = (userId: number, isoDate: string) => {
   const year = dayjs(isoDate).year();
   const month = dayjs(isoDate).month();
