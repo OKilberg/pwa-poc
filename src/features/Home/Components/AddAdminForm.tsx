@@ -27,10 +27,18 @@ const AddAdminForm = () => {
   const { push } = useRouter();
 
   const tryDemo = async () => {
+    const modalElement = document.getElementById(
+      "create_admin_modal"
+    ) as HTMLDialogElement | null;
+
     createTestData().then((admin) => {
-      toast.success(`Demo Admin PIN: ${admin.id}`, { icon: "🧪" });
-      startUserSession({ ...admin, isClockedIn: false });
-      push("/admin");
+      toast.success(`Created Demo Admin with PIN: ${admin.id}`, {
+        icon: "🧪",
+        duration: 7000,
+      });
+      // startUserSession({ ...admin, isClockedIn: false });
+      // push("/admin");
+      modalElement?.close();
     });
   };
 

@@ -8,7 +8,10 @@ import { getTimeDifferenceISO } from "@/util/util";
 import { editLogEntry } from "@/lib/db/logs";
 import { LogEntry, NewLogEntry } from "@/lib/dbTypes";
 import toast from "react-hot-toast";
-import { clearUserLogsCache } from "@/lib/queryCache/queryCache";
+import {
+  clearLogEditCacheKey,
+  clearUserLogsCache,
+} from "@/lib/queryCache/queryCache";
 
 type EditLogForm = Pick<LogEntry, "id" | "inTime" | "outTime" | "userId">;
 
@@ -19,7 +22,7 @@ export default function EditLogForm({
   userId,
 }: EditLogForm) {
   const startDateDayjs = dayjs(inTime);
-  const endDateDayjs = dayjs(outTime);
+  const endDateDayjs = outTime ? dayjs(outTime) : null;
   const [startDate, setStartDate] = useState<Dayjs | null>(startDateDayjs);
   const [endDate, setEndDate] = useState<Dayjs | null>(endDateDayjs);
 
@@ -41,6 +44,7 @@ export default function EditLogForm({
       editLogEntry(id, { ...logEntry })
         .then(() => {
           clearUserLogsCache(userId, logEntry.inTime);
+          clearLogEditCacheKey(id);
           toast.success("Saved log entry update");
         })
         .catch((error) => {
@@ -49,6 +53,7 @@ export default function EditLogForm({
     }
   };
 
+  console.log(endDate);
   const duration =
     startDate && endDate
       ? getTimeDifferenceISO(startDate?.toISOString(), endDate?.toISOString())
