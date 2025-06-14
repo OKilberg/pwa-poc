@@ -3,7 +3,7 @@ import { WorkAbsence } from "@/lib/dbTypes";
 import { getAbsenceDuration } from "@/util/util";
 import dayjs from "dayjs";
 
-const getReadableLog = (absence: WorkAbsence) => {
+const getReadableAbsence = (absence: WorkAbsence) => {
   const { id, dateStart, month, note, dateEnd, userId, year } = absence;
 
   const duration = getAbsenceDuration(dateStart, dateEnd);
@@ -24,4 +24,4 @@ const getReadableLog = (absence: WorkAbsence) => {
   };
 };
 
-export default getReadableLog;
+export default getReadableAbsence;

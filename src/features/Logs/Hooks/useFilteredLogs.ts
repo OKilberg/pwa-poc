@@ -15,8 +15,6 @@ const useFilteredLogs = () => {
     key: `logs-${employee}-${month}-${year}`,
   });
 
-  console.log("filteredLogs", filteredLogs);
-
   if (!logTypes.includes("log")) return [];
 
   return filteredLogs;
