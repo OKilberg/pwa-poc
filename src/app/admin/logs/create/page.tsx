@@ -1,8 +1,12 @@
 import Create from "@/features/Logs/Pages/Create/Create";
-import React from "react";
+import React, { Suspense } from "react";
 
 const CreatePage = () => {
-  return <Create />;
+  return (
+    <Suspense>
+      <Create />
+    </Suspense>
+  );
 };
 
 export default CreatePage;
