@@ -46,8 +46,6 @@ const EmployeeFilter = () => {
     setEmployee(value);
   };
 
-  console.log("Employee", employee);
-
   return (
     <WithLabel label="Employee" className="max-w-fit">
       <select

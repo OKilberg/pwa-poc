@@ -13,6 +13,12 @@ export const addWorkAbsence = async (workAbsence: NewWorkAbsence) => {
   return response;
 };
 
+export const getWorkAbsence = async (id: WorkAbsence["id"]) => {
+  const response = await tryFetch(() => db.absences.get(id));
+
+  return response;
+};
+
 export const getWorkAbsences = async () => {
   const response = await tryFetch(() => db.absences.toArray());
 
@@ -58,6 +64,15 @@ export const getWorkAbsenceByYearMonthUser = async (
 
 export const removeWorkAbsence = async (id: WorkAbsence["id"]) => {
   const response = await tryFetch(() => db.absences.delete(id));
+
+  return response;
+};
+
+export const editWorkAbsence = async (
+  id: WorkAbsence["id"],
+  updates: Partial<WorkAbsence>
+) => {
+  const response = await tryFetch(() => db.absences.update(id, { ...updates }));
 
   return response;
 };

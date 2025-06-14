@@ -16,8 +16,6 @@ const useFilteredAbsences = () => {
     key: `absences-${employee}-${month}-${year}`,
   });
 
-  console.log("filteredLogs", filteredAbsences);
-
   if (!logTypes.includes("absence")) return [];
 
   return filteredAbsences;
