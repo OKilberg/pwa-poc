@@ -7,8 +7,8 @@ const getReadableAbsence = (absence: WorkAbsence) => {
   const { id, dateStart, month, note, dateEnd, userId, year } = absence;
 
   const duration = getAbsenceDuration(dateStart, dateEnd);
-  const startDate = dayjs(dateStart).format("YYYY-MM-DD");
-  const endDate = dayjs(dateEnd).format("YYYY-MM-DD");
+  const startDate = dayjs(dateStart).format("D/M");
+  const endDate = dayjs(dateEnd).format("D/M");
 
   const monthReadable = fullMonthNames[month];
 

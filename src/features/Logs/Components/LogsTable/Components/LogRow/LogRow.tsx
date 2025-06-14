@@ -9,6 +9,8 @@ const LogRow = ({ log }: { log: LogEntry }) => {
   const { id, note } = log;
   const { duration, endDate, startDate, startTime, endTime } =
     getReadableLog(log);
+  const dates =
+    startDate !== endDate ? `${startDate} - ${endDate}` : `${startDate}`;
   const [showDrawer, setShowDrawer] = useState(false);
 
   return (
@@ -22,10 +24,10 @@ const LogRow = ({ log }: { log: LogEntry }) => {
         <BriefcaseBusiness size={18} />
       </td>
       <td className="text-center">
-        <time className="text-center">{`${startTime}, ${startDate}`}</time>
+        <time className="text-center">{`${dates}`}</time>
       </td>
       <td className="text-center">
-        <time className="text-center">{`${endTime}, ${endDate}`}</time>
+        <time className="text-center">{`${startTime} - ${endTime}`}</time>
       </td>
       <td className="text-center">
         <div>{duration}</div>

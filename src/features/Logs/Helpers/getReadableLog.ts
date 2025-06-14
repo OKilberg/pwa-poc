@@ -1,15 +1,16 @@
 import { fullMonthNames } from "@/lib/date/constants";
 import { LogEntry } from "@/lib/dbTypes";
-import { getISODate, getISOTime, getLogDuration } from "@/util/util";
+import { getISOTime, getLogDuration } from "@/util/util";
+import dayjs from "dayjs";
 
 const getReadableLog = (log: LogEntry) => {
   const { id, inTime, month, note, outTime, userId, year } = log;
 
   const duration = outTime ? getLogDuration(inTime, outTime) : "Ongoing";
   const startTime = getISOTime(inTime);
-  const startDate = getISODate(inTime);
+  const startDate = dayjs(inTime).format("D/M");
   const endTime = outTime ? getISOTime(outTime) : "Ongoing";
-  const endDate = outTime ? getISODate(outTime) : "Unknown";
+  const endDate = outTime ? dayjs(outTime).format("D/M") : "Unknown";
   const monthReadable = fullMonthNames[month];
 
   return {

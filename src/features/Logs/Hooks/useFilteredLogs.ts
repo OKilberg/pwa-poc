@@ -17,7 +17,11 @@ const useFilteredLogs = () => {
 
   if (!logTypes.includes("log")) return [];
 
-  return filteredLogs;
+  const sortedLogs = filteredLogs.sort((a, b) =>
+    a.inTime.localeCompare(b.inTime)
+  );
+
+  return sortedLogs;
 };
 
 export default useFilteredLogs;
