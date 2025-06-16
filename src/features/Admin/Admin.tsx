@@ -40,14 +40,14 @@ const Admin = () => {
             />
             <MenuItem
               linkTo="/admin/logs"
-              description="View and manage all work logs"
+              description="View and manage work logs"
               label="Logs"
               leadingIcon={<ClipboardList />}
               trailingIcon={<ChevronRight />}
             />
             <MenuItem
               linkTo="/admin/calendar"
-              description="View work per date"
+              description="View daily logs"
               label="Calendar"
               leadingIcon={<Calendar />}
               trailingIcon={<ChevronRight />}
@@ -61,7 +61,7 @@ const Admin = () => {
             />
             <MenuItem
               linkTo="/admin/logs/create"
-              description="Manually register time worked"
+              description="Manual time entry"
               label="Register logs"
               leadingIcon={<Edit />}
               trailingIcon={<ChevronRight />}

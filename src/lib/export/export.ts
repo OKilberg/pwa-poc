@@ -8,6 +8,8 @@ import {
   createWorkbookSheetFromJson,
   exportWorkbook,
   getFormattedLogInfo,
+  getLogsWithTotal,
+  getTotalWorkDuration,
   getWorkbookFilename,
 } from "./utils";
 import {
@@ -48,10 +50,14 @@ export const exportEmployeeMonthlyLogsToXLSX = async (
     };
   });
 
+  const totalWorkDuration = getTotalWorkDuration(employeeMonthlyLogs);
+
+  const logsWithTotal = getLogsWithTotal(logs, totalWorkDuration);
+
   const formattedMonth = fullMonthNames[month];
   const sheetName = `${year}-${formattedMonth}`;
 
-  const logsSheet = createWorkbookSheetFromJson(logs);
+  const logsSheet = createWorkbookSheetFromJson(logsWithTotal);
   const absenceSheet = await createEmployeeAbsenceWorkbookSheet(
     id,
     year,
@@ -112,8 +118,14 @@ export const exportMonthlyLogsToXLSX = async (year: number, month: number) => {
     };
   });
 
-  const logsSheet = createWorkbookSheetFromJson(logsWithEmployeeInfo);
-  // const logsSheet = utils.json_to_sheet(logsWithEmployeeInfo); // TODO: Extract each sheet to a function
+  const totalWorkDuration = getTotalWorkDuration(monthlyLogs);
+
+  const logsWithTotal = getLogsWithTotal(
+    logsWithEmployeeInfo,
+    totalWorkDuration
+  );
+
+  const logsSheet = createWorkbookSheetFromJson(logsWithTotal);
   const absencesSheet = await createAbsenceWorkbookSheet(year, month);
 
   appendSheetToWorkbook(workbook, logsSheet, "Work logs");
