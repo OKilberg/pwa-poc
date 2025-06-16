@@ -67,7 +67,7 @@ export const viewport: Viewport = {
   themeColor: "#FFFFFF",
 };
 
-const versionNumber = "0.10.0";
+const versionNumber = "1.0.0";
 
 export default async function RootLayout({
   children,
