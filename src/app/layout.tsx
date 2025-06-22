@@ -11,6 +11,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import DatePickerProvider from "@/shared/providers/DatePickerProvider";
 import MountTestCommands from "@/lib/test/MountTestCommands";
+import ModalContext from "@/shared/providers/ModalContext/ModalContext";
+import Modals from "@/components/Modals/Modals";
 
 const carterOne = Carter_One({
   weight: "400", // Default weight for Carter One
@@ -102,7 +104,12 @@ export default async function RootLayout({
               </TopBarSide>
             </TopBar>
             <Toaster position="top-right" />
-            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+            <NextIntlClientProvider>
+              <ModalContext>
+                <Modals />
+                {children}
+              </ModalContext>
+            </NextIntlClientProvider>
           </NuqsAdapter>
         </DatePickerProvider>
       </body>

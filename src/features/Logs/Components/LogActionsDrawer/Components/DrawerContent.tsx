@@ -2,40 +2,40 @@ import { LogEntry } from "@/lib/dbTypes";
 import { ListItem } from "@mui/material";
 import { SquarePen, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
-import useArchiveLog from "../Hooks/useArchiveLog";
-import getReadableLog from "@/features/Logs/Helpers/getReadableLog";
-
-const getLabel = (log: LogEntry) => {
-  const { id, duration, startTime, startDate, endTime, endDate, month } =
-    getReadableLog(log);
-
-  const showEndDate = startDate !== endDate;
-
-  const label = `Log #${id} (${month} ${startDate}, ${startTime} - 
-  ${showEndDate ? endDate : ""} ${endTime}, ${duration})`;
-
-  return label;
-};
+import getLogLabel from "@/features/Logs/Helpers/getLogLabel";
+import useShowModal from "@/shared/providers/ModalContext/ContextHooks/useShowModal";
+import { CONFIRM_LOG_DELETION_MODAL } from "@/components/Modals/constants";
 
 const DrawerContent = ({ log }: { log: LogEntry }) => {
   const { id } = log;
   const { push } = useRouter();
-  const archiveLog = useArchiveLog();
-  const label = getLabel(log);
+  const label = getLogLabel(log);
+  const showModal = useShowModal();
+
+  const onDelete = () => {
+    showModal(CONFIRM_LOG_DELETION_MODAL, log);
+  };
 
   return (
-    <div className="py-2 flex flex-col gap-2 min-h-[33vh]">
-      <ListItem className="font-bold text-lg">{label}</ListItem>
+    <div className="py-2 px-4 flex flex-col min-h-[33vh]">
+      <ListItem className="font-medium text-lg mb-2">{label}</ListItem>
       <ListItem
-        className="px-4 py-2 gap-4 bg-white"
+        sx={{
+          py: { sm: 2 },
+        }}
+        className="py-2 gap-4 bg-white border border-1 border-gray-200 rounded-sm"
         onClick={() => push(`/admin/logs/${id}/edit`)}
       >
         <SquarePen className="size-5" />
         Edit
       </ListItem>
+
       <ListItem
-        className="px-4 py-2 gap-4 text-red-500 bg-white"
-        onClick={() => archiveLog(log)}
+        sx={{
+          py: { sm: 2 },
+        }}
+        className="py-2 gap-4 text-red-500 bg-white border border-1 border-t-0 border-gray-200 rounded-sm"
+        onClick={onDelete}
       >
         <Trash className="size-5" />
         Delete

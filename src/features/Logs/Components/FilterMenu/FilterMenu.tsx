@@ -34,7 +34,7 @@ const WithLabel = ({
   );
 };
 
-// Multi-select checkbox filter, default = none (all)
+// Multi-select checkbox filter
 const EmployeeFilter = () => {
   const { employee, setEmployee } = useEmployee();
   const employees = useEmployees();
