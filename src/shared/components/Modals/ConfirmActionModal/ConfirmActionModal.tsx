@@ -2,7 +2,7 @@
 
 import { Button } from "@mui/material";
 import { ConfirmActionModalProps } from "./types";
-import closeModalById from "../Helpers/closeModalById";
+import closeModalById from "@/shared/providers/ModalContext/Helpers/closeModalById";
 
 const ConfirmActionModal = ({
   children,
@@ -23,12 +23,14 @@ const ConfirmActionModal = ({
         {children}
         <div className="modal-action">
           <form method="dialog">
-            <Button variant="outlined" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button variant="contained" color="warning" onClick={onConfirm}>
-              Confirm
-            </Button>
+            <div className="flex gap-4">
+              <Button variant="outlined" onClick={onClose}>
+                Cancel
+              </Button>
+              <Button variant="contained" color="warning" onClick={onConfirm}>
+                Confirm
+              </Button>
+            </div>
           </form>
         </div>
       </div>

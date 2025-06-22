@@ -1,5 +1,7 @@
-const Divider = () => {
-  return <div className="divider" />;
+import { Styleable } from "./types";
+
+const Divider = ({ className }: Styleable) => {
+  return <div className={"divider " + className} />;
 };
 
 export default Divider;
