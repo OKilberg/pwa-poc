@@ -3,7 +3,8 @@ import { ListItem } from "@mui/material";
 import { SquarePen, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import getReadableAbsence from "@/features/Logs/Helpers/getReadableAbsence";
-import useArchiveAbsence from "../Hooks/useArchiveAbsence";
+import useShowModal from "@/shared/providers/ModalContext/ContextHooks/useShowModal";
+import { CONFIRM_ABSENCE_DELETION_MODAL } from "@/components/Modals/constants";
 
 const getLabel = (absence: WorkAbsence) => {
   const { id, duration, startDate, endDate, month } =
@@ -18,22 +19,28 @@ const getLabel = (absence: WorkAbsence) => {
 const DrawerContent = ({ absence }: { absence: WorkAbsence }) => {
   const { id } = absence;
   const { push } = useRouter();
-  const archiveAbsence = useArchiveAbsence();
+  const showModal = useShowModal();
   const label = getLabel(absence);
 
   return (
-    <div className="py-2 flex flex-col gap-2 min-h-[33vh]">
-      <ListItem className="font-bold text-lg">{label}</ListItem>
+    <div className="py-2 px-4 flex flex-col min-h-[33vh]">
+      <ListItem className="font-bold text-lg mb-2">{label}</ListItem>
       <ListItem
-        className="px-4 py-2 gap-4 bg-white"
+        sx={{
+          py: { sm: 2 },
+        }}
+        className="py-2 gap-4 bg-white border border-1 border-gray-200 rounded-sm"
         onClick={() => push(`/admin/absences/${id}/edit`)}
       >
         <SquarePen className="size-5" />
         Edit
       </ListItem>
       <ListItem
-        className="px-4 py-2 gap-4 text-red-500 bg-white"
-        onClick={() => archiveAbsence(absence)}
+        sx={{
+          py: { sm: 2 },
+        }}
+        className="py-2 gap-4 text-red-500 bg-white border border-1 border-t-0 border-gray-200 rounded-sm"
+        onClick={() => showModal(CONFIRM_ABSENCE_DELETION_MODAL, absence)}
       >
         <Trash className="size-5" />
         Delete

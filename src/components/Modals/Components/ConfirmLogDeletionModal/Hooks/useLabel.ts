@@ -1,12 +1,10 @@
-import getLogLabel from "@/features/Logs/Helpers/getLogLabel";
 import useSelectedLog from "./useSelectedLog";
 
 const useLabel = () => {
   const selectedLog = useSelectedLog();
 
   if (selectedLog) {
-    const logLabel = getLogLabel(selectedLog);
-    const label = `Are you sure you want to delete this log? ${logLabel}`;
+    const label = `Are you sure you want to delete Log #${selectedLog.id}?`;
 
     return label;
   }
