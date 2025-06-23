@@ -1,6 +1,5 @@
 "use client";
 
-import useQuery, { promiseCache } from "@/features/Home/Components/useQuery";
 import { editLogEntry, getRecordsByDate } from "@/lib/db/logs";
 import { getEmployeesMap } from "@/lib/db/users";
 import ListItem from "@/shared/components/ListItem";
@@ -13,6 +12,7 @@ import { ChevronDown } from "lucide-react";
 import { getWorkAbsencesByDate } from "@/lib/db/absence";
 import { User } from "@/lib/dbTypes";
 import { useTranslations } from "next-intl";
+import useQuery, { promiseCache } from "@/shared/hooks/useQuery";
 
 const DateAttendance = ({ date }: { date: Dayjs }) => {
   const t = useTranslations("Absence");
@@ -36,7 +36,7 @@ const DateAttendance = ({ date }: { date: Dayjs }) => {
   }
 
   return (
-    <ul className="flex flex-col gap-2 w-full max-h-[300px] overflow-scroll p-1">
+    <ul className="flex flex-col gap-2 w-full p-1">
       {logs?.map((log, index) => {
         const { id, inTime, outTime, userId } = log;
         const employee = employees.get(userId);

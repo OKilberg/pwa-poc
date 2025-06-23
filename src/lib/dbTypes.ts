@@ -1,7 +1,7 @@
 import { EntityTable } from "dexie";
 
-type UserRole = "admin" | "employee";
-type UserState = "active" | "archived";
+export type UserRole = "admin" | "employee";
+export type UserState = "active" | "archived";
 
 export type User = {
   id: number;
@@ -15,8 +15,8 @@ export type User = {
 export type LogEntry = {
   id: number;
   userId: number;
-  inTime: string; // ISO-like datetime string
-  outTime: string | null; // ISO-like datetime string
+  inTime: string;
+  outTime: string | null;
   month: number;
   year: number;
   note: string | null;
@@ -29,8 +29,8 @@ export type AbsenceCause = "sickLeave" | "vacation" | "other";
 export type WorkAbsence = {
   id: number;
   userId: number;
-  dateStart: string; // iso date,
-  dateEnd: string; // not required if single day
+  dateStart: string;
+  dateEnd: string;
   month: number;
   year: number;
   cause: AbsenceCause;

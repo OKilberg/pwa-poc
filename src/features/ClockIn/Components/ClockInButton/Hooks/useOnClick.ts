@@ -4,12 +4,26 @@ import { addLogEntry, editLogEntry } from "@/lib/db/logs";
 import useLogout from "@/shared/context/UserSessionContext.tsx/ContextHooks/useLogout";
 import toast from "react-hot-toast";
 import { getISOTime } from "@/util/util";
-import { promiseCache } from "@/features/Home/Components/useQuery";
 import dayjs from "dayjs";
+import { promiseCache } from "@/shared/hooks/useQuery";
+import {
+  clearLogsCacheKey,
+  clearUserLogsCache,
+} from "@/lib/queryCache/queryCache";
 
 const useOnClick = () => {
   const user = useUser();
   const logout = useLogout();
+
+  const clearCache = (
+    userId: number,
+    dateFormatted: string,
+    isoDate: string
+  ) => {
+    promiseCache.delete("clockedIn");
+    clearLogsCacheKey(dateFormatted);
+    clearUserLogsCache(userId, isoDate);
+  };
 
   const onClick = async () => {
     if (user) {
@@ -17,21 +31,19 @@ const useOnClick = () => {
 
       // IF CLOCKED IN, CLOCK OUT
       if (isClockedIn) {
-        const clockedOutDate = new Date();
+        const clockedOutDate = dayjs();
+        const clockedOutIsoString = clockedOutDate.toISOString();
 
         const entryEdits = {
-          outTime: clockedOutDate.toISOString(),
+          outTime: clockedOutIsoString,
         };
 
         const { entryId } = user;
 
         await editLogEntry(entryId, entryEdits);
-        promiseCache.delete("clockedIn");
-        promiseCache.delete(`att-${id}-${clockedOutDate.getFullYear()}`);
 
         const dateFormatted = dayjs().format("YYYY-MM-DD");
-        const calendarDatesKey = String(`date-${dateFormatted}`);
-        promiseCache.delete(calendarDatesKey);
+        clearCache(id, dateFormatted, clockedOutIsoString);
 
         const clockedOutMessage = `${firstName} clocked out at ${getISOTime(
           entryEdits.outTime
@@ -53,8 +65,11 @@ const useOnClick = () => {
       promiseCache.delete(`att-${id}-${newCheckInEntry.year}`); // clear attendance cache for the user and year
 
       const dateFormatted = dayjs().format("YYYY-MM-DD");
-      const calendarDatesKey = String(`date-${dateFormatted}`);
-      promiseCache.delete(calendarDatesKey);
+      clearCache(
+        id,
+        dateFormatted,
+        dayjs(newCheckInEntry.inTime).toISOString()
+      );
 
       const clockedInMessage = `${firstName} clocked in at ${getISOTime(
         newCheckInEntry.inTime
