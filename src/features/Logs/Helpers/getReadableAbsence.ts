@@ -1,3 +1,4 @@
+import { absenceCauses } from "@/lib/constants";
 import { fullMonthNames } from "@/lib/date/constants";
 import { WorkAbsence } from "@/lib/dbTypes";
 import { getAbsenceDuration } from "@/util/util";
