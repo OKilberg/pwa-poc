@@ -6,6 +6,7 @@ import ArchiveEmployeeModal from "./ArchiveEmployeeModal";
 import { showModalById } from "@/components/CheckIn/helpers";
 import AbsenceEmployeeModal from "./AbsenceModal";
 import Link from "next/link";
+import getEmployeeInitials from "./Employee/Helpers/getEmployeeInitials";
 
 type EmployeeProps = {
   user: User;
@@ -19,7 +20,12 @@ const Employee = ({ user }: EmployeeProps) => {
   return (
     <li className="flex p-2 md:p-5 bg-[#EAEAEA] rounded-md md:rounded-2xl">
       <details className="flex flex-col w-full group">
-        <summary className="flex w-full items-center">
+        <summary className="flex w-full items-center gap-3">
+          <div className="avatar placeholder">
+            <div className="bg-zinc-300 text-zinc-700 w-10 rounded-full">
+              <span>{getEmployeeInitials(user)}</span>
+            </div>
+          </div>
           <p className="flex-1 md:text-2xl">
             {firstName} {lastName}
           </p>
@@ -27,7 +33,7 @@ const Employee = ({ user }: EmployeeProps) => {
             <ChevronDown className="ml-auto group-open:rotate-180" />
           </p>
         </summary>
-        <ul className="mt-2">
+        <ul className="mt-4">
           <li className="flex w-full text-sm md:text-lg">
             <div className="flex-1">Role: {role}</div>
             <div className="flex-1 text-center">Idn: {idn}</div>

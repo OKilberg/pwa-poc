@@ -15,7 +15,7 @@ const AbsenceRow = ({ absence }: { absence: WorkAbsence }) => {
   const [showDrawer, setShowDrawer] = useState(false);
 
   return (
-    <tr>
+    <tr className="hover">
       <td>
         <div>
           <div className="font-bold">{id}</div>
@@ -36,9 +36,9 @@ const AbsenceRow = ({ absence }: { absence: WorkAbsence }) => {
       <td className="text-center">
         <div>{note}</div>
       </td>
-      <td className="" onClick={() => setShowDrawer(true)}>
-        <EllipsisVertical className="mx-auto" />
-      </td>
+      <th className="text-right" onClick={() => setShowDrawer(true)}>
+        <button className="btn btn-xs md:btn-sm btn-outline">Manage</button>
+      </th>
       {
         <LogActionsDrawer
           showDrawer={showDrawer}

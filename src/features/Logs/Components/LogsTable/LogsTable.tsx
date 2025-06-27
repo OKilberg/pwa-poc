@@ -10,7 +10,7 @@ const LogsTable = () => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="table table-pin-rows">
+      <table className="table table-pin-rows table-pin-cols">
         <LogsTableHeader />
         <tbody>
           {filteredLogs.map((log) => (

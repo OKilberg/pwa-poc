@@ -1,7 +1,7 @@
 import useEmployeeData from "../../Hooks/useEmployeeData";
 import useFilterSummary from "../../Hooks/useFilterSummary";
 import { Button } from "@mui/material";
-import { HardDriveDownload, PlusCircle } from "lucide-react";
+import { HardDriveDownload, Plus, PlusCircle } from "lucide-react";
 import useExportFilteredLogs from "../../Hooks/useExportFilteredLogs";
 import { useRouter } from "next/navigation";
 import useMonth, { MONTHS } from "@/shared/queryState/useMonth";
@@ -17,25 +17,23 @@ const LogSummaryActions = ({
   const { push } = useRouter();
 
   return (
-    <div className="flex flex-col md:flex-row md:h-1/2 md:justify-between flex-1 pl-1 gap-1 md:gap-2">
-      <Button
-        fullWidth
-        endIcon={<PlusCircle className="size-4" />}
-        variant="outlined"
+    <div className="flex flex-col md:flex-row justify-end w-full pl-1 gap-1 md:gap-2">
+      <button
+        className="btn btn-outline btn-sm md:btn-md"
         onClick={() =>
           push(`/admin/logs/create?employee=${userId}&month=${month}`)
         }
       >
+        <Plus className="size-4" />
         Add
-      </Button>
-      <Button
-        fullWidth
-        endIcon={<HardDriveDownload className="size-4" />}
-        variant="contained"
+      </button>
+      <button
+        className="btn btn-sm md:btn-md btn-neutral"
         onClick={exportFilteredLogs}
       >
+        <HardDriveDownload className="size-4" />
         Export
-      </Button>
+      </button>
     </div>
   );
 };

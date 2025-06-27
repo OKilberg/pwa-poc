@@ -24,7 +24,7 @@ const DrawerContent = ({ absence }: { absence: WorkAbsence }) => {
 
   return (
     <div className="py-2 px-4 flex flex-col min-h-[33vh]">
-      <ListItem className="font-bold text-lg mb-2">{label}</ListItem>
+      <ListItem className="font-bold text-lg mb-2">Manage {label}</ListItem>
       <ListItem
         sx={{
           py: { sm: 2 },
