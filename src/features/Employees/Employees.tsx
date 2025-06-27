@@ -6,8 +6,6 @@ import EmployeesList from "./Components/EmployeesList";
 import { UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ensureAuth } from "@/lib/session/auth";
-
-import Button from "@mui/material/Button";
 import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 
 const Employees = () => {
@@ -22,13 +20,13 @@ const Employees = () => {
         url="/admin"
       />
       <section className="w-full flex flex-row-reverse justify-start px-4">
-        <Button
+        <button
+          className="btn btn-neutral"
           onClick={() => push("/admin/employees/add")}
-          variant="contained"
         >
           <UserPlus />
           Add
-        </Button>
+        </button>
       </section>
       <EmployeesList />
     </MainPane>
