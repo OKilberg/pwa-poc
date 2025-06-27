@@ -8,7 +8,7 @@ const LogsTableHeader = () => {
         <th className="text-center">In-Out</th>
         <th className="text-center">Duration</th>
         <th className="text-center">Note</th>
-        <th className="text-center">Actions</th>
+        <th className="text-right">Actions</th>
       </tr>
     </thead>
   );
