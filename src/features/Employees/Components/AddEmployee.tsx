@@ -3,10 +3,7 @@
 import { addUser, getUser } from "@/lib/db/users";
 import { User } from "@/lib/dbTypes";
 import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
-import Button from "@/shared/components/Button/Button";
 import Content from "@/shared/components/Content/Content";
-import Header from "@/shared/components/Header/Header";
-import HeaderTitle from "@/shared/components/Header/Subcomponents/HeaderTitle";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import { promiseCache } from "@/shared/hooks/useQuery";
 import {
