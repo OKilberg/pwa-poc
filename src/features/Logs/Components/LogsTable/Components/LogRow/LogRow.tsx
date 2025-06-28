@@ -1,6 +1,6 @@
 import getReadableLog from "@/features/Logs/Helpers/getReadableLog";
 import { LogEntry } from "@/lib/dbTypes";
-import { BriefcaseBusiness, EllipsisVertical } from "lucide-react";
+import { BriefcaseBusiness } from "lucide-react";
 import { useState } from "react";
 import LogActionsDrawer from "../../../LogActionsDrawer/LogActionsDrawer";
 import DrawerContent from "../../../LogActionsDrawer/Components/DrawerContent";

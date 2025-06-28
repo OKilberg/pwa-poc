@@ -9,6 +9,7 @@ import { editLogEntry } from "@/lib/db/logs";
 import { LogEntry, NewLogEntry } from "@/lib/dbTypes";
 import toast from "react-hot-toast";
 import {
+  clearDateCacheKey,
   clearLogEditCacheKey,
   clearUserLogsCache,
 } from "@/lib/queryCache/queryCache";
@@ -45,6 +46,8 @@ export default function EditLogForm({
         .then(() => {
           clearUserLogsCache(userId, logEntry.inTime);
           clearLogEditCacheKey(id);
+          clearDateCacheKey(logEntry.inTime);
+
           toast.success("Saved log entry update");
         })
         .catch((error) => {

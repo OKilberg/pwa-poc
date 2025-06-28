@@ -1,5 +1,5 @@
 import { WorkAbsence } from "@/lib/dbTypes";
-import { EllipsisVertical, TreePalm } from "lucide-react";
+import { TreePalm } from "lucide-react";
 import { useState } from "react";
 import LogActionsDrawer from "../../../LogActionsDrawer/LogActionsDrawer";
 // import { useTranslations } from "next-intl";
