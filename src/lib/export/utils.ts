@@ -58,6 +58,7 @@ export const getTotalWorkDuration = (logs: Array<LogEntry>) => {
   return totalWorkDuration;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getLogsWithTotal = (logs: Array<any>, total: string) => {
   if (logs.length === 0) return logs;
 
