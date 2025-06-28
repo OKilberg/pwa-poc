@@ -1,7 +1,6 @@
 import useEmployeeData from "../../Hooks/useEmployeeData";
 import useFilterSummary from "../../Hooks/useFilterSummary";
-import { Button } from "@mui/material";
-import { HardDriveDownload, Plus, PlusCircle } from "lucide-react";
+import { HardDriveDownload, Plus } from "lucide-react";
 import useExportFilteredLogs from "../../Hooks/useExportFilteredLogs";
 import { useRouter } from "next/navigation";
 import useMonth, { MONTHS } from "@/shared/queryState/useMonth";

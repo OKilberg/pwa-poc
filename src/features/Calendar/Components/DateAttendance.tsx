@@ -1,6 +1,6 @@
 "use client";
 
-import { editLogEntry, getRecordsByDate } from "@/lib/db/logs";
+import { editLogEntry } from "@/lib/db/logs";
 import { getEmployeesMap } from "@/lib/db/users";
 import ListItem from "@/shared/components/ListItem";
 import { getISODate, getISOTime } from "@/util/util";
@@ -9,35 +9,27 @@ import React from "react";
 import { MobileDateTimePicker } from "@mui/x-date-pickers";
 import toast from "react-hot-toast";
 import { ChevronDown } from "lucide-react";
-import { getWorkAbsencesByDate } from "@/lib/db/absence";
 import { User } from "@/lib/dbTypes";
 import { useTranslations } from "next-intl";
 import useQuery, { promiseCache } from "@/shared/hooks/useQuery";
+import useDateLogs from "./DateAttendance/Hooks/useDateLogs";
+import useDateAbsences from "./DateAttendance/Hooks/useDateAbsences";
 
-const DateAttendance = ({ date }: { date: Dayjs }) => {
+const DateAttendance = () => {
   const t = useTranslations("Absence");
-  const dateFormatted = date.format("YYYY-MM-DD");
-  const key = String(`date-${dateFormatted}`);
 
-  const logs = useQuery({
-    fn: () => getRecordsByDate(dateFormatted),
-    key: key,
-  });
-
-  const absence = useQuery({
-    fn: () => getWorkAbsencesByDate(date.toISOString()),
-    key: `absence-${key}`,
-  });
+  const dateLogs = useDateLogs();
+  const dateAbsences = useDateAbsences();
 
   const employees = useQuery({ fn: getEmployeesMap, key: "employeesMap" });
 
-  if (logs.length === 0 && absence.length === 0) {
+  if (dateLogs.length === 0 && dateAbsences.length === 0) {
     return <p>No logs found for the selected date.</p>;
   }
 
   return (
     <ul className="flex flex-col gap-2 w-full p-1">
-      {logs?.map((log, index) => {
+      {dateLogs?.map((log, index) => {
         const { id, inTime, outTime, userId } = log;
         const employee = employees.get(userId);
         const timeIn = getISOTime(inTime);
@@ -108,7 +100,7 @@ const DateAttendance = ({ date }: { date: Dayjs }) => {
           </ListItem>
         );
       })}
-      {absence.map(({ id, dateEnd, userId, dateStart, cause }) => {
+      {dateAbsences.map(({ id, dateEnd, userId, dateStart, cause }) => {
         const { firstName, lastName } = employees.get(userId) as User;
         const readableDateStart = dayjs(dateStart).format("YYYY-MM-DD");
         const readableDateEnd = dayjs(dateEnd).format("YYYY-MM-DD");

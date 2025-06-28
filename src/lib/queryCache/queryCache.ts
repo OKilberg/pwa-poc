@@ -62,6 +62,14 @@ export const clearLogEditCacheKey = (id: number) => {
   clearCacheKeys([cacheKey, cacheKey1]);
 };
 
+export const clearDateCacheKey = (isoDate: string) => {
+  const calendarDate = dayjs(isoDate);
+  const dateFormatted = calendarDate.format("YYYY-MM-DD");
+  const cacheKey = String(`date-${dateFormatted}`);
+
+  clearCacheKeys([cacheKey]);
+};
+
 export const clearUserLogsCache = (userId: number, isoDate: string) => {
   const year = dayjs(isoDate).year();
   const month = dayjs(isoDate).month();
