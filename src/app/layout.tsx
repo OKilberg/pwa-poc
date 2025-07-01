@@ -67,6 +67,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#FFFFFF",
+  userScalable: false,
 };
 
 const versionNumber = "1.0.0";
