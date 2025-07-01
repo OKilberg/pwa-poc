@@ -9,6 +9,7 @@ import {
   ClipboardList,
   Edit,
   HardDriveDownload,
+  CircleQuestionMark,
   Users,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -64,6 +65,13 @@ const Admin = () => {
               description="Manual time entry"
               label="Register logs"
               leadingIcon={<Edit />}
+              trailingIcon={<ChevronRight />}
+            />
+            <MenuItem
+              linkTo="/admin/help"
+              description="Guides and support"
+              label="Help"
+              leadingIcon={<CircleQuestionMark />}
               trailingIcon={<ChevronRight />}
             />
           </div>
