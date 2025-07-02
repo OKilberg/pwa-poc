@@ -1,5 +1,3 @@
 import { ParentComponent } from "../types";
 
-export type AccordionGroupProps = ParentComponent & {
-  name: string;
-};
+export type AccordionGroupProps = ParentComponent;
