@@ -16,7 +16,10 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   className,
 }) => {
   const groupName = useContext(AccordionContext);
-  const _className = clsx("collapse collapse-arrow", className ?? "bg-zinc-50");
+  const _className = clsx(
+    "collapse collapse-arrow",
+    className ?? "bg-zinc-200"
+  );
 
   return (
     <div className={_className}>

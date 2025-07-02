@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
 import createNextIntlPlugin from "next-intl/plugin";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -8,6 +9,7 @@ const nextConfig: NextConfig = {
   experimental: {
     authInterrupts: true,
   },
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
 
 const withSerwist = withSerwistInit({
@@ -19,4 +21,8 @@ const withSerwist = withSerwistInit({
 
 const withNextIntl = createNextIntlPlugin();
 
-export default withNextIntl(withSerwist(nextConfig));
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+});
+
+export default withMDX(withNextIntl(withSerwist(nextConfig)));
