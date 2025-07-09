@@ -9,7 +9,7 @@ const useDateAbsences = () => {
   const key = String(`date-${dateFormatted}`);
 
   const dateAbsence = useQuery({
-    fn: () => getWorkAbsencesByDate(calendarDate.toISOString()),
+    fn: () => getWorkAbsencesByDate(dateFormatted),
     key: `absence-${key}`,
   });
 
