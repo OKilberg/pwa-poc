@@ -1,5 +1,4 @@
 import { LogEntry } from "@/lib/dbTypes";
-import { ListItem } from "@mui/material";
 import { SquarePen, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import getLogLabel from "@/features/Logs/Helpers/getLogLabel";
@@ -18,28 +17,25 @@ const DrawerContent = ({ log }: { log: LogEntry }) => {
 
   return (
     <div className="py-2 px-4 flex flex-col min-h-[33vh]">
-      <ListItem className="font-medium text-lg mb-2">Manage {label}</ListItem>
-      <ListItem
-        sx={{
-          py: { sm: 2 },
-        }}
-        className="py-2 gap-4 bg-white border border-1 border-gray-200 rounded-sm"
-        onClick={() => push(`/admin/logs/${id}/edit`)}
-      >
-        <SquarePen className="size-5" />
-        Edit
-      </ListItem>
-
-      <ListItem
-        sx={{
-          py: { sm: 2 },
-        }}
-        className="py-2 gap-4 text-red-500 bg-white border border-1 border-t-0 border-gray-200 rounded-sm"
-        onClick={onDelete}
-      >
-        <Trash className="size-5" />
-        Delete
-      </ListItem>
+      <div className="font-medium text-sm md:text-lg mb-2 py-2 md:py-4">
+        Manage <p className="text-zinc-700">{label}</p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <button
+          className="btn btn-outline flex-1 btn-sm py-2 md:btn-md"
+          onClick={() => push(`/admin/logs/${id}/edit`)}
+        >
+          <SquarePen className="size-5" />
+          Edit
+        </button>
+        <button
+          className="btn btn-outline btn-error flex-1 btn-sm py-2 md:btn-md"
+          onClick={onDelete}
+        >
+          <Trash className="size-5" />
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
