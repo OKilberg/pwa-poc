@@ -1,6 +1,9 @@
+"use client";
+
 import clsx from "clsx";
 import React from "react";
 import { ParentComponent, Styleable } from "../types";
+import useShowTopbar from "./Hooks/useShowTopbar";
 
 type TopBarProps = ParentComponent & Styleable;
 
@@ -10,7 +13,9 @@ const TopBar = ({ children, className }: TopBarProps) => {
     className
   );
 
-  return <nav className={classTopBar}>{children}</nav>;
+  const showTopbar = useShowTopbar();
+
+  if (showTopbar) return <nav className={classTopBar}>{children}</nav>;
 };
 
 export default TopBar;

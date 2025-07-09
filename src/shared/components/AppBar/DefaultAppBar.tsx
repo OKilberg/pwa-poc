@@ -1,3 +1,4 @@
+import Logo from "../Logo";
 import AppBar, { AppBarProps } from "./AppBar";
 import AppBarActions from "./Subcomponents/AppBarActions";
 import AppBarBack, { AppBarBackProps } from "./Subcomponents/AppBarBack";
@@ -13,6 +14,15 @@ const DefaultAppBar = ({
   const LeftAppBarChildren = (
     <AppBarActions>
       <AppBarBack url={url} />
+      <div>
+        <Logo
+          style={{
+            textShadow:
+              "1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black, 0px 1px 0px black, 1px 0px 0px black, 0px -1px 0px black, -1px 0px 0px black",
+          }}
+        />
+      </div>
+      <div className="size-6"></div>
     </AppBarActions>
   );
 
