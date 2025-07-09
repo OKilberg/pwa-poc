@@ -7,7 +7,7 @@ type AppBarActionProps = ParentComponent & Clickable;
 
 const AppBarIconAction = ({ children, onClick }: AppBarActionProps) => {
   return (
-    <button className="size-6" onClick={onClick}>
+    <button className="size-5 md:size-6" onClick={onClick}>
       {children}
     </button>
   );

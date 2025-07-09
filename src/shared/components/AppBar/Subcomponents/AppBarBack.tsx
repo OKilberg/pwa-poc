@@ -20,7 +20,7 @@ const AppBarBack = ({ url }: AppBarBackProps) => {
 
   return (
     <AppBarIconAction onClick={onClick}>
-      <ArrowLeft />
+      <ArrowLeft className="size-5 md:size-6" />
     </AppBarIconAction>
   );
 };

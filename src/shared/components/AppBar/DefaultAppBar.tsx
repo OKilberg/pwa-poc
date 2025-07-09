@@ -22,7 +22,7 @@ const DefaultAppBar = ({
           }}
         />
       </div>
-      <div className="size-6"></div>
+      <div className="size-5 md:size-6"></div>
     </AppBarActions>
   );
 
