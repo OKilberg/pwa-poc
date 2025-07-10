@@ -23,7 +23,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 
   return (
     <div className={_className}>
-      <input type="radio" name={groupName} defaultChecked={defaultChecked} />
+      <input type="checkbox" name={groupName} defaultChecked={defaultChecked} />
       {children}
     </div>
   );
