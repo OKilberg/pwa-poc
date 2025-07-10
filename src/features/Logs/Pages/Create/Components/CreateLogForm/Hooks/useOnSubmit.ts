@@ -7,14 +7,14 @@ import toast from "react-hot-toast";
 const useOnSubmit = () => {
   const onSubmit = (
     startDate: Dayjs,
-    endDate: Dayjs,
+    endDate: Dayjs | null,
     employee: string,
     onSuccess: () => void
   ) => {
     const logEntry: NewLogEntry = {
       userId: Number(employee),
       inTime: startDate.toISOString(),
-      outTime: endDate.toISOString(),
+      outTime: endDate ? endDate.toISOString() : null,
       month: startDate.month(),
       year: startDate.year(),
       note: "Registered by admin",

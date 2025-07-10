@@ -27,7 +27,7 @@ export default function CreateLogForm() {
   };
 
   const handleOnSubmit = () => {
-    if (startDate && endDate && employee) {
+    if (startDate && employee) {
       onSubmit(startDate, endDate, employee, reset);
     }
   };
