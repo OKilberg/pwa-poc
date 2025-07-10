@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types";
+import { ParentComponent } from "./shared/components/types";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -6,3 +7,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ...components,
   };
 }
+
+export const Columns = ({ children }: ParentComponent) => {
+  return <div className="grid md:grid-cols-2 w-full md:gap-6">{children}</div>;
+};

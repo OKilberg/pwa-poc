@@ -1,6 +1,8 @@
 import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 import MainPane from "@/shared/components/MainPane/MainPane";
 import ManageEmployeesGuides from "./Components/ManageEmployeesGuides";
+import WorkAttendanceGuides from "./Components/WorkAttendanceGuides";
+import DataExportGuides from "./Components/DataExportGuides";
 
 const Help = () => {
   return (
@@ -11,6 +13,8 @@ const Help = () => {
         url="/admin"
       />
       <section className="px-4 pb-6 gap-2 flex flex-col min-h-0 flex-1 overflow-auto">
+        <WorkAttendanceGuides />
+        <DataExportGuides />
         <ManageEmployeesGuides />
       </section>
     </MainPane>
