@@ -31,7 +31,7 @@ export const getActiveLogEntry = async (userId: User["id"]) => {
       .equals(userId)
       .reverse()
       .first((log) => {
-        if (log && log.outTime === null) return log;
+        if (log && log.outTime === null) return log; // TODO: prone to bugs, rework
       })
   );
 
@@ -112,6 +112,12 @@ export const editLogEntry = async (
   updates: Partial<LogEntry>
 ) => {
   const response = await tryFetch(() => db.logs.update(id, { ...updates }));
+
+  return response;
+};
+
+export const removeLogEntry = async (id: LogEntry["id"]) => {
+  const response = await tryFetch(() => db.logs.delete(id));
 
   return response;
 };

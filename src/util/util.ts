@@ -1,4 +1,5 @@
 import { DATE_LOCALE, TIME_LOCALE } from "@/app/constants";
+import dayjs from "dayjs";
 
 export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
@@ -83,6 +84,25 @@ export function getTimeDifferenceISO(isoDate1: string, isoDate2: string) {
   return { hours, minutes }; // Return the result as an object
 }
 
+export const getLogDuration = (inTime: string, outTime: string) => {
+  const { hours, minutes } = getTimeDifferenceISO(inTime, outTime);
+
+  const logDuration = `${hours} hr ${minutes} min`;
+
+  return logDuration;
+};
+
+export const getAbsenceDuration = (dateStart: string, dateEnd: string) => {
+  const start = dayjs(dateStart);
+  const end = dayjs(dateEnd);
+
+  const days = end.diff(start, "days") + 1;
+
+  const duration = `${days} day(s)`;
+
+  return duration;
+};
+
 export function getTimeDifferenceMinutesISO(
   isoDate1: string,
   isoDate2: string
@@ -103,9 +123,9 @@ export function convertMinutesToHoursAndMinutes(minutes: number) {
   return { hours, minutes: remainingMinutes }; // Return as an object
 }
 
-export const getRandomIdentityNumber =()=>{
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let randomString = '';
+export const getRandomIdentityNumber = () => {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let randomString = "";
 
   for (let i = 0; i < 9; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
@@ -113,4 +133,4 @@ export const getRandomIdentityNumber =()=>{
   }
 
   return randomString;
-}
+};

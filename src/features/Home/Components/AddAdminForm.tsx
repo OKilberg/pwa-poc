@@ -1,11 +1,18 @@
 "use client";
 
-import { promiseCache } from "@/features/Home/Components/useQuery";
 import { addUser, getUser } from "@/lib/db/users";
 import { User } from "@/lib/dbTypes";
 import { startUserSession } from "@/lib/session/Session";
+import createTestData from "@/lib/test/create";
 import Button from "@/shared/components/Button/Button";
-import { Check, IdCard, KeyRound, User as UserIcon } from "lucide-react";
+import { promiseCache } from "@/shared/hooks/useQuery";
+import {
+  FlaskConical,
+  IdCard,
+  KeyRound,
+  User as UserIcon,
+  UserPlus2,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -18,6 +25,22 @@ const generatePIN = () => {
 
 const AddAdminForm = () => {
   const { push } = useRouter();
+
+  const tryDemo = async () => {
+    const modalElement = document.getElementById(
+      "create_admin_modal"
+    ) as HTMLDialogElement | null;
+
+    createTestData().then((admin) => {
+      toast.success(`Created Demo Admin with PIN: ${admin.id}`, {
+        icon: "🧪",
+        duration: 7000,
+      });
+      // startUserSession({ ...admin, isClockedIn: false });
+      // push("/admin");
+      modalElement?.close();
+    });
+  };
 
   const addAdmin = async (_prevData: unknown, formData: FormData) => {
     const firstName = String(formData.get("firstName"));
@@ -113,8 +136,14 @@ const AddAdminForm = () => {
 
       <div className="flex w-full justify-center gap-4">
         <Button type="submit" className="" variant="primary">
-          <Check />
-          Add
+          <UserPlus2 />
+          Create Admin
+        </Button>
+      </div>
+      <div className="flex w-full justify-center gap-4">
+        <Button onClick={tryDemo} className="" variant="secondary">
+          <FlaskConical />
+          Try Demo
         </Button>
       </div>
     </form>

@@ -36,6 +36,40 @@ export const getFormattedLogInfo = (log: LogEntry) => {
   };
 };
 
+export const getTotalWorkDuration = (logs: Array<LogEntry>) => {
+  let totalMinutes = 0;
+
+  logs.forEach(({ inTime, outTime }) => {
+    if (!outTime) return;
+
+    const { hours, minutes } = getTimeDifferenceISO(inTime, outTime);
+
+    // Convert each diff to minutes, and sum
+    totalMinutes += hours * 60 + minutes;
+  });
+
+  const totalHours = Math.floor(totalMinutes / 60);
+  const remainderMinutes = totalMinutes % 60;
+
+  console.log("getTotalWorkDuration", totalHours, remainderMinutes);
+
+  const totalWorkDuration = getFormattedDuration(totalHours, remainderMinutes);
+
+  return totalWorkDuration;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getLogsWithTotal = (logs: Array<any>, total: string) => {
+  if (logs.length === 0) return logs;
+
+  const updatedArr = [
+    { ...logs[0], ["Total (h:mm)"]: total }, // ← Add special key immutably
+    ...logs.slice(1),
+  ];
+
+  return updatedArr;
+};
+
 export const createWorkbookSheetFromJson = <T>(data: Array<T>) => {
   const workbookSheet = utils.json_to_sheet(data);
 

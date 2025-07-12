@@ -1,5 +1,6 @@
 import { addWorkAbsence } from "@/lib/db/absence";
 import { AbsenceCause, NewWorkAbsence } from "@/lib/dbTypes";
+import { clearAbsencesCacheKey } from "@/lib/queryCache/queryCache";
 import { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -29,6 +30,7 @@ const useOnClick = () => {
       .then(() => {
         // clearCacheKeys([""]);
         toast.success(`Work absence reported.`);
+        clearAbsencesCacheKey(absence.userId, absence.dateStart);
         push("/admin/employees");
       })
       .catch((error) => {

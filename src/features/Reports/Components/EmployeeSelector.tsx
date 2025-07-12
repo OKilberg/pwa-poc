@@ -1,8 +1,8 @@
 "use client";
 
-import useQuery from "@/features/Home/Components/useQuery";
 import { getActiveEmployeesMap } from "@/lib/db/users";
 import useSetUser from "@/shared/context/ReportsContext/ContextHooks/useSetUser";
+import useQuery from "@/shared/hooks/useQuery";
 import React, { ChangeEvent } from "react";
 
 const EmployeeSelector = () => {
