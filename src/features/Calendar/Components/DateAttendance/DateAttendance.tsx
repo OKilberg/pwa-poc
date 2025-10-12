@@ -2,9 +2,10 @@ import useDateLogs from "./Hooks/useDateLogs";
 import DateLogItem from "./Components/DateLogItem/DateLogItem";
 import useDateAbsences from "./Hooks/useDateAbsences";
 import DateAbsenceItem from "./Components/DateAbsenceItem/DateAbsenceItem";
+import useFilteredDateLogs from "./Hooks/useFilteredDateLogs";
 
 const DateAttendance = () => {
-  const dateLogs = useDateLogs();
+  const dateLogs = useFilteredDateLogs();
   const dateAbsences = useDateAbsences();
 
   return (

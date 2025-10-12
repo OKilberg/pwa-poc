@@ -64,6 +64,18 @@ export const getActiveEmployees = async () => {
   return response;
 };
 
+export const getArchivedEmployees = async () => {
+  const response = await tryFetch(() =>
+    db.users.where({ role: "employee", state: "archived" }).toArray()
+  );
+
+  if (!response) {
+    return [];
+  }
+
+  return response;
+};
+
 export const getAdmins = async () => {
   const response = await tryFetch(() =>
     db.users.where("role").equals("admin").toArray()
@@ -95,6 +107,22 @@ export const getEmployeesMap = async () => {
 export const getActiveEmployeesMap = async () => {
   const response = await tryFetch(() =>
     db.users.where({ role: "employee", state: "active" }).toArray()
+  );
+
+  if (!response) {
+    return new Map<number, User>();
+  }
+
+  const employeeMap = new Map<number, User>(
+    response.map((employee) => [employee.id, employee])
+  );
+
+  return employeeMap;
+};
+
+export const getArchivedEmployeesMap = async () => {
+  const response = await tryFetch(() =>
+    db.users.where({ role: "employee", state: "archived" }).toArray()
   );
 
   if (!response) {

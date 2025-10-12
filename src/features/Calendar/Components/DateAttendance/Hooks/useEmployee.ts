@@ -1,8 +1,8 @@
 import { User } from "@/lib/dbTypes";
-import useEmployees from "@/shared/hooks/queries/useEmployees";
+import useFilteredEmployees from "./useFilteredEmployees";
 
 const useEmployee = (employeeId: User["id"]) => {
-  const employees = useEmployees();
+  const employees = useFilteredEmployees();
 
   const employee = employees.find(([number]) => number === employeeId);
 
