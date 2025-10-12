@@ -7,15 +7,17 @@ import { UserPlus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ensureAuth } from "@/lib/session/auth";
 import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
+import usePageTitle from "./Hooks/usePageTitle";
 
 const Employees = () => {
   ensureAuth();
   const { push } = useRouter();
+  const pageTitle = usePageTitle();
 
   return (
     <MainPane className="h-[calc(100vh-3rem)]">
       <DefaultAppBar
-        pageTitle="Employees"
+        pageTitle={pageTitle}
         pageDescription="Manage your employees"
         url="/admin"
       />
