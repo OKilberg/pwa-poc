@@ -7,15 +7,17 @@ import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 import CalendarProvider from "./Context/CalendarProvider";
 import CalendarDatePicker from "./Components/CalendarDatePicker/CalendarDatePicker";
 import DateAttendance from "./Components/DateAttendance/DateAttendance";
+import usePageTitle from "./Hooks/usePageTitle";
 
 const Calendar = () => {
   ensureAuth();
+  const pageTitle = usePageTitle();
 
   return (
     <CalendarProvider>
       <MainPane className="h-[calc(100vh-3rem)] min-h-0">
         <DefaultAppBar
-          pageTitle="Calendar"
+          pageTitle={pageTitle}
           pageDescription="View work per date"
           url="/admin"
         />
