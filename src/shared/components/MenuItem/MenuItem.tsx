@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import React, { ReactNode } from "react";
 
@@ -10,10 +11,12 @@ type MenuItemProps = {
   trailingIcon?: ReactNode;
   onClick?: () => void;
   linkTo: string;
+  disabled?: boolean;
 };
 
 const MenuItem = ({
   description,
+  disabled,
   label,
   leadingIcon,
   trailingIcon,
@@ -24,11 +27,13 @@ const MenuItem = ({
 
   const _onClick = linkTo ? () => push(linkTo) : onClick;
 
+  const className = clsx(
+    "flex w-full gap-4 px-4 py-3 border border-gray-600 rounded-md",
+    disabled && "opacity-50 pointer-events-none"
+  );
+
   return (
-    <button
-      className="flex w-full gap-4 px-4 py-3 border border-gray-600 rounded-md"
-      onClick={_onClick}
-    >
+    <button className={className} onClick={_onClick}>
       {leadingIcon}
       <div className="text-left">
         <p className="text-xl">{label}</p>

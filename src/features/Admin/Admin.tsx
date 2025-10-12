@@ -11,6 +11,7 @@ import {
   HardDriveDownload,
   CircleQuestionMark,
   Users,
+  Archive,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import AdminHeader from "./Components/AdminHeader";
@@ -65,6 +66,13 @@ const Admin = () => {
               description="Manual time entry"
               label="Register logs"
               leadingIcon={<Edit />}
+              trailingIcon={<ChevronRight />}
+            />
+            <MenuItem
+              linkTo="/admin/archive"
+              description="View archive pages"
+              label="Archive"
+              leadingIcon={<Archive />}
               trailingIcon={<ChevronRight />}
             />
             <MenuItem
