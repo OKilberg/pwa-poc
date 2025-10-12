@@ -6,8 +6,8 @@
 @tailwind utilities;
 
 @theme {
-  --font-carter-one: "Carter One", sans-serif; 
-  --font-public-sans: "Public Sans", sans-serif; 
+  --font-carter-one: "Carter One", sans-serif;
+  --font-public-sans: "Public Sans", sans-serif;
 }
 
 :root {
