@@ -57,30 +57,9 @@ db.version(5).stores({
   absences: "++id, userId, dateStart, dateEnd, month, year, cause, note",
 });
 
-/*
-db.on("populate", () => {
-  db.users.bulkAdd(users);
-  db.absences.bulkAdd(workAbsences);
-  db.logs.bulkAdd(logEntries);
-});
-*/
-
-/*
-db.version(1).stores({
-  posts: "++id, code, in, out",
-  users: "++id, code, firstname, lastname",
-});
-*/
-
 declare global {
   interface Window {
     db: Dexie;
     createTestData: () => void;
   }
 }
-
-/*
-if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
-  window.createTestData = createTestData;
-}
-  */
