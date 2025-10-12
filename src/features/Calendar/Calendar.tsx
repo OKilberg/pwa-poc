@@ -6,7 +6,7 @@ import { ensureAuth } from "@/lib/session/auth";
 import DefaultAppBar from "@/shared/components/AppBar/DefaultAppBar";
 import CalendarProvider from "./Context/CalendarProvider";
 import CalendarDatePicker from "./Components/CalendarDatePicker/CalendarDatePicker";
-import DateAttendance2 from "./Components/DateAttendance/DateAttendance";
+import DateAttendance from "./Components/DateAttendance/DateAttendance";
 
 const Calendar = () => {
   ensureAuth();
@@ -22,7 +22,7 @@ const Calendar = () => {
         <section className="flex flex-col flex-1 overflow-y-scroll py-2 px-4">
           <CalendarDatePicker />
           <div className="divider my-2" />
-          <DateAttendance2 />
+          <DateAttendance />
         </section>
       </MainPane>
     </CalendarProvider>
