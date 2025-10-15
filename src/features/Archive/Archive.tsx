@@ -32,7 +32,6 @@ const Archive = () => {
           label="Logs [Archive]"
           leadingIcon={<ClipboardList />}
           trailingIcon={<ChevronRight />}
-          disabled
         />
       </section>
     </MainPane>

@@ -7,12 +7,15 @@ import FilterMenu from "./Components/FilterMenu/FilterMenu";
 import LogsSummary from "./Components/LogsSummary/LogsSummary";
 import LogsContentSkeleton from "./Components/LogsContentSkeleton/LogsContentSkeleton";
 import LogsTable from "./Components/LogsTable/LogsTable";
+import usePageTitle from "./Hooks/usePageTitle";
 
 const Logs = () => {
+  const pageTitle = usePageTitle();
+
   return (
     <MainPane className="h-[calc(100vh-3rem)] min-h-0">
       <DefaultAppBar
-        pageTitle="Logs"
+        pageTitle={pageTitle}
         pageDescription="Browse and manage all work logs"
         url="/admin"
       />

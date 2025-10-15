@@ -8,6 +8,7 @@ import useMonth, { MONTHS, months } from "@/shared/queryState/useMonth";
 import clsx from "clsx";
 import { BriefcaseBusiness, ListFilter, TreePalm } from "lucide-react";
 import React, { ChangeEvent, ReactNode, useState } from "react";
+import useFilteredEmployees from "../../Hooks/useFilteredEmployees";
 
 const WithLabel = ({
   children,
@@ -37,7 +38,7 @@ const WithLabel = ({
 // Multi-select checkbox filter
 const EmployeeFilter = () => {
   const { employee, setEmployee } = useEmployee();
-  const employees = useEmployees();
+  const employees = useFilteredEmployees();
   const employeeValue = employee || "null";
 
   const handleSelectEmployee = (e: ChangeEvent<HTMLSelectElement>) => {
