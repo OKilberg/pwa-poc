@@ -2,6 +2,7 @@ import React from "react";
 import { User } from "@/lib/dbTypes";
 import {
   Archive,
+  ArchiveRestore,
   CalendarClock,
   ChevronDown,
   IdCard,
@@ -14,9 +15,35 @@ import AbsenceEmployeeModal from "./AbsenceModal";
 import Link from "next/link";
 import getEmployeeInitials from "./Employee/Helpers/getEmployeeInitials";
 import { ParentComponent } from "@/shared/components/types";
+import useFilter from "@/shared/queryState/useFilter";
+import { setUserState } from "@/lib/db/users";
 
 type EmployeeProps = {
   user: User;
+};
+
+const RestoreButton = ({ userId }: { userId: User["id"] }) => {
+  return (
+    <button
+      className="btn btn-outline btn-success"
+      onClick={() => setUserState(userId, "active")}
+    >
+      <ArchiveRestore className="size-4" />
+      Restore
+    </button>
+  );
+};
+
+const ArchiveButton = ({ archiveModalId }: { archiveModalId: string }) => {
+  return (
+    <button
+      className="btn btn-outline btn-error"
+      onClick={() => showModalById(archiveModalId)}
+    >
+      <Archive className="size-4" />
+      Archive
+    </button>
+  );
 };
 
 const EmployeeDetail = ({ children }: ParentComponent) => {
@@ -31,6 +58,9 @@ const Employee = ({ user }: EmployeeProps) => {
   const { id, idn, firstName, lastName, role } = user;
   const absenceEmployeeModal = `report_absence_${id}_modal`;
   const archiveEmployeeModal = `archive_employee_${id}_modal`;
+  const { filter } = useFilter();
+  const showArchiveButton = !filter;
+  const showRestoreButton = filter === "archived";
 
   return (
     <li className="flex py-2 px-3 bg-zinc-100 rounded-md md:rounded-2xl">
@@ -69,13 +99,10 @@ const Employee = ({ user }: EmployeeProps) => {
                 Absence
               </button>
             </Link>
-            <button
-              className="btn btn-outline btn-error"
-              onClick={() => showModalById(archiveEmployeeModal)}
-            >
-              <Archive className="size-4" />
-              Archive
-            </button>
+            {showArchiveButton && (
+              <ArchiveButton archiveModalId={archiveEmployeeModal} />
+            )}
+            {showRestoreButton && <RestoreButton userId={id} />}
           </li>
         </ul>
       </details>
