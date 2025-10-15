@@ -1,8 +1,12 @@
 import Logs from "@/features/Logs/Logs";
-import React from "react";
+import React, { Suspense } from "react";
 
 const LogsPage = () => {
-  return <Logs />;
+  return (
+    <Suspense>
+      <Logs />
+    </Suspense>
+  );
 };
 
 export default LogsPage;
