@@ -11,6 +11,7 @@ const UserAttendanceList = ({ user }: UserAttendanceListProps) => {
 
   return (
     <ul className="flex flex-col gap-2 flex-1 w-full overflow-y-scroll px-4 pb-24">
+      <Year userId={userId} year={2026} />
       <Year userId={userId} year={2025} />
     </ul>
   );

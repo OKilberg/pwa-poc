@@ -9,6 +9,7 @@ import clsx from "clsx";
 import { BriefcaseBusiness, ListFilter, TreePalm } from "lucide-react";
 import React, { ChangeEvent, ReactNode, useState } from "react";
 import useFilteredEmployees from "../../Hooks/useFilteredEmployees";
+import useYear, { years, YEARS } from "@/shared/queryState/useYear";
 
 const WithLabel = ({
   children,
@@ -95,10 +96,27 @@ const MonthFilter = () => {
 
 // Year radio filter (default this year)
 const YearFilter = () => {
+  const { year, setYear } = useYear();
+
+  const handleSetYear = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { target } = e;
+    const { value } = target;
+
+    setYear(Number(value) as YEARS);
+  };
+
   return (
     <WithLabel label="Year" className="max-w-fit">
-      <select className="select select-sm md:select-md select-bordered w-full">
-        <option>2025</option>
+      <select
+        value={year}
+        onChange={handleSetYear}
+        className="select select-sm md:select-md select-bordered w-full"
+      >
+        {years.map((year) => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
       </select>
     </WithLabel>
   );

@@ -40,7 +40,7 @@ export const Year = ({ userId, year }: Props) => {
 
   return (
     <>
-      <time className="divider">{2025}</time>
+      <time className="divider">{year}</time>
       {monthsMatrix.map((month, index) => {
         if (month.length === 0) return null;
 

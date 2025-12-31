@@ -3,11 +3,12 @@ import useQuery from "@/shared/hooks/useQuery";
 import useEmployee from "@/shared/queryState/useEmployee";
 import useLogTypes from "@/shared/queryState/useLogTypes";
 import useMonth from "@/shared/queryState/useMonth";
+import useYear from "@/shared/queryState/useYear";
 
 const useFilteredLogs = () => {
   const { employee } = useEmployee();
   const { month } = useMonth();
-  const year = 2025;
+  const { year } = useYear();
   const { logTypes } = useLogTypes();
 
   const filteredLogs = useQuery({
