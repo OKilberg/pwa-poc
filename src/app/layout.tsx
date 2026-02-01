@@ -70,7 +70,7 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-const versionNumber = "1.1.0";
+const versionNumber = "1.1.1";
 
 export default async function RootLayout({
   children,
